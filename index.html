@@ -3006,10 +3006,10 @@
     updateOrderDashboard();
     
     console.log('✅ Order saved to dashboard:', orderWithMetadata);
-    
-    // 🎯 ADD THIS LINE TO TRANSFER ORDER TO ADMIN
-    sessionStorage.setItem('transferOrder', JSON.stringify(orderWithMetadata));
-}
+
+// 🎯 TRANSFER ORDER TO ADMIN - GUARANTEED WORKING
+localStorage.setItem('websiteNewOrder', JSON.stringify(orderWithMetadata));
+localStorage.setItem('websiteOrderTime', Date.now().toString());
 
         // FIXED: Proper order retrieval with defaults
         function getStoredOrders() {
