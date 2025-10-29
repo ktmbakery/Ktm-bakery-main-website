@@ -1,0 +1,3651 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>KTM Bakery - Premium Admin</title>
+  <!-- APP TAGS -->
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-title" content="KTM Staff">
+<meta name="theme-color" content="#4b2e05">
+<link rel="apple-touch-icon" href="adminlogo.jpeg">
+<link rel="manifest" href="manifest.json">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css">
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap');
+        
+        :root {
+            --primary: #4b2e05;
+            --primary-dark: #3a2404;
+            --secondary: #f39c12;
+            --success: #27ae60;
+            --warning: #f39c12;
+            --danger: #e74c3c;
+            --sidebar-bg: #1a1a1a;
+            --sidebar-active: #4b2e05;
+            --header-bg: #FFFFFF;
+            --content-bg: #f8f9fa;
+            --card-bg: #FFFFFF;
+            --text-primary: #333333;
+            --text-secondary: #666666;
+            --border: #e0e0e0;
+            --shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.1);
+            --mobile-sidebar-width: 85%;
+        }
+        
+        * { 
+            box-sizing: border-box; 
+            margin: 0; 
+            padding: 0; 
+        }
+        
+        body { 
+            font-family: 'Inter', sans-serif; 
+            background: var(--content-bg);
+            color: var(--text-primary);
+            display: flex;
+            min-height: 100vh;
+            overflow-x: hidden;
+        }
+        
+        /* ========== FIXED SIDEBAR ========== */
+        .sidebar {
+            width: 260px;
+            background: var(--sidebar-bg);
+            color: white;
+            position: fixed;
+            height: 100vh;
+            z-index: 1000;
+            overflow-y: auto;
+            transition: transform 0.3s ease;
+        }
+        
+        .sidebar-header {
+            padding: 20px;
+            border-bottom: 1px solid rgba(255,255,255,0.1);
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            background: var(--primary);
+        }
+        
+        .sidebar-logo {
+            width: 40px;
+            height: 40px;
+            background: white;
+            border-radius: 8px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 700;
+            color: var(--primary);
+        }
+        
+        .close-sidebar {
+            display: none;
+            background: none;
+            border: none;
+            color: white;
+            font-size: 20px;
+            cursor: pointer;
+        }
+        
+        .sidebar-nav {
+            padding: 15px 0;
+        }
+        
+        .nav-item {
+            padding: 12px 20px;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            color: #94A3B8;
+            text-decoration: none;
+            transition: all 0.3s ease;
+            border-left: 3px solid transparent;
+            cursor: pointer;
+        }
+        
+        .nav-item:hover, .nav-item.active {
+            background: rgba(75, 46, 5, 0.1);
+            color: white;
+            border-left-color: var(--primary);
+        }
+        
+        .nav-item.active {
+            background: rgba(75, 46, 5, 0.15);
+        }
+        
+        .nav-icon {
+            width: 20px;
+            text-align: center;
+        }
+        
+        /* ========== FIXED HEADER ========== */
+        .main-content {
+            flex: 1;
+            margin-left: 260px;
+            min-height: 100vh;
+            width: calc(100% - 260px);
+        }
+        
+        .top-header {
+            background: var(--header-bg);
+            padding: 15px 25px;
+            border-bottom: 1px solid var(--border);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            position: fixed;
+            top: 0;
+            left: 260px;
+            right: 0;
+            z-index: 999;
+            box-shadow: var(--shadow);
+            transition: left 0.3s ease;
+        }
+        
+        .header-actions {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+        
+        .user-menu {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        
+        .user-avatar {
+            width: 35px;
+            height: 35px;
+            background: linear-gradient(135deg, var(--primary), var(--primary-dark));
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-weight: 600;
+        }
+        
+        .content-area {
+            padding: 25px;
+            margin-top: 70px;
+            width: 100%;
+        }
+        
+        /* ========== ENHANCED MIXED ORDER DISPLAY ========== */
+        .mixed-order-container {
+            border: 1px solid #e0e0e0;
+            border-radius: 8px;
+            margin-bottom: 15px;
+            overflow: hidden;
+        }
+        
+        .mixed-order-header {
+            background: #f8f9fa;
+            padding: 12px 15px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-bottom: 1px solid #e0e0e0;
+        }
+        
+        .order-types-display {
+            display: flex;
+            gap: 8px;
+            flex-wrap: wrap;
+        }
+        
+        .mixed-order-content {
+            padding: 0;
+        }
+        
+        .delivery-type-section {
+            padding: 15px;
+            border-bottom: 2px dashed #e0e0e0;
+        }
+        
+        .delivery-type-section:last-child {
+            border-bottom: none;
+        }
+        
+        .delivery-type-header {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            margin-bottom: 12px;
+            padding: 8px 0;
+        }
+        
+        .type-status-indicator {
+            margin-left: auto;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            font-size: 12px;
+            font-weight: 600;
+        }
+        
+        .type-completed {
+            color: var(--success);
+        }
+        
+        .type-pending {
+            color: var(--warning);
+        }
+        
+        .item-row {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 10px 0;
+            border-bottom: 1px solid #f5f5f5;
+        }
+        
+        .item-row:last-child {
+            border-bottom: none;
+        }
+        
+        .item-info {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            flex: 1;
+        }
+        
+        .item-status-controls {
+            display: flex;
+            gap: 6px;
+        }
+        
+        .status-btn {
+            padding: 6px 10px;
+            border: none;
+            border-radius: 6px;
+            font-size: 11px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            min-width: 60px;
+        }
+        
+        .status-btn.pending { 
+            background: #f8f9fa; 
+            color: #6c757d;
+            border: 1px solid #dee2e6;
+        }
+        
+        .status-btn.baking { 
+            background: #fff3cd; 
+            color: #856404;
+            border: 1px solid #ffeaa7;
+        }
+        
+        .status-btn.ready { 
+            background: #d4edda; 
+            color: #155724;
+            border: 1px solid #c3e6cb;
+        }
+        
+        .status-btn.served { 
+            background: #cce7ff; 
+            color: #004085;
+            border: 1px solid #b3d7ff;
+        }
+        
+        .status-btn.active { 
+            transform: scale(1.05);
+            box-shadow: 0 2px 4px rgba(0,0,0,0.2);
+        }
+        
+        .status-btn:disabled {
+            opacity: 0.6;
+            cursor: not-allowed;
+        }
+        
+        .completion-badge {
+            background: var(--success);
+            color: white;
+            padding: 2px 8px;
+            border-radius: 12px;
+            font-size: 10px;
+            font-weight: 600;
+        }
+        
+        /* ========== PAYMENT CONFIRMATION ========== */
+        .payment-confirmation {
+            background: #f8f9fa;
+            padding: 15px;
+            border-radius: 8px;
+            margin-top: 15px;
+            border-left: 4px solid var(--primary);
+        }
+        
+        .payment-options {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
+            margin-top: 10px;
+        }
+        
+        .payment-option {
+            flex: 1;
+            min-width: 80px;
+            padding: 8px 12px;
+            border: 2px solid #e0e0e0;
+            border-radius: 6px;
+            text-align: center;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            font-size: 12px;
+            font-weight: 600;
+        }
+        
+        .payment-option.active {
+            border-color: var(--primary);
+            background: rgba(75, 46, 5, 0.1);
+        }
+        
+        .complete-order-btn {
+            width: 100%;
+            padding: 12px;
+            background: var(--success);
+            color: white;
+            border: none;
+            border-radius: 8px;
+            font-weight: 600;
+            margin-top: 15px;
+            cursor: pointer;
+            transition: background 0.3s ease;
+        }
+        
+        .complete-order-btn:hover {
+            background: #219653;
+        }
+        
+        .complete-order-btn:disabled {
+            background: #95a5a6;
+            cursor: not-allowed;
+        }
+        
+        /* ========== DELETE REASON MODAL ========== */
+        .delete-reason-modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0,0,0,0.5);
+            z-index: 3000;
+            justify-content: center;
+            align-items: center;
+            padding: 15px;
+        }
+        
+        .delete-reason-content {
+            background: white;
+            padding: 25px;
+            border-radius: 12px;
+            width: 95%;
+            max-width: 400px;
+        }
+        
+        .reason-options {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+            margin: 15px 0;
+        }
+        
+        .reason-option {
+            padding: 12px;
+            border: 2px solid #e0e0e0;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            text-align: left;
+            background: white;
+        }
+        
+        .reason-option:hover {
+            border-color: var(--primary);
+        }
+        
+        .reason-option.selected {
+            border-color: var(--primary);
+            background: rgba(75, 46, 5, 0.1);
+        }
+        
+/* ========== SECURITY GATE - CENTERED FIX ========== */
+#securityGate {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background: linear-gradient(135deg, var(--primary) 0%, var(--primary-dark) 100%);
+    z-index: 9999;
+    margin: 0;
+    padding: 0;
+}
+
+#securityGate .gate-form {
+    background: white;
+    padding: 30px;
+    border-radius: 15px;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+    width: 100%;
+    max-width: 350px;
+    text-align: center;
+    margin: 0 auto;
+}
+
+.logo-container {
+    margin-bottom: 25px;
+}
+
+.round-logo {
+    width: 100px;
+    height: 100px;
+    border-radius: 50%;
+    background: #f8f9fa;
+    margin: 0 auto 15px;
+    border: 3px solid var(--primary);
+    overflow: hidden;
+}
+
+.round-logo img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+}
+
+.gate-input {
+    width: 100%;
+    padding: 12px;
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    font-size: 14px;
+    margin-bottom: 15px;
+    background: white;
+    box-sizing: border-box;
+}
+
+.gate-btn {
+    width: 100%;
+    padding: 12px;
+    background: var(--primary);
+    color: white;
+    border: none;
+    border-radius: 8px;
+    font-size: 14px;
+    font-weight: 600;
+    cursor: pointer;
+    box-sizing: border-box;
+}
+
+.step-indicator {
+    display: flex;
+    justify-content: center;
+    gap: 8px;
+    margin-bottom: 15px;
+}
+
+.step-dot {
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    background: #ddd;
+}
+
+.step-dot.active {
+    background: var(--primary);
+}
+
+/* Mobile fixes */
+@media (max-width: 480px) {
+    #securityGate {
+        padding: 15px;
+        align-items: center;
+    }
+    
+    #securityGate .gate-form {
+        padding: 20px;
+    }
+    
+    .round-logo {
+        width: 80px;
+        height: 80px;
+    }
+}
+        
+        /* ========== YOUR EXISTING STYLES ========== */
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 20px;
+            margin: 25px 0;
+        }
+        
+        .stat-card {
+            background: white;
+            padding: 20px;
+            border-radius: 12px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+            text-align: center;
+            border-left: 4px solid var(--primary);
+        }
+        
+        .stat-card h3 {
+            color: #666;
+            font-size: 14px;
+            margin-bottom: 10px;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+        
+        .stat-number {
+            font-size: 32px;
+            font-weight: 700;
+            color: var(--primary);
+            margin: 10px 0;
+        }
+        
+        .stat-trend {
+            font-size: 14px;
+            color: var(--success);
+            font-weight: 600;
+        }
+        
+        .payment-summary {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+            gap: 15px;
+            margin: 20px 0;
+        }
+        
+        .payment-card {
+            background: white;
+            padding: 15px;
+            border-radius: 10px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+            text-align: center;
+        }
+        
+        .payment-card.fonepay { border-top: 4px solid #3498db; }
+        .payment-card.cash { border-top: 4px solid #27ae60; }
+        .payment-card.bank { border-top: 4px solid #9b59b6; }
+        .payment-card.cod { border-top: 4px solid #f39c12; }
+        
+        .payment-icon {
+            font-size: 20px;
+            margin-bottom: 8px;
+        }
+        
+        .payment-amount {
+            font-size: 20px;
+            font-weight: 700;
+            color: var(--primary);
+            margin: 5px 0;
+        }
+        
+        .payment-count {
+            font-size: 12px;
+            color: #666;
+        }
+        
+        .orders-section {
+            background: white;
+            border-radius: 12px;
+            padding: 25px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+            margin-top: 25px;
+        }
+        
+        .section-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 20px;
+        }
+        
+        .section-header h2 {
+            color: var(--primary);
+            font-size: 20px;
+        }
+        
+        .tab-buttons {
+            display: flex;
+            background: #f8f9fa;
+            padding: 4px;
+            border-radius: 8px;
+            margin-bottom: 20px;
+            flex-wrap: wrap;
+            gap: 5px;
+        }
+        
+        .tab-btn {
+            padding: 8px 15px;
+            border: none;
+            background: transparent;
+            cursor: pointer;
+            font-weight: 600;
+            border-radius: 6px;
+            transition: all 0.3s ease;
+            font-size: 13px;
+        }
+        
+        .tab-btn.active {
+            background: var(--primary);
+            color: white;
+        }
+        
+        .orders-table-container {
+            max-height: 60vh;
+            overflow-y: auto;
+            border-radius: 8px;
+            border: 1px solid var(--border);
+        }
+        
+        .orders-table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+        
+        .orders-table thead {
+            position: sticky;
+            top: 0;
+            z-index: 10;
+        }
+        
+        .orders-table th {
+            background: #f8f9fa;
+            padding: 12px;
+            text-align: left;
+            font-weight: 600;
+            color: var(--primary);
+            border-bottom: 2px solid var(--border);
+            font-size: 13px;
+        }
+        
+        .orders-table td {
+            padding: 12px;
+            border-bottom: 1px solid #f0f0f0;
+            text-align: left;
+            vertical-align: top;
+            font-size: 13px;
+        }
+        
+        .order-row {
+            cursor: pointer;
+            transition: background 0.3s ease;
+        }
+        
+        .order-row:hover {
+            background: #f8f9fa;
+        }
+        
+        .status-badge {
+            padding: 5px 10px;
+            border-radius: 15px;
+            font-size: 10px;
+            font-weight: 600;
+            text-transform: uppercase;
+        }
+        
+        .status-received { background: #ffeaa7; color: #856404; }
+        .status-confirmed { background: #a29bfe; color: white; }
+        .status-baking { background: #fd79a8; color: white; }
+        .status-ready { background: #55efc4; color: #00b894; }
+        .status-completed { background: #7f8c8d; color: white; }
+        
+        .order-type-badge {
+            padding: 3px 8px;
+            border-radius: 6px;
+            font-size: 10px;
+            font-weight: 600;
+        }
+        
+        .delivery-badge { background: #3498db; color: white; }
+        .takeaway-badge { background: #f39c12; color: white; }
+        .dinein-badge { background: #27ae60; color: white; }
+        
+        .mixed-order-indicator {
+            background: linear-gradient(45deg, #3498db, #f39c12, #27ae60);
+            color: white;
+            padding: 4px 8px;
+            border-radius: 12px;
+            font-size: 10px;
+            font-weight: 600;
+            margin-left: 5px;
+        }
+        
+        .folder-system {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 15px;
+            margin: 15px 0;
+        }
+        
+        .folder {
+            background: white;
+            border-radius: 12px;
+            padding: 15px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+            cursor: pointer;
+            transition: all 0.3s ease;
+            border-left: 4px solid var(--primary);
+        }
+        
+        .folder:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+        }
+        
+        .folder-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 10px;
+        }
+        
+        .folder-count {
+            background: var(--primary);
+            color: white;
+            padding: 3px 10px;
+            border-radius: 15px;
+            font-size: 11px;
+            font-weight: 600;
+        }
+        
+        .analytics-section {
+            background: white;
+            border-radius: 12px;
+            padding: 25px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+            margin: 25px 0;
+        }
+        
+        .analytics-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 20px;
+        }
+        
+        .date-filter {
+            display: flex;
+            gap: 8px;
+        }
+        
+        .filter-btn {
+            padding: 6px 12px;
+            border: 2px solid #e0e0e0;
+            background: white;
+            border-radius: 6px;
+            cursor: pointer;
+            font-weight: 600;
+            font-size: 12px;
+            transition: all 0.3s ease;
+        }
+        
+        .filter-btn.active {
+            background: var(--primary);
+            color: white;
+            border-color: var(--primary);
+        }
+        
+        .sales-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 15px;
+            margin: 15px 0;
+        }
+        
+        .sales-card {
+            background: #f8f9fa;
+            padding: 15px;
+            border-radius: 8px;
+            text-align: center;
+        }
+        
+        /* ========== MODALS ========== */
+        .modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0,0,0,0.5);
+            z-index: 2000;
+            justify-content: center;
+            align-items: center;
+            padding: 15px;
+        }
+        
+        .modal-content {
+            background: white;
+            padding: 25px;
+            border-radius: 12px;
+            width: 95%;
+            max-width: 700px;
+            max-height: 85vh;
+            overflow-y: auto;
+        }
+        
+        .modal-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 20px;
+        }
+        
+        .close-modal {
+            font-size: 22px;
+            cursor: pointer;
+            color: #666;
+        }
+        
+        /* ========== RESPONSIVE ========== */
+        @media (max-width: 768px) {
+            .sidebar {
+                width: var(--mobile-sidebar-width);
+                transform: translateX(-100%);
+                z-index: 3000;
+            }
+            
+            .sidebar.mobile-open {
+                transform: translateX(0);
+            }
+            
+            .close-sidebar {
+                display: block;
+            }
+            
+            .main-content {
+                margin-left: 0;
+                width: 100%;
+            }
+            
+            .top-header {
+                left: 0;
+            }
+            
+            .content-area {
+                padding: 15px;
+                margin-top: 70px;
+            }
+            
+            .stats-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .folder-system {
+                grid-template-columns: 1fr;
+            }
+            
+            .tab-buttons {
+                flex-direction: column;
+            }
+            
+            .section-header {
+                flex-direction: column;
+                gap: 10px;
+                align-items: flex-start;
+            }
+            
+            .payment-summary {
+                grid-template-columns: 1fr 1fr;
+            }
+            
+            .orders-table th, 
+            .orders-table td {
+                padding: 8px 6px;
+                font-size: 12px;
+            }
+            
+            .orders-table-container {
+                max-height: 50vh;
+            }
+            
+            .status-btn {
+                padding: 4px 8px;
+                font-size: 10px;
+                min-width: 50px;
+            }
+        }
+        
+        @media (max-width: 480px) {
+            .payment-summary {
+                grid-template-columns: 1fr;
+            }
+            
+            .top-header {
+                padding: 12px 15px;
+            }
+            
+            .content-area {
+                padding: 10px;
+                margin-top: 65px;
+            }
+            
+            .orders-section, 
+            .analytics-section {
+                padding: 15px;
+            }
+            
+            .gate-form {
+                padding: 20px;
+            }
+            
+            .gate-logo {
+                width: 60px;
+                height: 60px;
+                font-size: 20px;
+            }
+        }
+
+    /* Add this to your existing CSS */
+@keyframes shake {
+    0%, 100% { transform: translateX(0); }
+    25% { transform: translateX(-5px); }
+    75% { transform: translateX(5px); }
+}
+   
+/* SECURITY GATE CENTER FIX */
+#securityGate {
+    display: flex !important;
+    justify-content: center !important;
+    align-items: center !important;
+    height: 100vh !important;
+    position: fixed !important; /* ADD THIS LINE */
+    top: 0 !important; /* ADD THIS LINE */
+    left: 0 !important; /* ADD THIS LINE */
+    width: 100% !important; /* ADD THIS LINE */
+}
+
+      /* ========== SETTINGS STYLES ========== */
+.settings-tab {
+    display: block;
+}
+
+.setting-group {
+    margin-bottom: 20px;
+}
+
+.setting-label {
+    display: block;
+    margin-bottom: 8px;
+    font-weight: 600;
+    color: var(--text-primary);
+    font-size: 14px;
+}
+
+.setting-group input[type="checkbox"] {
+    margin-right: 8px;
+}
+
+.setting-group input[type="text"],
+.setting-group input[type="email"],
+.setting-group input[type="password"],
+.setting-group input[type="number"],
+.setting-group input[type="time"],
+.setting-group input[type="url"],
+.setting-group select,
+.setting-group textarea {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid var(--border);
+    border-radius: 6px;
+    font-size: 14px;
+    background: white;
+}
+
+.setting-group textarea {
+    resize: vertical;
+    min-height: 80px;
+}
+
+/* ========== CUSTOMER MANAGEMENT STYLES ========== */
+.customer-badge {
+    padding: 4px 8px;
+    border-radius: 12px;
+    font-size: 10px;
+    font-weight: 600;
+    text-transform: uppercase;
+}
+
+.badge-vip { background: linear-gradient(45deg, #FFD700, #FFA500); color: #000; }
+.badge-regular { background: #3498db; color: white; }
+.badge-new { background: #27ae60; color: white; }
+.badge-inactive { background: #95a5a6; color: white; }
+
+.customer-actions {
+    display: flex;
+    gap: 5px;
+}
+
+.action-btn {
+    padding: 6px 10px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 11px;
+    font-weight: 600;
+}
+
+.action-btn.view { background: #3498db; color: white; }
+.action-btn.edit { background: #f39c12; color: white; }
+.action-btn.message { background: #27ae60; color: white; }
+    </style>
+</head>
+<body>
+<!-- SECURITY GATE -->
+<div id="securityGate" class="security-gate">
+    <div id="step1" class="gate-form">
+        <!-- BAKERY LOGO SECTION -->
+        <div class="logo-container">
+            <div class="round-logo">
+                <img src="adminlogo.jpeg" alt="KTM Bakery Logo">
+            </div>
+            <h2 style="color: var(--text-primary); margin-bottom: 20px;">Admin Access</h2>
+        </div>
+        
+        <div class="step-indicator">
+            <div class="step-dot active"></div>
+            <div class="step-dot"></div>
+        </div>
+        
+        <input type="password" id="step1Password" class="gate-input" placeholder="Security Password" maxlength="20">
+        <button class="gate-btn" onclick="verifyStep1()">
+            <i class="fas fa-arrow-right"></i> Continue
+        </button>
+        <div id="step1Error" style="color: var(--danger); margin-top: 12px; display: none; font-size: 14px;">
+            <i class="fas fa-exclamation-triangle"></i> Invalid Password
+        </div>
+    </div>
+
+    <div id="step2" class="gate-form" style="display: none;">
+        <!-- BAKERY LOGO SECTION -->
+        <div class="logo-container">
+            <div class="round-logo">
+                <img src="adminlogo.jpeg" alt="KTM Bakery Logo">
+            </div>
+            <h2 style="color: var(--text-primary); margin-bottom: 20px;">Admin Login</h2>
+        </div>
+        
+        <div class="step-indicator">
+            <div class="step-dot"></div>
+            <div class="step-dot active"></div>
+        </div>
+        
+        <input type="text" id="username" class="gate-input" placeholder="Username" maxlength="20">
+        <input type="password" id="password" class="gate-input" placeholder="Password" maxlength="20">
+        <button class="gate-btn" onclick="verifyStep2()">
+            <i class="fas fa-lock"></i> Enter Dashboard
+        </button>
+        <div id="step2Error" style="color: var(--danger); margin-top: 12px; display: none; font-size: 14px;">
+            <i class="fas fa-exclamation-triangle"></i> Invalid Credentials
+        </div>
+        <button class="gate-btn" onclick="backToStep1()" style="background: #95a5a6; margin-top: 8px;">
+            <i class="fas fa-arrow-left"></i> Back
+        </button>
+    </div>
+</div>
+
+    <!-- DASHBOARD LAYOUT -->
+    <div id="adminDashboard" class="dashboard" style="display: none;">
+        <!-- SIDEBAR -->
+        <div class="sidebar" id="sidebar">
+            <div class="sidebar-header">
+                <div class="sidebar-logo">KTM</div>
+                <span style="font-weight: 700; font-size: 16px; color: white;">Bakery Admin</span>
+                <button class="close-sidebar" onclick="toggleSidebar()">
+                    <i class="fas fa-times"></i>
+                </button>
+            </div>
+            
+            <div class="sidebar-nav">
+                <a class="nav-item active" onclick="showPage('dashboard'); toggleSidebar();">
+                    <div class="nav-icon"><i class="fas fa-chart-pie"></i></div>
+                    <span class="nav-text">Dashboard</span>
+                </a>
+                <a class="nav-item" onclick="showPage('orders'); toggleSidebar();">
+                    <div class="nav-icon"><i class="fas fa-shopping-cart"></i></div>
+                    <span class="nav-text">Order Management</span>
+                </a>
+                <a class="nav-item" onclick="showPage('analytics'); toggleSidebar();">
+                    <div class="nav-icon"><i class="fas fa-chart-bar"></i></div>
+                    <span class="nav-text">Analytics</span>
+                </a>
+                <a class="nav-item" onclick="showPage('customers'); toggleSidebar();">
+                    <div class="nav-icon"><i class="fas fa-users"></i></div>
+                    <span class="nav-text">Customers</span>
+                </a>
+                <a class="nav-item" onclick="showPage('settings'); toggleSidebar();">
+                    <div class="nav-icon"><i class="fas fa-cog"></i></div>
+                    <span class="nav-text">Settings</span>
+                </a>
+            </div>
+        </div>
+
+        <!-- MAIN CONTENT -->
+        <div class="main-content">
+            <!-- FIXED HEADER -->
+            <div class="top-header">
+                <div style="display: flex; align-items: center; gap: 10px;">
+                    <button id="sidebarToggle" style="background: none; border: none; font-size: 18px; cursor: pointer; color: var(--text-secondary);" onclick="toggleSidebar()">
+                        <i class="fas fa-bars"></i>
+                    </button>
+                    <span style="font-weight: 600; color: var(--text-primary);" id="pageTitle">Dashboard</span>
+                </div>
+                
+                <div class="header-actions">
+                    <div class="user-menu">
+                        <div class="user-avatar">A</div>
+                        <div>
+                            <div style="font-weight: 600; font-size: 13px;">Admin User</div>
+                            <div style="font-size: 11px; color: var(--text-secondary);">Administrator</div>
+                        </div>
+                    </div>
+                    <button class="logout-btn" onclick="logoutAdmin()" style="background: var(--danger); color: white; border: none; padding: 8px 15px; border-radius: 6px; cursor: pointer; font-weight: 600; font-size: 13px;">
+                        <i class="fas fa-sign-out-alt"></i> Logout
+                    </button>
+                </div>
+            </div>
+
+            <!-- CONTENT AREA -->
+            <div class="content-area">
+                <!-- DASHBOARD PAGE -->
+                <div id="dashboardPage" class="page-content">
+                    <div class="page-header">
+                        <div class="page-title">Dashboard Overview</div>
+                        <button class="refresh-btn" onclick="loadOrders()" style="background: var(--primary); color: white; border: none; padding: 10px 18px; border-radius: 8px; cursor: pointer; font-weight: 600; font-size: 13px;">
+                            <i class="fas fa-sync-alt"></i> Refresh
+                        </button>
+                    </div>
+
+                    <!-- YOUR STATS GRID -->
+                    <div class="stats-grid">
+                        <div class="stat-card">
+                            <h3>Today's Orders</h3>
+                            <div id="todayOrders" class="stat-number">0</div>
+                            <div class="stat-trend" id="todayRevenue">Rs. 0 Revenue</div>
+                        </div>
+                        
+                        <div class="stat-card">
+                            <h3>Active Orders</h3>
+                            <div id="activeOrders" class="stat-number">0</div>
+                            <div class="stat-trend" id="pendingCalls">0 Need Confirmation</div>
+                        </div>
+                        
+                        <div class="stat-card">
+                            <h3>Mixed Orders</h3>
+                            <div id="mixedOrders" class="stat-number">0</div>
+                            <div class="stat-trend" id="mixedOrdersTrend">Multi-type Orders</div>
+                        </div>
+
+                        <div class="stat-card">
+                            <h3>Completion Rate</h3>
+                            <div id="completionRate" class="stat-number">0%</div>
+                            <div class="stat-trend">Today's Performance</div>
+                        </div>
+                    </div>
+
+                    <!-- YOUR FOLDER SYSTEM -->
+                    <div class="orders-section">
+                        <div class="section-header">
+                            <h2><i class="fas fa-folder"></i> Order Folders</h2>
+                        </div>
+                        <div class="folder-system" id="folderSystem">
+                            <!-- Folders will be loaded here -->
+                        </div>
+                    </div>
+
+                    <!-- YOUR ANALYTICS SECTION -->
+                    <div class="analytics-section">
+                        <div class="analytics-header">
+                            <h2><i class="fas fa-chart-bar"></i> Sales Analytics</h2>
+                            <div class="date-filter">
+                                <button class="filter-btn active" onclick="setAnalyticsPeriod('today')">Today</button>
+                                <button class="filter-btn" onclick="setAnalyticsPeriod('week')">This Week</button>
+                                <button class="filter-btn" onclick="setAnalyticsPeriod('month')">This Month</button>
+                            </div>
+                        </div>
+                        <div class="sales-grid">
+                            <div class="sales-card">
+                                <h4>Total Revenue</h4>
+                                <div class="stat-number" id="analyticsRevenue">Rs. 0</div>
+                            </div>
+                            <div class="sales-card">
+                                <h4>Total Orders</h4>
+                                <div class="stat-number" id="analyticsOrders">0</div>
+                            </div>
+                            <div class="sales-card">
+                                <h4>Average Order</h4>
+                                <div class="stat-number" id="analyticsAverage">Rs. 0</div>
+                            </div>
+                            <div class="sales-card">
+                                <h4>Popular Item</h4>
+                                <div class="stat-number" id="analyticsPopular">-</div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- YOUR PAYMENT SUMMARY -->
+                    <div class="payment-summary">
+                        <div class="payment-card fonepay">
+                            <div class="payment-icon">💳</div>
+                            <div class="payment-amount" id="fonepayTotal">Rs. 0</div>
+                            <div class="payment-count" id="fonepayCount">0 orders</div>
+                            <div>Fonepay</div>
+                        </div>
+                        
+                        <div class="payment-card cash">
+                            <div class="payment-icon">💵</div>
+                            <div class="payment-amount" id="cashTotal">Rs. 0</div>
+                            <div class="payment-count" id="cashCount">0 orders</div>
+                            <div>Cash</div>
+                        </div>
+                        
+                        <div class="payment-card bank">
+                            <div class="payment-icon">🏦</div>
+                            <div class="payment-amount" id="bankTotal">Rs. 0</div>
+                            <div class="payment-count" id="bankCount">0 orders</div>
+                            <div>Bank Transfer</div>
+                        </div>
+                        
+                        <div class="payment-card cod">
+                            <div class="payment-icon">📦</div>
+                            <div class="payment-amount" id="codTotal">Rs. 0</div>
+                            <div class="payment-count" id="codCount">0 orders</div>
+                            <div>Cash on Delivery</div>
+                        </div>
+                    </div>
+
+                    <!-- ORDER MANAGEMENT IN DASHBOARD -->
+                    <div class="orders-section">
+                        <div class="section-header">
+                            <h2><i class="fas fa-list-alt"></i> Order Management</h2>
+                        </div>
+                        
+                        <div class="tab-buttons">
+                            <button class="tab-btn active" onclick="showOrdersTab('active')">Active</button>
+                            <button class="tab-btn" onclick="showOrdersTab('mixed')">Mixed</button>
+                            <button class="tab-btn" onclick="showOrdersTab('delivery')">Delivery</button>
+                            <button class="tab-btn" onclick="showOrdersTab('dinein')">Dine-in</button>
+                            <button class="tab-btn" onclick="showOrdersTab('takeaway')">Takeaway</button>
+                            <button class="tab-btn" onclick="showOrdersTab('completed')">Completed</button>
+                            <button class="tab-btn" onclick="showOrdersTab('deleted')">Deleted</button>
+                        </div>
+                        
+                        <div class="orders-table-container">
+                            <table class="orders-table">
+                                <thead>
+                                    <tr>
+                                        <th>Order ID</th>
+                                        <th>Customer & Phone</th>
+                                        <th>Type & Items</th>
+                                        <th>Total</th>
+                                        <th>Status</th>
+                                        <th>Time</th>
+                                    </tr>
+                                </thead>
+                                <tbody id="ordersTableBody">
+                                    <!-- Orders will be loaded here -->
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- ORDER MANAGEMENT PAGE -->
+<div id="ordersPage" class="page-content" style="display: none;">
+    <div class="page-header">
+        <div class="page-title">Order Management</div>
+        <button class="refresh-btn" onclick="loadOrders()" style="background: var(--primary); color: white; border: none; padding: 10px 18px; border-radius: 8px; cursor: pointer; font-weight: 600; font-size: 13px;">
+            <i class="fas fa-sync-alt"></i> Refresh
+        </button>
+    </div>
+    
+    <!-- ORDER MANAGEMENT SYSTEM -->
+    <div class="orders-section">
+        <div class="section-header">
+            <h2><i class="fas fa-list-alt"></i> All Orders</h2>
+        </div>
+        
+        <div class="tab-buttons">
+            <button class="tab-btn active" onclick="showOrdersTab('active')">Active</button>
+            <button class="tab-btn" onclick="showOrdersTab('mixed')">Mixed</button>
+            <button class="tab-btn" onclick="showOrdersTab('delivery')">Delivery</button>
+            <button class="tab-btn" onclick="showOrdersTab('dinein')">Dine-in</button>
+            <button class="tab-btn" onclick="showOrdersTab('takeaway')">Takeaway</button>
+            <button class="tab-btn" onclick="showOrdersTab('completed')">Completed</button>
+            <button class="tab-btn" onclick="showOrdersTab('deleted')">Deleted</button>
+        </div>
+        
+        <div class="orders-table-container">
+            <table class="orders-table">
+                <thead>
+                    <tr>
+                        <th>Order ID</th>
+                        <th>Customer & Phone</th>
+                        <th>Type & Items</th>
+                        <th>Total</th>
+                        <th>Status</th>
+                        <th>Time</th>
+                    </tr>
+                </thead>
+                <tbody id="ordersTableBody2">
+                    <!-- Orders will be loaded here -->
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+
+               <div id="analyticsPage" class="page-content" style="display: none;">
+    <div class="page-header">
+        <div class="page-title">Analytics Dashboard</div>
+        <button class="refresh-btn" onclick="loadAnalyticsData()" style="background: var(--primary); color: white; border: none; padding: 10px 18px; border-radius: 8px; cursor: pointer; font-weight: 600; font-size: 13px;">
+            <i class="fas fa-sync-alt"></i> Refresh
+        </button>
+    </div>
+
+    <!-- DATE FILTER CONTROLS -->
+    <div class="analytics-section">
+        <div class="analytics-header">
+            <h2><i class="fas fa-calendar-alt"></i> Date Range</h2>
+            <div class="date-filter">
+                <button class="filter-btn active" onclick="setAnalyticsDateRange('today')">Today</button>
+                <button class="filter-btn" onclick="setAnalyticsDateRange('yesterday')">Yesterday</button>
+                <button class="filter-btn" onclick="setAnalyticsDateRange('week')">This Week</button>
+                <button class="filter-btn" onclick="setAnalyticsDateRange('month')">This Month</button>
+                <button class="filter-btn" onclick="setAnalyticsDateRange('custom')">Custom</button>
+            </div>
+        </div>
+        
+        <!-- CUSTOM DATE PICKER (HIDDEN BY DEFAULT) -->
+        <div id="customDateRange" style="display: none; margin-top: 15px; padding: 15px; background: #f8f9fa; border-radius: 8px;">
+            <div style="display: flex; gap: 10px; align-items: center; flex-wrap: wrap;">
+                <div>
+                    <label style="font-size: 12px; font-weight: 600; color: var(--text-secondary);">From:</label>
+                    <input type="date" id="startDate" class="gate-input" style="margin-top: 5px;">
+                </div>
+                <div>
+                    <label style="font-size: 12px; font-weight: 600; color: var(--text-secondary);">To:</label>
+                    <input type="date" id="endDate" class="gate-input" style="margin-top: 5px;">
+                </div>
+                <button onclick="applyCustomDateRange()" style="background: var(--primary); color: white; border: none; padding: 10px 15px; border-radius: 6px; cursor: pointer; font-weight: 600; margin-top: 20px;">
+                    Apply
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- KEY PERFORMANCE METRICS -->
+    <div class="stats-grid">
+        <div class="stat-card">
+            <h3>Total Revenue</h3>
+            <div id="analyticsTotalRevenue" class="stat-number">Rs. 0</div>
+            <div class="stat-trend" id="revenueTrend">+0% vs previous</div>
+        </div>
+        
+        <div class="stat-card">
+            <h3>Total Orders</h3>
+            <div id="analyticsTotalOrders" class="stat-number">0</div>
+            <div class="stat-trend" id="ordersTrend">+0% vs previous</div>
+        </div>
+        
+        <div class="stat-card">
+            <h3>Average Order Value</h3>
+            <div id="analyticsAOV" class="stat-number">Rs. 0</div>
+            <div class="stat-trend" id="aovTrend">+0% vs previous</div>
+        </div>
+
+        <div class="stat-card">
+            <h3>Completion Rate</h3>
+            <div id="analyticsCompletion" class="stat-number">0%</div>
+            <div class="stat-trend" id="completionTrend">+0% vs previous</div>
+        </div>
+    </div>
+
+    <!-- SALES BREAKDOWN -->
+    <div class="analytics-section">
+        <div class="analytics-header">
+            <h2><i class="fas fa-chart-pie"></i> Sales Breakdown</h2>
+        </div>
+        
+        <div class="sales-grid">
+            <div class="sales-card">
+                <h4>By Order Type</h4>
+                <div style="margin: 15px 0;">
+                    <div style="display: flex; justify-content: space-between; margin: 8px 0;">
+                        <span>🚚 Delivery</span>
+                        <span id="deliverySales">Rs. 0</span>
+                    </div>
+                    <div style="display: flex; justify-content: space-between; margin: 8px 0;">
+                        <span>🍽️ Dine-in</span>
+                        <span id="dineinSales">Rs. 0</span>
+                    </div>
+                    <div style="display: flex; justify-content: space-between; margin: 8px 0;">
+                        <span>🥡 Takeaway</span>
+                        <span id="takeawaySales">Rs. 0</span>
+                    </div>
+                    <div style="display: flex; justify-content: space-between; margin: 8px 0;">
+                        <span>🔄 Mixed</span>
+                        <span id="mixedSales">Rs. 0</span>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="sales-card">
+                <h4>By Payment Method</h4>
+                <div style="margin: 15px 0;">
+                    <div style="display: flex; justify-content: space-between; margin: 8px 0;">
+                        <span>💳 Fonepay</span>
+                        <span id="fonepaySales">Rs. 0</span>
+                    </div>
+                    <div style="display: flex; justify-content: space-between; margin: 8px 0;">
+                        <span>💵 Cash</span>
+                        <span id="cashSales">Rs. 0</span>
+                    </div>
+                    <div style="display: flex; justify-content: space-between; margin: 8px 0;">
+                        <span>🏦 Bank</span>
+                        <span id="bankSales">Rs. 0</span>
+                    </div>
+                    <div style="display: flex; justify-content: space-between; margin: 8px 0;">
+                        <span>📦 COD</span>
+                        <span id="codSales">Rs. 0</span>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="sales-card">
+                <h4>Order Status Distribution</h4>
+                <div style="margin: 15px 0;">
+                    <div style="display: flex; justify-content: space-between; margin: 8px 0;">
+                        <span>🟡 Received</span>
+                        <span id="receivedCount">0</span>
+                    </div>
+                    <div style="display: flex; justify-content: space-between; margin: 8px 0;">
+                        <span>🔵 Baking</span>
+                        <span id="bakingCount">0</span>
+                    </div>
+                    <div style="display: flex; justify-content: space-between; margin: 8px 0;">
+                        <span>🟢 Ready</span>
+                        <span id="readyCount">0</span>
+                    </div>
+                    <div style="display: flex; justify-content: space-between; margin: 8px 0;">
+                        <span>✅ Completed</span>
+                        <span id="completedCount">0</span>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="sales-card">
+                <h4>Performance Metrics</h4>
+                <div style="margin: 15px 0;">
+                    <div style="display: flex; justify-content: space-between; margin: 8px 0;">
+                        <span>Peak Hour</span>
+                        <span id="peakHour">-</span>
+                    </div>
+                    <div style="display: flex; justify-content: space-between; margin: 8px 0;">
+                        <span>Avg Prep Time</span>
+                        <span id="avgPrepTime">-</span>
+                    </div>
+                    <div style="display: flex; justify-content: space-between; margin: 8px 0;">
+                        <span>Popular Item</span>
+                        <span id="popularItem">-</span>
+                    </div>
+                    <div style="display: flex; justify-content: space-between; margin: 8px 0;">
+                        <span>Cancellation Rate</span>
+                        <span id="cancellationRate">0%</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- TOP PRODUCTS & CUSTOMERS -->
+    <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 20px; margin: 25px 0;">
+        <!-- TOP PRODUCTS -->
+        <div class="analytics-section">
+            <div class="analytics-header">
+                <h2><i class="fas fa-star"></i> Top Selling Products</h2>
+            </div>
+            <div id="topProductsList" style="max-height: 300px; overflow-y: auto;">
+                <!-- Top products will be loaded here -->
+                <div style="text-align: center; padding: 20px; color: #666;">
+                    <i class="fas fa-chart-bar" style="font-size: 24px; margin-bottom: 10px;"></i>
+                    <div>No data available</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- TOP CUSTOMERS -->
+        <div class="analytics-section">
+            <div class="analytics-header">
+                <h2><i class="fas fa-users"></i> Top Customers</h2>
+            </div>
+            <div id="topCustomersList" style="max-height: 300px; overflow-y: auto;">
+                <!-- Top customers will be loaded here -->
+                <div style="text-align: center; padding: 20px; color: #666;">
+                    <i class="fas fa-users" style="font-size: 24px; margin-bottom: 10px;"></i>
+                    <div>No data available</div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- HOURLY SALES TREND -->
+    <div class="analytics-section">
+        <div class="analytics-header">
+            <h2><i class="fas fa-chart-line"></i> Hourly Sales Trend</h2>
+        </div>
+        <div id="hourlySalesChart" style="padding: 20px; background: #f8f9fa; border-radius: 8px; min-height: 200px; display: flex; align-items: center; justify-content: center;">
+            <div style="text-align: center; color: #666;">
+                <i class="fas fa-chart-line" style="font-size: 32px; margin-bottom: 10px;"></i>
+                <div>Hourly sales chart will be displayed here</div>
+                <div style="font-size: 12px; margin-top: 5px;">(Chart visualization can be added with Chart.js)</div>
+            </div>
+        </div>
+    </div>
+
+    <!-- COMPARISON WITH PREVIOUS PERIOD -->
+    <div class="analytics-section">
+        <div class="analytics-header">
+            <h2><i class="fas fa-balance-scale"></i> Performance Comparison</h2>
+        </div>
+        <div class="sales-grid">
+            <div class="sales-card">
+                <h4>Revenue Comparison</h4>
+                <div style="text-align: center; padding: 15px 0;">
+                    <div id="revenueComparison" style="font-size: 18px; font-weight: 700; color: var(--primary);">+0%</div>
+                    <div style="font-size: 12px; color: #666;">vs previous period</div>
+                </div>
+            </div>
+            <div class="sales-card">
+                <h4>Order Volume</h4>
+                <div style="text-align: center; padding: 15px 0;">
+                    <div id="ordersComparison" style="font-size: 18px; font-weight: 700; color: var(--primary);">+0%</div>
+                    <div style="font-size: 12px; color: #666;">vs previous period</div>
+                </div>
+            </div>
+            <div class="sales-card">
+                <h4>Average Order Value</h4>
+                <div style="text-align: center; padding: 15px 0;">
+                    <div id="aovComparison" style="font-size: 18px; font-weight: 700; color: var(--primary);">+0%</div>
+                    <div style="font-size: 12px; color: #666;">vs previous period</div>
+                </div>
+            </div>
+            <div class="sales-card">
+                <h4>Efficiency</h4>
+                <div style="text-align: center; padding: 15px 0;">
+                    <div id="efficiencyComparison" style="font-size: 18px; font-weight: 700; color: var(--primary);">+0%</div>
+                    <div style="font-size: 12px; color: #666;">completion rate change</div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+             <!-- CUSTOMERS PAGE -->
+<div id="customersPage" class="page-content" style="display: none;">
+    <div class="page-header">
+        <div class="page-title">Customer Management</div>
+        <div style="display: flex; gap: 10px;">
+            <button class="refresh-btn" onclick="loadCustomers()" style="background: var(--primary); color: white; border: none; padding: 10px 18px; border-radius: 8px; cursor: pointer; font-weight: 600; font-size: 13px;">
+                <i class="fas fa-sync-alt"></i> Refresh
+            </button>
+            <button class="export-btn" onclick="exportCustomerData()" style="background: var(--success); color: white; border: none; padding: 10px 18px; border-radius: 8px; cursor: pointer; font-weight: 600; font-size: 13px;">
+                <i class="fas fa-download"></i> Export
+            </button>
+        </div>
+    </div>
+
+    <!-- CUSTOMER STATS -->
+    <div class="stats-grid">
+        <div class="stat-card">
+            <h3>Total Customers</h3>
+            <div id="totalCustomers" class="stat-number">0</div>
+            <div class="stat-trend" id="newCustomersTrend">+0 this week</div>
+        </div>
+        
+        <div class="stat-card">
+            <h3>Active Customers</h3>
+            <div id="activeCustomers" class="stat-number">0</div>
+            <div class="stat-trend" id="activeCustomersTrend">Last 30 days</div>
+        </div>
+        
+        <div class="stat-card">
+            <h3>Repeat Rate</h3>
+            <div id="repeatRate" class="stat-number">0%</div>
+            <div class="stat-trend" id="repeatRateTrend">Customer loyalty</div>
+        </div>
+
+        <div class="stat-card">
+            <h3>Avg. Order Value</h3>
+            <div id="customerAOV" class="stat-number">Rs. 0</div>
+            <div class="stat-trend" id="aovTrend">Per customer</div>
+        </div>
+    </div>
+
+    <!-- CUSTOMER SEARCH AND FILTERS -->
+    <div class="analytics-section">
+        <div class="analytics-header">
+            <h2><i class="fas fa-search"></i> Customer Search & Filters</h2>
+        </div>
+        <div style="display: grid; grid-template-columns: 2fr 1fr 1fr 1fr; gap: 15px; margin-bottom: 20px;">
+            <input type="text" id="customerSearch" class="gate-input" placeholder="Search by name, phone, or email..." onkeyup="filterCustomers()">
+            <select id="customerTypeFilter" class="gate-input" onchange="filterCustomers()">
+                <option value="all">All Types</option>
+                <option value="regular">Regular</option>
+                <option value="vip">VIP</option>
+                <option value="new">New</option>
+            </select>
+            <select id="customerStatusFilter" class="gate-input" onchange="filterCustomers()">
+                <option value="all">All Status</option>
+                <option value="active">Active</option>
+                <option value="inactive">Inactive</option>
+            </select>
+            <select id="sortCustomers" class="gate-input" onchange="filterCustomers()">
+                <option value="recent">Most Recent</option>
+                <option value="orders">Most Orders</option>
+                <option value="spending">Highest Spending</option>
+                <option value="name">Name A-Z</option>
+            </select>
+        </div>
+    </div>
+
+    <!-- CUSTOMERS TABLE -->
+    <div class="orders-section">
+        <div class="section-header">
+            <h2><i class="fas fa-users"></i> Customer Database</h2>
+            <div style="font-size: 13px; color: var(--text-secondary);">
+                <span id="customersCount">0</span> customers found
+            </div>
+        </div>
+        
+        <div class="orders-table-container">
+            <table class="orders-table">
+                <thead>
+                    <tr>
+                        <th>Customer</th>
+                        <th>Contact</th>
+                        <th>Orders</th>
+                        <th>Total Spent</th>
+                        <th>Last Order</th>
+                        <th>Customer Type</th>
+                        <th>Actions</th>
+                    </tr>
+                </thead>
+                <tbody id="customersTableBody">
+                    <!-- Customers will be loaded here -->
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+    <!-- CUSTOMER LOYALTY PROGRAM -->
+    <div class="analytics-section">
+        <div class="analytics-header">
+            <h2><i class="fas fa-crown"></i> Loyalty Program</h2>
+            <button class="filter-btn" onclick="manageLoyaltyProgram()" style="background: var(--secondary); color: white;">
+                <i class="fas fa-cog"></i> Manage
+            </button>
+        </div>
+        
+        <div class="sales-grid">
+            <div class="sales-card">
+                <h4>VIP Customers</h4>
+                <div class="stat-number" id="vipCount">0</div>
+                <div style="font-size: 12px; color: #666;">Top 10% spenders</div>
+            </div>
+            <div class="sales-card">
+                <h4>Loyalty Points</h4>
+                <div class="stat-number" id="totalPoints">0</div>
+                <div style="font-size: 12px; color: #666;">Total points issued</div>
+            </div>
+            <div class="sales-card">
+                <h4>Avg. Visits</h4>
+                <div class="stat-number" id="avgVisits">0</div>
+                <div style="font-size: 12px; color: #666;">Per customer</div>
+            </div>
+            <div class="sales-card">
+                <h4>Referrals</h4>
+                <div class="stat-number" id="referralCount">0</div>
+                <div style="font-size: 12px; color: #666;">Successful referrals</div>
+            </div>
+        </div>
+    </div>
+
+    <!-- CUSTOMER SEGMENTS -->
+    <div class="analytics-section">
+        <div class="analytics-header">
+            <h2><i class="fas fa-chart-pie"></i> Customer Segments</h2>
+        </div>
+        <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 20px;">
+            <div>
+                <h4 style="margin-bottom: 15px;">By Order Frequency</h4>
+                <div style="background: #f8f9fa; padding: 15px; border-radius: 8px;">
+                    <div style="display: flex; justify-content: space-between; margin: 10px 0;">
+                        <span>🥇 Frequent (5+ orders)</span>
+                        <span id="frequentCustomers">0</span>
+                    </div>
+                    <div style="display: flex; justify-content: space-between; margin: 10px 0;">
+                        <span>🥈 Regular (2-4 orders)</span>
+                        <span id="regularCustomers">0</span>
+                    </div>
+                    <div style="display: flex; justify-content: space-between; margin: 10px 0;">
+                        <span>🥉 New (1 order)</span>
+                        <span id="newCustomers">0</span>
+                    </div>
+                </div>
+            </div>
+            <div>
+                <h4 style="margin-bottom: 15px;">By Spending Level</h4>
+                <div style="background: #f8f9fa; padding: 15px; border-radius: 8px;">
+                    <div style="display: flex; justify-content: space-between; margin: 10px 0;">
+                        <span>💎 High Spender (Rs. 5000+)</span>
+                        <span id="highSpenders">0</span>
+                    </div>
+                    <div style="display: flex; justify-content: space-between; margin: 10px 0;">
+                        <span>💰 Medium Spender (Rs. 1000-5000)</span>
+                        <span id="mediumSpenders">0</span>
+                    </div>
+                    <div style="display: flex; justify-content: space-between; margin: 10px 0;">
+                        <span>💵 Low Spender (Below Rs. 1000)</span>
+                        <span id="lowSpenders">0</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+            <!-- SETTINGS PAGE -->
+<div id="settingsPage" class="page-content" style="display: none;">
+    <div class="page-header">
+        <div class="page-title">Settings & Configuration</div>
+        <button class="refresh-btn" onclick="saveAllSettings()" style="background: var(--success); color: white; border: none; padding: 10px 18px; border-radius: 8px; cursor: pointer; font-weight: 600; font-size: 13px;">
+            <i class="fas fa-save"></i> Save All Changes
+        </button>
+    </div>
+
+    <!-- SETTINGS NAVIGATION -->
+    <div class="tab-buttons" style="margin-bottom: 25px;">
+        <button class="tab-btn active" onclick="showSettingsTab('general')">General</button>
+        <button class="tab-btn" onclick="showSettingsTab('business')">Business Info</button>
+        <button class="tab-btn" onclick="showSettingsTab('payment')">Payment</button>
+        <button class="tab-btn" onclick="showSettingsTab('notifications')">Notifications</button>
+        <button class="tab-btn" onclick="showSettingsTab('backup')">Backup & Security</button>
+    </div>
+
+    <!-- GENERAL SETTINGS -->
+    <div id="generalSettings" class="settings-tab">
+        <div class="analytics-section">
+            <div class="analytics-header">
+                <h2><i class="fas fa-cog"></i> General Settings</h2>
+            </div>
+            
+            <div style="display: grid; gap: 20px;">
+                <div class="setting-group">
+                    <label class="setting-label">Bakery Name</label>
+                    <input type="text" id="bakeryName" class="gate-input" placeholder="Enter bakery name" value="KTM Bakery">
+                </div>
+                
+                <div class="setting-group">
+                    <label class="setting-label">Admin Theme</label>
+                    <select id="adminTheme" class="gate-input">
+                        <option value="default">Default Theme</option>
+                        <option value="dark">Dark Mode</option>
+                        <option value="light">Light Mode</option>
+                    </select>
+                </div>
+                
+                <div class="setting-group">
+                    <label class="setting-label">Language</label>
+                    <select id="adminLanguage" class="gate-input">
+                        <option value="en">English</option>
+                        <option value="np">Nepali</option>
+                    </select>
+                </div>
+                
+                <div class="setting-group">
+                    <label class="setting-label">
+                        <input type="checkbox" id="autoRefresh" checked> Auto-refresh orders every 30 seconds
+                    </label>
+                </div>
+                
+                <div class="setting-group">
+                    <label class="setting-label">
+                        <input type="checkbox" id="soundNotifications" checked> Enable sound notifications
+                    </label>
+                </div>
+                
+                <div class="setting-group">
+                    <label class="setting-label">
+                        <input type="checkbox" id="lowStockAlerts" checked> Enable low stock alerts
+                    </label>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- BUSINESS INFORMATION -->
+    <div id="businessSettings" class="settings-tab" style="display: none;">
+        <div class="analytics-section">
+            <div class="analytics-header">
+                <h2><i class="fas fa-store"></i> Business Information</h2>
+            </div>
+            
+            <div style="display: grid; gap: 20px;">
+                <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 15px;">
+                    <div class="setting-group">
+                        <label class="setting-label">Business Address</label>
+                        <textarea id="businessAddress" class="gate-input" rows="3" placeholder="Enter full business address">Kathmandu, Nepal</textarea>
+                    </div>
+                    
+                    <div class="setting-group">
+                        <label class="setting-label">Contact Phone</label>
+                        <input type="text" id="businessPhone" class="gate-input" placeholder="Phone number" value="+977-1-XXXXXXX">
+                    </div>
+                </div>
+                
+                <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 15px;">
+                    <div class="setting-group">
+                        <label class="setting-label">Email Address</label>
+                        <input type="email" id="businessEmail" class="gate-input" placeholder="Email address" value="info@ktmbakery.com">
+                    </div>
+                    
+                    <div class="setting-group">
+                        <label class="setting-label">Website</label>
+                        <input type="url" id="businessWebsite" class="gate-input" placeholder="Website URL" value="https://ktmbakery.com">
+                    </div>
+                </div>
+                
+                <div class="setting-group">
+                    <label class="setting-label">Business Hours</label>
+                    <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 10px;">
+                        <input type="time" id="openTime" class="gate-input" value="07:00">
+                        <input type="time" id="closeTime" class="gate-input" value="20:00">
+                    </div>
+                </div>
+                
+                <div class="setting-group">
+                    <label class="setting-label">Tax Registration Number</label>
+                    <input type="text" id="taxNumber" class="gate-input" placeholder="Tax registration number">
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- PAYMENT SETTINGS -->
+    <div id="paymentSettings" class="settings-tab" style="display: none;">
+        <div class="analytics-section">
+            <div class="analytics-header">
+                <h2><i class="fas fa-credit-card"></i> Payment Settings</h2>
+            </div>
+            
+            <div style="display: grid; gap: 20px;">
+                <h4 style="color: var(--primary);">Accepted Payment Methods</h4>
+                
+                <div class="setting-group">
+                    <label class="setting-label">
+                        <input type="checkbox" id="enableFonepay" checked> Accept Fonepay Payments
+                    </label>
+                    <div id="fonepayDetails" style="margin-left: 25px; margin-top: 10px;">
+                        <input type="text" id="fonepayMerchantId" class="gate-input" placeholder="Merchant ID" style="margin-bottom: 8px;">
+                        <input type="text" id="fonepaySecret" class="gate-input" placeholder="Secret Key">
+                    </div>
+                </div>
+                
+                <div class="setting-group">
+                    <label class="setting-label">
+                        <input type="checkbox" id="enableCash" checked> Accept Cash Payments
+                    </label>
+                </div>
+                
+                <div class="setting-group">
+                    <label class="setting-label">
+                        <input type="checkbox" id="enableBankTransfer" checked> Accept Bank Transfers
+                    </label>
+                    <div id="bankDetails" style="margin-left: 25px; margin-top: 10px;">
+                        <input type="text" id="bankName" class="gate-input" placeholder="Bank Name" style="margin-bottom: 8px;">
+                        <input type="text" id="accountNumber" class="gate-input" placeholder="Account Number" style="margin-bottom: 8px;">
+                        <input type="text" id="accountName" class="gate-input" placeholder="Account Holder Name">
+                    </div>
+                </div>
+                
+                <div class="setting-group">
+                    <label class="setting-label">
+                        <input type="checkbox" id="enableCOD" checked> Accept Cash on Delivery
+                    </label>
+                </div>
+                
+                <div class="setting-group">
+                    <label class="setting-label">Tax Rate (%)</label>
+                    <input type="number" id="taxRate" class="gate-input" value="13" min="0" max="50" step="0.1">
+                </div>
+                
+                <div class="setting-group">
+                    <label class="setting-label">Service Charge (%)</label>
+                    <input type="number" id="serviceCharge" class="gate-input" value="10" min="0" max="20" step="0.1">
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- NOTIFICATION SETTINGS -->
+    <div id="notificationSettings" class="settings-tab" style="display: none;">
+        <div class="analytics-section">
+            <div class="analytics-header">
+                <h2><i class="fas fa-bell"></i> Notification Settings</h2>
+            </div>
+            
+            <div style="display: grid; gap: 20px;">
+                <h4 style="color: var(--primary);">Notification Preferences</h4>
+                
+                <div class="setting-group">
+                    <label class="setting-label">
+                        <input type="checkbox" id="notifyNewOrders" checked> Notify on New Orders
+                    </label>
+                </div>
+                
+                <div class="setting-group">
+                    <label class="setting-label">
+                        <input type="checkbox" id="notifyOrderUpdates" checked> Notify on Order Status Changes
+                    </label>
+                </div>
+                
+                <div class="setting-group">
+                    <label class="setting-label">
+                        <input type="checkbox" id="notifyLowStock" checked> Low Stock Alerts
+                    </label>
+                </div>
+                
+                <div class="setting-group">
+                    <label class="setting-label">
+                        <input type="checkbox" id="notifyDailyReports" checked> Daily Sales Reports
+                    </label>
+                </div>
+                
+                <div class="setting-group">
+                    <label class="setting-label">Notification Sound</label>
+                    <select id="notificationSound" class="gate-input">
+                        <option value="default">Default</option>
+                        <option value="chime">Chime</option>
+                        <option value="bell">Bell</option>
+                        <option value="beep">Beep</option>
+                    </select>
+                </div>
+                
+                <div class="setting-group">
+                    <label class="setting-label">Email Reports</label>
+                    <input type="email" id="reportEmail" class="gate-input" placeholder="Email for daily reports">
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- BACKUP & SECURITY -->
+    <div id="backupSettings" class="settings-tab" style="display: none;">
+        <div class="analytics-section">
+            <div class="analytics-header">
+                <h2><i class="fas fa-shield-alt"></i> Backup & Security</h2>
+            </div>
+            
+            <div style="display: grid; gap: 20px;">
+                <h4 style="color: var(--primary);">Data Management</h4>
+                
+                <div class="setting-group">
+                    <label class="setting-label">Automatic Backup</label>
+                    <select id="backupFrequency" class="gate-input">
+                        <option value="daily">Daily</option>
+                        <option value="weekly">Weekly</option>
+                        <option value="monthly">Monthly</option>
+                        <option value="never">Never</option>
+                    </select>
+                </div>
+                
+                <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 15px; margin: 15px 0;">
+                    <button onclick="exportAllData()" style="background: var(--primary); color: white; border: none; padding: 12px; border-radius: 6px; cursor: pointer; font-weight: 600;">
+                        <i class="fas fa-download"></i> Export All Data
+                    </button>
+                    
+                    <button onclick="importData()" style="background: var(--secondary); color: white; border: none; padding: 12px; border-radius: 6px; cursor: pointer; font-weight: 600;">
+                        <i class="fas fa-upload"></i> Import Data
+                    </button>
+                </div>
+                
+                <div class="setting-group">
+                    <label class="setting-label">
+                        <input type="checkbox" id="autoLogout" checked> Auto-logout after 30 minutes
+                    </label>
+                </div>
+                
+                <h4 style="color: var(--primary); margin-top: 20px;">Security Settings</h4>
+                
+                <div class="setting-group">
+                    <label class="setting-label">Change Admin Password</label>
+                    <div style="display: grid; gap: 10px;">
+                        <input type="password" id="currentPassword" class="gate-input" placeholder="Current Password">
+                        <input type="password" id="newPassword" class="gate-input" placeholder="New Password">
+                        <input type="password" id="confirmPassword" class="gate-input" placeholder="Confirm New Password">
+                        <button onclick="changeAdminPassword()" style="background: var(--danger); color: white; border: none; padding: 10px; border-radius: 6px; cursor: pointer; font-weight: 600;">
+                            Change Password
+                        </button>
+                    </div>
+                </div>
+                
+                <div class="setting-group">
+                    <label class="setting-label">System Information</label>
+                    <div style="background: #f8f9fa; padding: 15px; border-radius: 8px; font-size: 12px;">
+                        <div>Last Backup: <span id="lastBackupDate">Never</span></div>
+                        <div>Data Size: <span id="dataSize">0 KB</span></div>
+                        <div>Orders in System: <span id="totalOrdersCount">0</span></div>
+                        <div>Customers in System: <span id="totalCustomersCount">0</span></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+    <!-- ORDER DETAILS MODAL -->
+    <div id="orderDetailsModal" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <div class="modal-title">Order Details</div>
+                <span class="close-modal" onclick="closeOrderModal()">&times;</span>
+            </div>
+            <div id="orderDetailsContent">
+                <!-- Order details will be loaded here -->
+            </div>
+        </div>
+    </div>
+
+    <!-- DELETE REASON MODAL -->
+    <div id="deleteReasonModal" class="delete-reason-modal">
+        <div class="delete-reason-content">
+            <div class="modal-header">
+                <div class="modal-title">Delete Order</div>
+                <span class="close-modal" onclick="closeDeleteReasonModal()">&times;</span>
+            </div>
+            <p style="margin-bottom: 15px; color: var(--text-secondary);">Please select the reason for deleting this order:</p>
+            <div class="reason-options">
+                <button class="reason-option" onclick="selectDeleteReason('Customer cancelled')">
+                    <strong>Customer cancelled</strong>
+                    <div style="font-size: 12px; color: var(--text-secondary);">Order was cancelled by customer</div>
+                </button>
+                <button class="reason-option" onclick="selectDeleteReason('Wrong order')">
+                    <strong>Wrong order</strong>
+                    <div style="font-size: 12px; color: var(--text-secondary);">Incorrect order was placed</div>
+                </button>
+                <button class="reason-option" onclick="selectDeleteReason('Duplicate order')">
+                    <strong>Duplicate order</strong>
+                    <div style="font-size: 12px; color: var(--text-secondary);">Order was placed multiple times</div>
+                </button>
+                <button class="reason-option" onclick="selectDeleteReason('Payment issue')">
+                    <strong>Payment issue</strong>
+                    <div style="font-size: 12px; color: var(--text-secondary);">Problem with payment processing</div>
+                </button>
+                <button class="reason-option" onclick="selectDeleteReason('Out of stock')">
+                    <strong>Out of stock</strong>
+                    <div style="font-size: 12px; color: var(--text-secondary);">Items not available</div>
+                </button>
+                <button class="reason-option" onclick="selectDeleteReason('Other')">
+                    <strong>Other reason</strong>
+                    <div style="font-size: 12px; color: var(--text-secondary);">Different reason</div>
+                </button>
+            </div>
+            <div style="display: flex; gap: 10px; margin-top: 20px;">
+                <button onclick="closeDeleteReasonModal()" style="flex: 1; padding: 10px; border: 1px solid #ddd; border-radius: 6px; background: white; cursor: pointer;">
+                    Cancel
+                </button>
+                <button id="confirmDeleteBtn" onclick="confirmDeleteOrder()" style="flex: 1; padding: 10px; border: none; border-radius: 6px; background: var(--danger); color: white; cursor: pointer; font-weight: 600;" disabled>
+                    Delete Order
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <script>
+       // ==================== CONFIGURATION ====================
+        const SECURITY_CONFIG = {
+            step1Password: "BAKERY24",
+            adminUsername: "ktmadmin",
+            adminPassword: "bakery2024"
+        };
+
+        let currentOrdersTab = 'active';
+        let selectedOrderId = null;
+        let orders = [];
+        let deletedOrders = [];
+        let analyticsPeriod = 'today';
+        let selectedDeleteReason = '';
+
+        // ==================== MOBILE SIDEBAR TOGGLE ====================
+        function toggleSidebar() {
+            const sidebar = document.getElementById('sidebar');
+            if (window.innerWidth <= 768) {
+                sidebar.classList.toggle('mobile-open');
+            }
+        }
+
+        // ==================== FIXED TIME DISPLAY ====================
+        function getNepaliTime(timestamp) {
+            try {
+                const date = new Date(timestamp);
+                if (isNaN(date.getTime())) {
+                    return 'Recently';
+                }
+                
+                const now = new Date();
+                const diffMs = now - date;
+                const diffMins = Math.floor(diffMs / 60000);
+                const diffHours = Math.floor(diffMs / 3600000);
+                
+                if (diffMins < 1) return 'Just now';
+                if (diffMins < 60) return `${diffMins} min ago`;
+                if (diffHours < 24) return `${diffHours} hr ago`;
+                
+                return date.toLocaleDateString('en-US', { 
+                    month: 'short', 
+                    day: 'numeric',
+                    hour: '2-digit',
+                    minute: '2-digit'
+                });
+            } catch (e) {
+                return 'Recently';
+            }
+        }
+
+// ==================== ANALYTICS SYSTEM ====================
+let analyticsDateRange = 'today';
+
+function setAnalyticsDateRange(range) {
+    analyticsDateRange = range;
+    document.querySelectorAll('#analyticsPage .filter-btn').forEach(btn => btn.classList.remove('active'));
+    event.target.classList.add('active');
+    
+    // Show/hide custom date picker
+    const customDateRange = document.getElementById('customDateRange');
+    if (range === 'custom') {
+        customDateRange.style.display = 'block';
+    } else {
+        customDateRange.style.display = 'none';
+        loadAnalyticsData();
+    }
+}
+
+function applyCustomDateRange() {
+    const startDate = document.getElementById('startDate').value;
+    const endDate = document.getElementById('endDate').value;
+    
+    if (!startDate || !endDate) {
+        alert('Please select both start and end dates');
+        return;
+    }
+    
+    loadAnalyticsData();
+}
+
+function loadAnalyticsData() {
+    const allOrders = JSON.parse(localStorage.getItem('ktmBakeryOrders')) || [];
+    const deletedOrders = JSON.parse(localStorage.getItem('ktmDeletedOrders')) || [];
+    
+    // Filter orders based on date range
+    let filteredOrders = filterOrdersByDateRange(allOrders, analyticsDateRange);
+    let previousOrders = filterOrdersByDateRange(allOrders, getPreviousDateRange(analyticsDateRange));
+    
+    // Calculate metrics
+    calculateAnalyticsMetrics(filteredOrders, previousOrders);
+    calculateTopProducts(filteredOrders);
+    calculateTopCustomers(filteredOrders);
+    updatePerformanceComparison(filteredOrders, previousOrders);
+}
+
+function filterOrdersByDateRange(orders, range) {
+    const now = new Date();
+    let startDate, endDate = new Date(now);
+    
+    switch(range) {
+        case 'today':
+            startDate = new Date(now.getFullYear(), now.getMonth(), now.getDate());
+            break;
+        case 'yesterday':
+            startDate = new Date(now.getFullYear(), now.getMonth(), now.getDate() - 1);
+            endDate = new Date(now.getFullYear(), now.getMonth(), now.getDate() - 1, 23, 59, 59);
+            break;
+        case 'week':
+            startDate = new Date(now.getFullYear(), now.getMonth(), now.getDate() - 7);
+            break;
+        case 'month':
+            startDate = new Date(now.getFullYear(), now.getMonth(), 1);
+            break;
+        case 'custom':
+            const customStart = document.getElementById('startDate').value;
+            const customEnd = document.getElementById('endDate').value;
+            if (customStart && customEnd) {
+                startDate = new Date(customStart);
+                endDate = new Date(customEnd);
+                endDate.setHours(23, 59, 59);
+            }
+            break;
+        default:
+            startDate = new Date(now.getFullYear(), now.getMonth(), now.getDate());
+    }
+    
+    return orders.filter(order => {
+        const orderDate = new Date(order.timestamp);
+        return orderDate >= startDate && orderDate <= endDate;
+    });
+}
+
+function getPreviousDateRange(currentRange) {
+    const now = new Date();
+    
+    switch(currentRange) {
+        case 'today':
+            return 'yesterday';
+        case 'yesterday':
+            const yesterday = new Date(now.getFullYear(), now.getMonth(), now.getDate() - 1);
+            const dayBefore = new Date(now.getFullYear(), now.getMonth(), now.getDate() - 2);
+            // For simplicity, we'll use yesterday as previous for yesterday
+            return 'yesterday';
+        case 'week':
+            return 'lastWeek';
+        case 'month':
+            return 'lastMonth';
+        default:
+            return 'yesterday';
+    }
+}
+
+function calculateAnalyticsMetrics(orders, previousOrders) {
+    // Total Revenue
+    const totalRevenue = orders.reduce((sum, order) => sum + order.total, 0);
+    const previousRevenue = previousOrders.reduce((sum, order) => sum + order.total, 0);
+    const revenueChange = previousRevenue > 0 ? ((totalRevenue - previousRevenue) / previousRevenue * 100).toFixed(1) : 0;
+    
+    // Total Orders
+    const totalOrders = orders.length;
+    const previousOrdersCount = previousOrders.length;
+    const ordersChange = previousOrdersCount > 0 ? ((totalOrders - previousOrdersCount) / previousOrdersCount * 100).toFixed(1) : 0;
+    
+    // Average Order Value
+    const aov = totalOrders > 0 ? Math.round(totalRevenue / totalOrders) : 0;
+    const previousAOV = previousOrdersCount > 0 ? Math.round(previousRevenue / previousOrdersCount) : 0;
+    const aovChange = previousAOV > 0 ? ((aov - previousAOV) / previousAOV * 100).toFixed(1) : 0;
+    
+    // Completion Rate
+    const completedOrders = orders.filter(order => order.status === 'completed').length;
+    const completionRate = totalOrders > 0 ? Math.round((completedOrders / totalOrders) * 100) : 0;
+    const previousCompleted = previousOrders.filter(order => order.status === 'completed').length;
+    const previousCompletionRate = previousOrdersCount > 0 ? Math.round((previousCompleted / previousOrdersCount) * 100) : 0;
+    const completionChange = previousCompletionRate > 0 ? (completionRate - previousCompletionRate) : 0;
+    
+    // Update DOM
+    document.getElementById('analyticsTotalRevenue').textContent = `Rs. ${totalRevenue}`;
+    document.getElementById('analyticsTotalOrders').textContent = totalOrders;
+    document.getElementById('analyticsAOV').textContent = `Rs. ${aov}`;
+    document.getElementById('analyticsCompletion').textContent = `${completionRate}%`;
+    
+    // Update trends
+    document.getElementById('revenueTrend').textContent = `${revenueChange >= 0 ? '+' : ''}${revenueChange}% vs previous`;
+    document.getElementById('revenueTrend').style.color = revenueChange >= 0 ? 'var(--success)' : 'var(--danger)';
+    
+    document.getElementById('ordersTrend').textContent = `${ordersChange >= 0 ? '+' : ''}${ordersChange}% vs previous`;
+    document.getElementById('ordersTrend').style.color = ordersChange >= 0 ? 'var(--success)' : 'var(--danger)';
+    
+    document.getElementById('aovTrend').textContent = `${aovChange >= 0 ? '+' : ''}${aovChange}% vs previous`;
+    document.getElementById('aovTrend').style.color = aovChange >= 0 ? 'var(--success)' : 'var(--danger)';
+    
+    document.getElementById('completionTrend').textContent = `${completionChange >= 0 ? '+' : ''}${completionChange}% vs previous`;
+    document.getElementById('completionTrend').style.color = completionChange >= 0 ? 'var(--success)' : 'var(--danger)';
+    
+    // Sales by order type
+    const deliverySales = orders.filter(order => order.type === 'delivery').reduce((sum, order) => sum + order.total, 0);
+    const dineinSales = orders.filter(order => order.type === 'dinein').reduce((sum, order) => sum + order.total, 0);
+    const takeawaySales = orders.filter(order => order.type === 'takeaway').reduce((sum, order) => sum + order.total, 0);
+    const mixedSales = orders.filter(order => order.isMixed).reduce((sum, order) => sum + order.total, 0);
+    
+    document.getElementById('deliverySales').textContent = `Rs. ${deliverySales}`;
+    document.getElementById('dineinSales').textContent = `Rs. ${dineinSales}`;
+    document.getElementById('takeawaySales').textContent = `Rs. ${takeawaySales}`;
+    document.getElementById('mixedSales').textContent = `Rs. ${mixedSales}`;
+    
+    // Sales by payment method
+    const fonepaySales = orders.filter(order => order.paymentMethod === 'fonepay').reduce((sum, order) => sum + order.total, 0);
+    const cashSales = orders.filter(order => order.paymentMethod === 'cash').reduce((sum, order) => sum + order.total, 0);
+    const bankSales = orders.filter(order => order.paymentMethod === 'bank').reduce((sum, order) => sum + order.total, 0);
+    const codSales = orders.filter(order => order.paymentMethod === 'cod').reduce((sum, order) => sum + order.total, 0);
+    
+    document.getElementById('fonepaySales').textContent = `Rs. ${fonepaySales}`;
+    document.getElementById('cashSales').textContent = `Rs. ${cashSales}`;
+    document.getElementById('bankSales').textContent = `Rs. ${bankSales}`;
+    document.getElementById('codSales').textContent = `Rs. ${codSales}`;
+    
+    // Order status distribution
+    const receivedCount = orders.filter(order => order.status === 'received').length;
+    const bakingCount = orders.filter(order => order.status === 'baking').length;
+    const readyCount = orders.filter(order => order.status === 'ready').length;
+    const completedCount = orders.filter(order => order.status === 'completed').length;
+    
+    document.getElementById('receivedCount').textContent = receivedCount;
+    document.getElementById('bakingCount').textContent = bakingCount;
+    document.getElementById('readyCount').textContent = readyCount;
+    document.getElementById('completedCount').textContent = completedCount;
+    
+    // Performance metrics
+    const peakHour = calculatePeakHour(orders);
+    const popularItem = calculatePopularItem(orders);
+    const deletedCount = JSON.parse(localStorage.getItem('ktmDeletedOrders') || '[]').length;
+    const cancellationRate = totalOrders > 0 ? Math.round((deletedCount / (totalOrders + deletedCount)) * 100) : 0;
+    
+    document.getElementById('peakHour').textContent = peakHour;
+    document.getElementById('popularItem').textContent = popularItem;
+    document.getElementById('cancellationRate').textContent = `${cancellationRate}%`;
+}
+
+function calculateTopProducts(orders) {
+    const productCounts = {};
+    
+    orders.forEach(order => {
+        order.items.forEach(item => {
+            const productName = item.name;
+            if (!productCounts[productName]) {
+                productCounts[productName] = {
+                    name: productName,
+                    quantity: 0,
+                    revenue: 0
+                };
+            }
+            productCounts[productName].quantity += item.quantity;
+            productCounts[productName].revenue += item.price * item.quantity;
+        });
+    });
+    
+    const topProducts = Object.values(productCounts)
+        .sort((a, b) => b.quantity - a.quantity)
+        .slice(0, 10);
+    
+    const topProductsList = document.getElementById('topProductsList');
+    
+    if (topProducts.length === 0) {
+        topProductsList.innerHTML = `
+            <div style="text-align: center; padding: 20px; color: #666;">
+                <i class="fas fa-chart-bar" style="font-size: 24px; margin-bottom: 10px;"></i>
+                <div>No products sold in this period</div>
+            </div>
+        `;
+        return;
+    }
+    
+    topProductsList.innerHTML = topProducts.map((product, index) => `
+        <div style="display: flex; justify-content: space-between; align-items: center; padding: 10px; border-bottom: 1px solid #f0f0f0;">
+            <div style="display: flex; align-items: center; gap: 10px;">
+                <span style="font-weight: 700; color: var(--primary);">${index + 1}.</span>
+                <div>
+                    <div style="font-weight: 600;">${product.name}</div>
+                    <div style="font-size: 11px; color: #666;">Rs. ${product.revenue} revenue</div>
+                </div>
+            </div>
+            <span style="font-weight: 700;">${product.quantity} sold</span>
+        </div>
+    `).join('');
+}
+
+function calculateTopCustomers(orders) {
+    const customerStats = {};
+    
+    orders.forEach(order => {
+        const customerKey = order.customer.phone;
+        if (!customerStats[customerKey]) {
+            customerStats[customerKey] = {
+                name: order.customer.name,
+                phone: order.customer.phone,
+                orders: 0,
+                totalSpent: 0
+            };
+        }
+        customerStats[customerKey].orders += 1;
+        customerStats[customerKey].totalSpent += order.total;
+    });
+    
+    const topCustomers = Object.values(customerStats)
+        .sort((a, b) => b.totalSpent - a.totalSpent)
+        .slice(0, 10);
+    
+    const topCustomersList = document.getElementById('topCustomersList');
+    
+    if (topCustomers.length === 0) {
+        topCustomersList.innerHTML = `
+            <div style="text-align: center; padding: 20px; color: #666;">
+                <i class="fas fa-users" style="font-size: 24px; margin-bottom: 10px;"></i>
+                <div>No customer data available</div>
+            </div>
+        `;
+        return;
+    }
+    
+    topCustomersList.innerHTML = topCustomers.map((customer, index) => `
+        <div style="display: flex; justify-content: space-between; align-items: center; padding: 10px; border-bottom: 1px solid #f0f0f0;">
+            <div style="display: flex; align-items: center; gap: 10px;">
+                <span style="font-weight: 700; color: var(--primary);">${index + 1}.</span>
+                <div>
+                    <div style="font-weight: 600;">${customer.name}</div>
+                    <div style="font-size: 11px; color: #666;">${customer.phone}</div>
+                </div>
+            </div>
+            <div style="text-align: right;">
+                <div style="font-weight: 700;">Rs. ${customer.totalSpent}</div>
+                <div style="font-size: 11px; color: #666;">${customer.orders} orders</div>
+            </div>
+        </div>
+    `).join('');
+}
+
+function calculatePeakHour(orders) {
+    if (orders.length === 0) return '-';
+    
+    const hourCounts = {};
+    orders.forEach(order => {
+        const hour = new Date(order.timestamp).getHours();
+        hourCounts[hour] = (hourCounts[hour] || 0) + 1;
+    });
+    
+    const peakHour = Object.keys(hourCounts).reduce((a, b) => hourCounts[a] > hourCounts[b] ? a : b);
+    return `${peakHour}:00 - ${parseInt(peakHour) + 1}:00`;
+}
+
+function calculatePopularItem(orders) {
+    if (orders.length === 0) return '-';
+    
+    const itemCounts = {};
+    orders.forEach(order => {
+        order.items.forEach(item => {
+            itemCounts[item.name] = (itemCounts[item.name] || 0) + item.quantity;
+        });
+    });
+    
+    return Object.keys(itemCounts).reduce((a, b) => itemCounts[a] > itemCounts[b] ? a : b);
+}
+
+function updatePerformanceComparison(currentOrders, previousOrders) {
+    const currentRevenue = currentOrders.reduce((sum, order) => sum + order.total, 0);
+    const previousRevenue = previousOrders.reduce((sum, order) => sum + order.total, 0);
+    const revenueChange = previousRevenue > 0 ? ((currentRevenue - previousRevenue) / previousRevenue * 100).toFixed(1) : 100;
+    
+    const currentOrdersCount = currentOrders.length;
+    const previousOrdersCount = previousOrders.length;
+    const ordersChange = previousOrdersCount > 0 ? ((currentOrdersCount - previousOrdersCount) / previousOrdersCount * 100).toFixed(1) : 100;
+    
+    const currentAOV = currentOrdersCount > 0 ? Math.round(currentRevenue / currentOrdersCount) : 0;
+    const previousAOV = previousOrdersCount > 0 ? Math.round(previousRevenue / previousOrdersCount) : 0;
+    const aovChange = previousAOV > 0 ? ((currentAOV - previousAOV) / previousAOV * 100).toFixed(1) : 100;
+    
+    const currentCompleted = currentOrders.filter(order => order.status === 'completed').length;
+    const currentCompletionRate = currentOrdersCount > 0 ? Math.round((currentCompleted / currentOrdersCount) * 100) : 0;
+    const previousCompleted = previousOrders.filter(order => order.status === 'completed').length;
+    const previousCompletionRate = previousOrdersCount > 0 ? Math.round((previousCompleted / previousOrdersCount) * 100) : 0;
+    const completionChange = previousCompletionRate > 0 ? (currentCompletionRate - previousCompletionRate) : currentCompletionRate;
+    
+    document.getElementById('revenueComparison').textContent = `${revenueChange >= 0 ? '+' : ''}${revenueChange}%`;
+    document.getElementById('revenueComparison').style.color = revenueChange >= 0 ? 'var(--success)' : 'var(--danger)';
+    
+    document.getElementById('ordersComparison').textContent = `${ordersChange >= 0 ? '+' : ''}${ordersChange}%`;
+    document.getElementById('ordersComparison').style.color = ordersChange >= 0 ? 'var(--success)' : 'var(--danger)';
+    
+    document.getElementById('aovComparison').textContent = `${aovChange >= 0 ? '+' : ''}${aovChange}%`;
+    document.getElementById('aovComparison').style.color = aovChange >= 0 ? 'var(--success)' : 'var(--danger)';
+    
+    document.getElementById('efficiencyComparison').textContent = `${completionChange >= 0 ? '+' : ''}${completionChange}%`;
+    document.getElementById('efficiencyComparison').style.color = completionChange >= 0 ? 'var(--success)' : 'var(--danger)';
+}
+
+// Initialize analytics when page loads
+document.addEventListener('DOMContentLoaded', function() {
+    // Load analytics data when analytics page is shown
+    const originalShowPage = window.showPage;
+    window.showPage = function(pageName) {
+        originalShowPage(pageName);
+        if (pageName === 'analytics') {
+            loadAnalyticsData();
+        }
+    };
+});
+
+// ==================== CUSTOMER MANAGEMENT ====================
+let customers = [];
+let currentSettingsTab = 'general';
+
+function loadCustomers() {
+    const orders = JSON.parse(localStorage.getItem('ktmBakeryOrders')) || [];
+    
+    // Generate customer data from orders
+    const customerMap = {};
+    
+    orders.forEach(order => {
+        const phone = order.customer.phone;
+        if (!customerMap[phone]) {
+            customerMap[phone] = {
+                name: order.customer.name,
+                phone: phone,
+                orders: [],
+                totalSpent: 0,
+                firstOrder: order.timestamp,
+                lastOrder: order.timestamp
+            };
+        }
+        
+        customerMap[phone].orders.push(order);
+        customerMap[phone].totalSpent += order.total;
+        customerMap[phone].lastOrder = order.timestamp;
+    });
+    
+    customers = Object.values(customerMap).map(customer => {
+        const orderCount = customer.orders.length;
+        const avgOrderValue = customer.totalSpent / orderCount;
+        
+        // Determine customer type
+        let type = 'new';
+        if (orderCount >= 5) type = 'vip';
+        else if (orderCount >= 2) type = 'regular';
+        
+        // Determine status (active if ordered in last 30 days)
+        const lastOrderDate = new Date(customer.lastOrder);
+        const thirtyDaysAgo = new Date(Date.now() - 30 * 24 * 60 * 60 * 1000);
+        const status = lastOrderDate >= thirtyDaysAgo ? 'active' : 'inactive';
+        
+        return {
+            ...customer,
+            orderCount,
+            avgOrderValue,
+            type,
+            status
+        };
+    });
+    
+    updateCustomerStats();
+    updateCustomersTable();
+}
+
+function updateCustomerStats() {
+    const totalCustomers = customers.length;
+    const activeCustomers = customers.filter(c => c.status === 'active').length;
+    const vipCustomers = customers.filter(c => c.type === 'vip').length;
+    
+    // Calculate repeat rate
+    const repeatCustomers = customers.filter(c => c.orderCount > 1).length;
+    const repeatRate = totalCustomers > 0 ? Math.round((repeatCustomers / totalCustomers) * 100) : 0;
+    
+    // Calculate average order value across all customers
+    const totalRevenue = customers.reduce((sum, c) => sum + c.totalSpent, 0);
+    const customerAOV = totalCustomers > 0 ? Math.round(totalRevenue / totalCustomers) : 0;
+    
+    // Customer segments
+    const frequentCustomers = customers.filter(c => c.orderCount >= 5).length;
+    const regularCustomers = customers.filter(c => c.orderCount >= 2 && c.orderCount < 5).length;
+    const newCustomers = customers.filter(c => c.orderCount === 1).length;
+    
+    const highSpenders = customers.filter(c => c.totalSpent >= 5000).length;
+    const mediumSpenders = customers.filter(c => c.totalSpent >= 1000 && c.totalSpent < 5000).length;
+    const lowSpenders = customers.filter(c => c.totalSpent < 1000).length;
+    
+    // Update DOM
+    document.getElementById('totalCustomers').textContent = totalCustomers;
+    document.getElementById('activeCustomers').textContent = activeCustomers;
+    document.getElementById('repeatRate').textContent = `${repeatRate}%`;
+    document.getElementById('customerAOV').textContent = `Rs. ${customerAOV}`;
+    
+    document.getElementById('vipCount').textContent = vipCustomers;
+    document.getElementById('totalPoints').textContent = vipCustomers * 100; // Example points
+    document.getElementById('avgVisits').textContent = totalCustomers > 0 ? (customers.reduce((sum, c) => sum + c.orderCount, 0) / totalCustomers).toFixed(1) : '0';
+    document.getElementById('referralCount').textContent = Math.floor(vipCustomers * 0.3); // Example referrals
+    
+    document.getElementById('frequentCustomers').textContent = frequentCustomers;
+    document.getElementById('regularCustomers').textContent = regularCustomers;
+    document.getElementById('newCustomers').textContent = newCustomers;
+    
+    document.getElementById('highSpenders').textContent = highSpenders;
+    document.getElementById('mediumSpenders').textContent = mediumSpenders;
+    document.getElementById('lowSpenders').textContent = lowSpenders;
+    
+    // Update trends
+    const newThisWeek = customers.filter(c => {
+        const firstOrder = new Date(c.firstOrder);
+        const weekAgo = new Date(Date.now() - 7 * 24 * 60 * 60 * 1000);
+        return firstOrder >= weekAgo;
+    }).length;
+    
+    document.getElementById('newCustomersTrend').textContent = `+${newThisWeek} this week`;
+    document.getElementById('activeCustomersTrend').textContent = `${activeCustomers} last 30 days`;
+    document.getElementById('repeatRateTrend').textContent = `${repeatCustomers} repeat customers`;
+    document.getElementById('aovTrend').textContent = `Across ${totalCustomers} customers`;
+}
+
+function updateCustomersTable() {
+    const tbody = document.getElementById('customersTableBody');
+    const searchTerm = document.getElementById('customerSearch').value.toLowerCase();
+    const typeFilter = document.getElementById('customerTypeFilter').value;
+    const statusFilter = document.getElementById('customerStatusFilter').value;
+    const sortBy = document.getElementById('sortCustomers').value;
+    
+    let filteredCustomers = customers.filter(customer => {
+        const matchesSearch = customer.name.toLowerCase().includes(searchTerm) || 
+                            customer.phone.includes(searchTerm);
+        const matchesType = typeFilter === 'all' || customer.type === typeFilter;
+        const matchesStatus = statusFilter === 'all' || customer.status === statusFilter;
+        
+        return matchesSearch && matchesType && matchesStatus;
+    });
+    
+    // Sort customers
+    filteredCustomers.sort((a, b) => {
+        switch(sortBy) {
+            case 'recent': return new Date(b.lastOrder) - new Date(a.lastOrder);
+            case 'orders': return b.orderCount - a.orderCount;
+            case 'spending': return b.totalSpent - a.totalSpent;
+            case 'name': return a.name.localeCompare(b.name);
+            default: return new Date(b.lastOrder) - new Date(a.lastOrder);
+        }
+    });
+    
+    document.getElementById('customersCount').textContent = filteredCustomers.length;
+    
+    if (filteredCustomers.length === 0) {
+        tbody.innerHTML = `<tr><td colspan="7" style="text-align: center; padding: 30px; color: #666;">No customers found matching your criteria.</td></tr>`;
+        return;
+    }
+    
+    tbody.innerHTML = filteredCustomers.map(customer => `
+        <tr>
+            <td>
+                <div><strong>${customer.name}</strong></div>
+                <span class="customer-badge badge-${customer.type}">${customer.type.toUpperCase()}</span>
+                ${customer.status === 'inactive' ? '<span class="customer-badge badge-inactive">INACTIVE</span>' : ''}
+            </td>
+            <td>
+                <div>${customer.phone}</div>
+                <div style="font-size: 11px; color: #666;">${getNepaliTime(customer.lastOrder)}</div>
+            </td>
+            <td>
+                <strong>${customer.orderCount}</strong>
+                <div style="font-size: 11px; color: #666;">orders</div>
+            </td>
+            <td>
+                <strong>Rs. ${customer.totalSpent}</strong>
+                <div style="font-size: 11px; color: #666;">Rs. ${Math.round(customer.avgOrderValue)} avg</div>
+            </td>
+            <td>${getNepaliTime(customer.lastOrder)}</td>
+            <td>
+                <span class="customer-badge badge-${customer.type}">${customer.type.toUpperCase()}</span>
+            </td>
+            <td>
+                <div class="customer-actions">
+                    <button class="action-btn view" onclick="viewCustomerDetails('${customer.phone}')">View</button>
+                    <button class="action-btn message" onclick="messageCustomer('${customer.phone}')">SMS</button>
+                </div>
+            </td>
+        </tr>
+    `).join('');
+}
+
+function filterCustomers() {
+    updateCustomersTable();
+}
+
+function viewCustomerDetails(phone) {
+    const customer = customers.find(c => c.phone === phone);
+    if (!customer) return;
+    
+    alert(`Customer Details:\n\nName: ${customer.name}\nPhone: ${customer.phone}\nTotal Orders: ${customer.orderCount}\nTotal Spent: Rs. ${customer.totalSpent}\nCustomer Type: ${customer.type.toUpperCase()}\nStatus: ${customer.status}`);
+}
+
+function messageCustomer(phone) {
+    const message = "Thank you for choosing KTM Bakery! We appreciate your business.";
+    window.open(`sms:${phone}&body=${encodeURIComponent(message)}`, '_self');
+}
+
+function exportCustomerData() {
+    const csvContent = "Name,Phone,Orders,Total Spent,Avg Order,Type,Status,Last Order\n" +
+        customers.map(c => 
+            `"${c.name}","${c.phone}",${c.orderCount},${c.totalSpent},${Math.round(c.avgOrderValue)},${c.type},${c.status},"${new Date(c.lastOrder).toLocaleDateString()}"`
+        ).join("\n");
+    
+    const blob = new Blob([csvContent], { type: 'text/csv' });
+    const url = window.URL.createObjectURL(blob);
+    const a = document.createElement('a');
+    a.href = url;
+    a.download = `ktm-bakery-customers-${new Date().toISOString().split('T')[0]}.csv`;
+    a.click();
+    window.URL.revokeObjectURL(url);
+}
+
+// ==================== SETTINGS MANAGEMENT ====================
+function showSettingsTab(tabName) {
+    currentSettingsTab = tabName;
+    document.querySelectorAll('.settings-tab').forEach(tab => {
+        tab.style.display = 'none';
+    });
+    document.getElementById(tabName + 'Settings').style.display = 'block';
+    
+    document.querySelectorAll('#settingsPage .tab-btn').forEach(btn => {
+        btn.classList.remove('active');
+    });
+    event.target.classList.add('active');
+    
+    // Load settings when tab is shown
+    loadSettings();
+}
+
+function loadSettings() {
+    const settings = JSON.parse(localStorage.getItem('ktmBakerySettings')) || {};
+    
+    // General Settings
+    document.getElementById('bakeryName').value = settings.bakeryName || 'KTM Bakery';
+    document.getElementById('adminTheme').value = settings.adminTheme || 'default';
+    document.getElementById('adminLanguage').value = settings.adminLanguage || 'en';
+    document.getElementById('autoRefresh').checked = settings.autoRefresh !== false;
+    document.getElementById('soundNotifications').checked = settings.soundNotifications !== false;
+    document.getElementById('lowStockAlerts').checked = settings.lowStockAlerts !== false;
+    
+    // Business Settings
+    document.getElementById('businessAddress').value = settings.businessAddress || 'Kathmandu, Nepal';
+    document.getElementById('businessPhone').value = settings.businessPhone || '+977-1-XXXXXXX';
+    document.getElementById('businessEmail').value = settings.businessEmail || 'info@ktmbakery.com';
+    document.getElementById('businessWebsite').value = settings.businessWebsite || 'https://ktmbakery.com';
+    document.getElementById('openTime').value = settings.openTime || '07:00';
+    document.getElementById('closeTime').value = settings.closeTime || '20:00';
+    document.getElementById('taxNumber').value = settings.taxNumber || '';
+    
+    // Payment Settings
+    document.getElementById('enableFonepay').checked = settings.enableFonepay !== false;
+    document.getElementById('fonepayMerchantId').value = settings.fonepayMerchantId || '';
+    document.getElementById('fonepaySecret').value = settings.fonepaySecret || '';
+    document.getElementById('enableCash').checked = settings.enableCash !== false;
+    document.getElementById('enableBankTransfer').checked = settings.enableBankTransfer !== false;
+    document.getElementById('bankName').value = settings.bankName || '';
+    document.getElementById('accountNumber').value = settings.accountNumber || '';
+    document.getElementById('accountName').value = settings.accountName || '';
+    document.getElementById('enableCOD').checked = settings.enableCOD !== false;
+    document.getElementById('taxRate').value = settings.taxRate || 13;
+    document.getElementById('serviceCharge').value = settings.serviceCharge || 10;
+    
+    // Notification Settings
+    document.getElementById('notifyNewOrders').checked = settings.notifyNewOrders !== false;
+    document.getElementById('notifyOrderUpdates').checked = settings.notifyOrderUpdates !== false;
+    document.getElementById('notifyLowStock').checked = settings.notifyLowStock !== false;
+    document.getElementById('notifyDailyReports').checked = settings.notifyDailyReports !== false;
+    document.getElementById('notificationSound').value = settings.notificationSound || 'default';
+    document.getElementById('reportEmail').value = settings.reportEmail || '';
+    
+    // Backup Settings
+    document.getElementById('backupFrequency').value = settings.backupFrequency || 'daily';
+    document.getElementById('autoLogout').checked = settings.autoLogout !== false;
+    document.getElementById('lastBackupDate').textContent = settings.lastBackupDate || 'Never';
+    
+    // Update system info
+    const orders = JSON.parse(localStorage.getItem('ktmBakeryOrders')) || [];
+    const customersData = JSON.parse(localStorage.getItem('ktmBakeryCustomers')) || [];
+    const dataSize = new Blob([localStorage.getItem('ktmBakeryOrders')]).size;
+    
+    document.getElementById('dataSize').textContent = Math.round(dataSize / 1024) + ' KB';
+    document.getElementById('totalOrdersCount').textContent = orders.length;
+    document.getElementById('totalCustomersCount').textContent = customersData.length || customers.length;
+}
+
+function saveAllSettings() {
+    const settings = {
+        // General
+        bakeryName: document.getElementById('bakeryName').value,
+        adminTheme: document.getElementById('adminTheme').value,
+        adminLanguage: document.getElementById('adminLanguage').value,
+        autoRefresh: document.getElementById('autoRefresh').checked,
+        soundNotifications: document.getElementById('soundNotifications').checked,
+        lowStockAlerts: document.getElementById('lowStockAlerts').checked,
+        
+        // Business
+        businessAddress: document.getElementById('businessAddress').value,
+        businessPhone: document.getElementById('businessPhone').value,
+        businessEmail: document.getElementById('businessEmail').value,
+        businessWebsite: document.getElementById('businessWebsite').value,
+        openTime: document.getElementById('openTime').value,
+        closeTime: document.getElementById('closeTime').value,
+        taxNumber: document.getElementById('taxNumber').value,
+        
+        // Payment
+        enableFonepay: document.getElementById('enableFonepay').checked,
+        fonepayMerchantId: document.getElementById('fonepayMerchantId').value,
+        fonepaySecret: document.getElementById('fonepaySecret').value,
+        enableCash: document.getElementById('enableCash').checked,
+        enableBankTransfer: document.getElementById('enableBankTransfer').checked,
+        bankName: document.getElementById('bankName').value,
+        accountNumber: document.getElementById('accountNumber').value,
+        accountName: document.getElementById('accountName').value,
+        enableCOD: document.getElementById('enableCOD').checked,
+        taxRate: parseFloat(document.getElementById('taxRate').value),
+        serviceCharge: parseFloat(document.getElementById('serviceCharge').value),
+        
+        // Notifications
+        notifyNewOrders: document.getElementById('notifyNewOrders').checked,
+        notifyOrderUpdates: document.getElementById('notifyOrderUpdates').checked,
+        notifyLowStock: document.getElementById('notifyLowStock').checked,
+        notifyDailyReports: document.getElementById('notifyDailyReports').checked,
+        notificationSound: document.getElementById('notificationSound').value,
+        reportEmail: document.getElementById('reportEmail').value,
+        
+        // Backup
+        backupFrequency: document.getElementById('backupFrequency').value,
+        autoLogout: document.getElementById('autoLogout').checked,
+        lastBackupDate: new Date().toLocaleDateString()
+    };
+    
+    localStorage.setItem('ktmBakerySettings', JSON.stringify(settings));
+    
+    // Show success message
+    alert('Settings saved successfully!');
+}
+
+function exportAllData() {
+    const data = {
+        orders: JSON.parse(localStorage.getItem('ktmBakeryOrders')) || [],
+        deletedOrders: JSON.parse(localStorage.getItem('ktmDeletedOrders')) || [],
+        settings: JSON.parse(localStorage.getItem('ktmBakerySettings')) || {},
+        exportDate: new Date().toISOString()
+    };
+    
+    const blob = new Blob([JSON.stringify(data, null, 2)], { type: 'application/json' });
+    const url = window.URL.createObjectURL(blob);
+    const a = document.createElement('a');
+    a.href = url;
+    a.download = `ktm-bakery-backup-${new Date().toISOString().split('T')[0]}.json`;
+    a.click();
+    window.URL.revokeObjectURL(url);
+    
+    // Update last backup date
+    document.getElementById('lastBackupDate').textContent = new Date().toLocaleDateString();
+}
+
+function importData() {
+    alert('To import data, please contact system administrator or use the file upload feature (to be implemented).');
+}
+
+function changeAdminPassword() {
+    const currentPassword = document.getElementById('currentPassword').value;
+    const newPassword = document.getElementById('newPassword').value;
+    const confirmPassword = document.getElementById('confirmPassword').value;
+    
+    if (currentPassword !== "bakery2024") {
+        alert('Current password is incorrect!');
+        return;
+    }
+    
+    if (newPassword !== confirmPassword) {
+        alert('New passwords do not match!');
+        return;
+    }
+    
+    if (newPassword.length < 6) {
+        alert('New password must be at least 6 characters long!');
+        return;
+    }
+    
+    // In a real application, you would save this securely
+    alert('Password changed successfully! Please update the SECURITY_CONFIG in the code.');
+    
+    // Clear password fields
+    document.getElementById('currentPassword').value = '';
+    document.getElementById('newPassword').value = '';
+    document.getElementById('confirmPassword').value = '';
+}
+
+function manageLoyaltyProgram() {
+    alert('Loyalty program management feature will be implemented in the next update.');
+}
+
+// Initialize settings when page loads
+document.addEventListener('DOMContentLoaded', function() {
+    // Load customers when customers page is shown
+    const originalShowPage = window.showPage;
+    window.showPage = function(pageName) {
+        originalShowPage(pageName);
+        if (pageName === 'customers') {
+            loadCustomers();
+        }
+        if (pageName === 'settings') {
+            loadSettings();
+        }
+    };
+});
+      
+        // ==================== ENHANCED MIXED ORDERS DETECTION ====================
+        function detectMixedOrders(orders) {
+            return orders.map(order => {
+                const originalData = order.originalData || {};
+                
+                // Check ALL order types from original data
+                let orderTypes = [];
+                if (originalData.delivery) orderTypes.push('delivery');
+                if (originalData.dineIn) orderTypes.push('dinein');
+                if (originalData.takeaway) orderTypes.push('takeaway');
+                
+                order.isMixed = orderTypes.length > 1;
+                order.orderTypes = order.isMixed ? orderTypes : [order.type];
+                
+                // Initialize type status tracking
+                if (!order.typeStatus) {
+                    order.typeStatus = {};
+                    orderTypes.forEach(type => {
+                        order.typeStatus[type] = {
+                            status: 'pending',
+                            completed: false
+                        };
+                    });
+                }
+                
+                return order;
+            });
+        }
+
+        function getMixedOrderTypes(order) {
+            const types = [];
+            const originalData = order.originalData || {};
+            
+            if (originalData.delivery) types.push('delivery');
+            if (originalData.dineIn) types.push('dinein');
+            if (originalData.takeaway) types.push('takeaway');
+            
+            return types.length > 0 ? types : [order.type];
+        }
+
+        function getItemTypeBadge(type) {
+            const badges = {
+                delivery: { badge: 'delivery-badge', icon: '🚚', text: 'Delivery' },
+                dinein: { badge: 'dinein-badge', icon: '🍽️', text: 'Dine-in' },
+                takeaway: { badge: 'takeaway-badge', icon: '🥡', text: 'Takeaway' }
+            };
+            return badges[type] || badges.takeaway;
+        }
+
+        // ==================== SECURITY SYSTEM ====================
+        function verifyStep1() {
+            const enteredPassword = document.getElementById('step1Password').value;
+            
+            // Remove any extra spaces and convert to uppercase for consistency
+            const cleanPassword = enteredPassword.trim().toUpperCase();
+            
+            if (cleanPassword === SECURITY_CONFIG.step1Password) {
+                document.getElementById('step1').style.display = 'none';
+                document.getElementById('step2').style.display = 'block';
+                document.getElementById('step1Error').style.display = 'none';
+            } else {
+                document.getElementById('step1Error').style.display = 'block';
+                // Add shake animation for wrong password
+                document.getElementById('step1Password').style.animation = 'shake 0.5s';
+                setTimeout(() => {
+                    document.getElementById('step1Password').style.animation = '';
+                }, 500);
+            }
+        }
+
+        function verifyStep2() {
+    const username = document.getElementById('username').value;
+    const password = document.getElementById('password').value;
+    
+    if (username === "ktmadmin" && password === "bakery2024") {
+        // Remove security gate completely
+        document.getElementById('securityGate').remove();
+        
+        // Show dashboard
+        document.getElementById('adminDashboard').style.display = 'block';
+        
+        loadAdminDashboard();
+    } else {
+        document.getElementById('step2Error').style.display = 'block';
+    }
+}
+
+        function backToStep1() {
+            document.getElementById('step2').style.display = 'none';
+            document.getElementById('step1').style.display = 'block';
+            document.getElementById('step1Password').value = '';
+            document.getElementById('step2Error').style.display = 'none';
+        }
+
+        function loadAdminDashboard() {
+            loadOrders();
+            updateDashboardStats();
+            updateFolderSystem();
+            updateSalesAnalytics();
+            setInterval(loadOrders, 30000);
+        }
+
+        // ==================== NAVIGATION ====================
+        function showPage(pageName) {
+            document.querySelectorAll('.page-content').forEach(page => {
+                page.style.display = 'none';
+            });
+            
+            document.getElementById(pageName + 'Page').style.display = 'block';
+            
+            const titles = {
+                dashboard: 'Dashboard',
+                orders: 'Order Management',
+                analytics: 'Analytics',
+                customers: 'Customers',
+                settings: 'Settings'
+            };
+            document.getElementById('pageTitle').textContent = titles[pageName];
+            
+            document.querySelectorAll('.nav-item').forEach(item => {
+                item.classList.remove('active');
+            });
+            event.currentTarget.classList.add('active');
+        }
+
+        // ==================== ORDER MANAGEMENT ====================
+        function loadOrders() {
+            const rawOrders = JSON.parse(localStorage.getItem('ktmBakeryOrders')) || [];
+            deletedOrders = JSON.parse(localStorage.getItem('ktmDeletedOrders')) || [];
+            
+            orders = rawOrders.map(order => {
+                let type = 'takeaway';
+                if (order.delivery) type = 'delivery';
+                else if (order.dineIn) type = 'dinein';
+                else if (order.takeaway) type = 'takeaway';
+                
+                const items = order.cart ? order.cart.map(item => ({
+                    name: item.name,
+                    quantity: item.quantity,
+                    price: item.unitPrice,
+                    variation: item.variationText || '',
+                    type: item.type || type,
+                    status: item.status || 'pending'
+                })) : [];
+                
+                let status = order.status ? order.status.toLowerCase() : 'received';
+                if (status === 'new') status = 'received';
+                if (status === 'preparing') status = 'baking';
+                if (status === 'ready') status = 'ready';
+                if (status === 'completed') status = 'completed';
+                
+                return {
+                    id: order.id || Date.now(),
+                    customer: {
+                        name: order.customer?.name || 'Unknown',
+                        phone: order.customer?.phone || 'Unknown'
+                    },
+                    type: type,
+                    items: items,
+                    total: order.total || 0,
+                    status: status,
+                    timestamp: order.timestamp || new Date().toISOString(),
+                    originalData: order,
+                    paymentMethod: order.paymentMethod,
+                    typeStatus: order.typeStatus || {},
+                    paymentConfirmed: order.paymentConfirmed || false
+                };
+            });
+            
+            orders = detectMixedOrders(orders);
+            // Save orders to localStorage to sync between dashboard and order management
+localStorage.setItem('ktmBakeryOrders', JSON.stringify(orders));
+          updateOrdersTable();
+            updateDashboardStats();
+            updateFolderSystem();
+            updateSalesAnalytics();
+        }
+
+        function updateOrdersTable() {
+    const tbody1 = document.getElementById('ordersTableBody'); // Dashboard table
+    const tbody2 = document.getElementById('ordersTableBody2'); // Orders page table
+    
+    let displayOrders = [];
+
+    switch(currentOrdersTab) {
+        case 'active': displayOrders = orders.filter(order => order.status !== 'completed'); break;
+        case 'completed': displayOrders = orders.filter(order => order.status === 'completed'); break;
+        case 'mixed': displayOrders = orders.filter(order => order.isMixed); break;
+        case 'delivery': displayOrders = orders.filter(order => getMixedOrderTypes(order).includes('delivery') && order.status !== 'completed'); break;
+        case 'dinein': displayOrders = orders.filter(order => getMixedOrderTypes(order).includes('dinein') && order.status !== 'completed'); break;
+        case 'takeaway': displayOrders = orders.filter(order => getMixedOrderTypes(order).includes('takeaway') && order.status !== 'completed'); break;
+        case 'deleted': displayOrders = deletedOrders; break;
+        default: displayOrders = orders.filter(order => order.status !== 'completed');
+    }
+
+    // Update both tables
+    [tbody1, tbody2].forEach(tbody => {
+        if (!tbody) return; // Skip if table doesn't exist
+        
+        if (displayOrders.length === 0) {
+            tbody.innerHTML = `<tr><td colspan="6" style="text-align: center; padding: 30px; color: #666;">No ${currentOrdersTab} orders found.</td></tr>`;
+            return;
+        }
+
+        tbody.innerHTML = displayOrders.map(order => {
+            const orderTypes = getMixedOrderTypes(order);
+            const isMixed = orderTypes.length > 1;
+            const isDeleted = deletedOrders.find(d => d.id === order.id);
+            
+            // Show all order types for mixed orders
+            const typesDisplay = orderTypes.map(type => {
+                const typeInfo = getItemTypeBadge(type);
+                return `<span class="order-type-badge ${typeInfo.badge}">
+                    ${typeInfo.icon} ${typeInfo.text}
+                </span>`;
+            }).join('');
+            
+            // Show first 2 items with their types
+            const itemsDisplay = order.items.slice(0, 2).map(item => {
+                const itemType = getItemTypeBadge(item.type || order.type);
+                return `
+                    <div style="display: flex; align-items: center; gap: 6px; margin-bottom: 4px;">
+                        <span class="order-type-badge ${itemType.badge}" style="font-size: 9px; padding: 2px 6px;">
+                            ${itemType.icon}
+                        </span>
+                        <span style="font-size: 12px;">${item.name} (${item.quantity})</span>
+                    </div>
+                `;
+            }).join('');
+            
+            const moreItems = order.items.length > 2 ? 
+                `<div style="font-size: 11px; color: #666; margin-top: 4px;">+${order.items.length - 2} more items</div>` : '';
+
+            let statusDisplay = '';
+            if (isMixed && !isDeleted) {
+                statusDisplay = orderTypes.map(type => {
+                    const typeInfo = getItemTypeBadge(type);
+                    const typeStatus = order.typeStatus[type]?.status || 'pending';
+                    return `<div style="margin: 2px 0;">
+                        <span class="order-type-badge ${typeInfo.badge}" style="font-size: 9px; padding: 2px 4px;">
+                            ${typeInfo.icon}
+                        </span>
+                        <span class="status-badge status-${typeStatus}" style="font-size: 9px; padding: 2px 4px;">
+                            ${typeStatus}
+                        </span>
+                    </div>`;
+                }).join('');
+            } else if (isDeleted) {
+                statusDisplay = `<span class="status-badge" style="background: #e74c3c; color: white;">DELETED</span>`;
+            } else {
+                statusDisplay = `<span class="status-badge status-${order.status}">${order.status.toUpperCase()}</span>`;
+            }
+
+            return `
+                <tr class="order-row" onclick="openOrderDetails(${order.id})">
+                    <td>
+                        <strong>#${order.id}</strong>
+                        ${isMixed ? '<span class="mixed-order-indicator">MIXED</span>' : ''}
+                        ${isDeleted ? '<span style="color: #e74c3c; font-size: 10px;">DELETED</span>' : ''}
+                    </td>
+                    <td>
+                        <div><strong>${order.customer.name}</strong></div>
+                        <div style="color: #666;">${order.customer.phone}</div>
+                    </td>
+                    <td>
+                        <div class="order-type-group">
+                            ${typesDisplay}
+                        </div>
+                        <div style="margin-top: 8px;">
+                            ${itemsDisplay}
+                            ${moreItems}
+                        </div>
+                    </td>
+                    <td><strong>Rs. ${order.total}</strong></td>
+                    <td>${statusDisplay}</td>
+                    <td>${getNepaliTime(order.timestamp)}</td>
+                </tr>
+            `;
+        }).join('');
+    });
+}
+
+        // ==================== FOLDER SYSTEM ====================
+        function updateFolderSystem() {
+            const folderSystem = document.getElementById('folderSystem');
+            const folders = [
+                {
+                    id: 'delivery', name: 'Delivery Orders', icon: '🚚', color: '#3498db',
+                    orders: orders.filter(order => getMixedOrderTypes(order).includes('delivery') && order.status !== 'completed' && !deletedOrders.find(d => d.id === order.id))
+                },
+                {
+                    id: 'dinein', name: 'Dine-in Orders', icon: '🍽️', color: '#27ae60',
+                    orders: orders.filter(order => getMixedOrderTypes(order).includes('dinein') && order.status !== 'completed' && !deletedOrders.find(d => d.id === order.id))
+                },
+                {
+                    id: 'takeaway', name: 'Takeaway Orders', icon: '🥡', color: '#f39c12',
+                    orders: orders.filter(order => getMixedOrderTypes(order).includes('takeaway') && order.status !== 'completed' && !deletedOrders.find(d => d.id === order.id))
+                },
+                {
+                    id: 'mixed', name: 'Mixed Orders', icon: '🔄', color: '#9b59b6',
+                    orders: orders.filter(order => order.isMixed && order.status !== 'completed' && !deletedOrders.find(d => d.id === order.id))
+                },
+                {
+                    id: 'urgent', name: 'Urgent Orders', icon: '⚡', color: '#e74c3c',
+                    orders: orders.filter(order => order.status === 'received' && !deletedOrders.find(d => d.id === order.id))
+                }
+            ];
+
+            folderSystem.innerHTML = folders.map(folder => `
+                <div class="folder" onclick="showOrdersTab('${folder.id}')" style="border-left-color: ${folder.color}">
+                    <div class="folder-header">
+                        <div>
+                            <span class="folder-icon">${folder.icon}</span>
+                            <strong>${folder.name}</strong>
+                        </div>
+                        <span class="folder-count">${folder.orders.length}</span>
+                    </div>
+                    <div class="folder-orders">
+                        ${folder.orders.slice(0, 3).map(order => `
+                            <div class="folder-order-item">
+                                <div><strong>#${order.id}</strong> - ${order.customer.name}</div>
+                                <div style="font-size: 12px; color: #666;">Rs. ${order.total} • ${getNepaliTime(order.timestamp)}</div>
+                            </div>
+                        `).join('')}
+                        ${folder.orders.length > 3 ? `<div style="text-align: center; padding: 8px; color: #666; font-size: 11px;">+${folder.orders.length - 3} more</div>` : ''}
+                        ${folder.orders.length === 0 ? `<div style="text-align: center; padding: 15px; color: #999;">No orders</div>` : ''}
+                    </div>
+                </div>
+            `).join('');
+        }
+
+        function showOrdersTab(tabName) {
+            currentOrdersTab = tabName;
+            document.querySelectorAll('.tab-btn').forEach(btn => btn.classList.remove('active'));
+            event.target.classList.add('active');
+            updateOrdersTable();
+        }
+
+        // ==================== ANALYTICS SYSTEM ====================
+        function setAnalyticsPeriod(period) {
+            analyticsPeriod = period;
+            document.querySelectorAll('.filter-btn').forEach(btn => btn.classList.remove('active'));
+            event.target.classList.add('active');
+            updateSalesAnalytics();
+        }
+
+        function updateSalesAnalytics() {
+            const now = new Date();
+            let startDate, endDate = now;
+            
+            switch(analyticsPeriod) {
+                case 'today': startDate = new Date(now.getFullYear(), now.getMonth(), now.getDate()); break;
+                case 'week': startDate = new Date(now.getFullYear(), now.getMonth(), now.getDate() - 7); break;
+                case 'month': startDate = new Date(now.getFullYear(), now.getMonth(), 1); break;
+            }
+            
+            const periodOrders = orders.filter(order => {
+                const orderDate = new Date(order.timestamp);
+                return orderDate >= startDate && orderDate <= endDate && order.status === 'completed';
+            });
+            
+            const totalRevenue = periodOrders.reduce((sum, order) => sum + order.total, 0);
+            const totalOrders = periodOrders.length;
+            const averageOrder = totalOrders > 0 ? Math.round(totalRevenue / totalOrders) : 0;
+            
+            const itemCounts = {};
+            periodOrders.forEach(order => {
+                order.items.forEach(item => {
+                    const key = item.name;
+                    itemCounts[key] = (itemCounts[key] || 0) + item.quantity;
+                });
+            });
+            
+            const popularItem = Object.keys(itemCounts).length > 0 ? 
+                Object.keys(itemCounts).reduce((a, b) => itemCounts[a] > itemCounts[b] ? a : b) : '-';
+            
+            document.getElementById('analyticsRevenue').textContent = `Rs. ${totalRevenue}`;
+            document.getElementById('analyticsOrders').textContent = totalOrders;
+            document.getElementById('analyticsAverage').textContent = `Rs. ${averageOrder}`;
+            document.getElementById('analyticsPopular').textContent = popularItem;
+        }
+
+        // ==================== ENHANCED ORDER DETAILS ====================
+        function openOrderDetails(orderId) {
+            selectedOrderId = orderId;
+            const order = orders.find(o => o.id === orderId) || deletedOrders.find(o => o.id === orderId);
+            if (!order) return;
+
+            const orderTypes = getMixedOrderTypes(order);
+            const isMixed = orderTypes.length > 1;
+            const isDeleted = deletedOrders.find(o => o.id === order.id);
+
+            // Group items by type
+            const itemsByType = {};
+            order.items.forEach(item => {
+                const type = item.type || order.type;
+                if (!itemsByType[type]) {
+                    itemsByType[type] = [];
+                }
+                itemsByType[type].push(item);
+            });
+
+            // Build delivery type sections
+            let deliverySections = '';
+            Object.keys(itemsByType).forEach(type => {
+                const typeItems = itemsByType[type];
+                const typeInfo = getItemTypeBadge(type);
+                
+                // Check if all items in this type are served
+                const allServed = typeItems.every(item => item.status === 'served');
+                const typeStatus = allServed ? 'completed' : 'pending';
+                
+                deliverySections += `
+                    <div class="delivery-type-section">
+                        <div class="delivery-type-header">
+                            <span class="order-type-badge ${typeInfo.badge}">${typeInfo.icon} ${typeInfo.text}</span>
+                            <div class="type-status-indicator">
+                                ${allServed ? 
+                                    '<span class="type-completed"><i class="fas fa-check-circle"></i> COMPLETED</span>' : 
+                                    '<span class="type-pending"><i class="fas fa-clock"></i> IN PROGRESS</span>'
+                                }
+                            </div>
+                        </div>
+                        ${typeItems.map(item => `
+                            <div class="item-row">
+                                <div class="item-info">
+                                    <span>${item.name} ${item.variation ? '(' + item.variation + ')' : ''} × ${item.quantity}</span>
+                                    <span style="color: #666; font-size: 12px;">Rs. ${item.price * item.quantity}</span>
+                                </div>
+                                <div class="item-status-controls">
+                                    <button class="status-btn baking ${item.status === 'baking' ? 'active' : ''}" 
+                                            onclick="updateItemStatus(${order.id}, '${item.name}', 'baking')">
+                                        Bake
+                                    </button>
+                                    <button class="status-btn ready ${item.status === 'ready' ? 'active' : ''}" 
+                                            onclick="updateItemStatus(${order.id}, '${item.name}', 'ready')"
+                                            ${item.status === 'baking' ? '' : 'disabled'}>
+                                        Ready
+                                    </button>
+                                    <button class="status-btn served ${item.status === 'served' ? 'active' : ''}" 
+                                            onclick="updateItemStatus(${order.id}, '${item.name}', 'served')"
+                                            ${item.status === 'ready' ? '' : 'disabled'}>
+                                        Serve
+                                    </button>
+                                </div>
+                            </div>
+                        `).join('')}
+                    </div>
+                `;
+            });
+
+            // Check if all items are served (ready to complete)
+            const allItemsServed = order.items.every(item => item.status === 'served');
+            const canComplete = allItemsServed && order.paymentMethod;
+
+            document.getElementById('orderDetailsContent').innerHTML = `
+                <div style="background: #F8FAFC; padding: 15px; border-radius: 8px; margin-bottom: 15px;">
+                    <h3 style="color: var(--text-primary); margin-bottom: 12px;">Customer Information</h3>
+                    <p><strong>Name:</strong> ${order.customer.name}</p>
+                    <p><strong>Phone:</strong> 
+                        <a href="tel:${order.customer.phone}" style="color: var(--primary); text-decoration: none; font-weight: 600;">
+                            <i class="fas fa-phone"></i> ${order.customer.phone}
+                        </a>
+                    </p>
+                    <p><strong>Order Type${isMixed ? 's' : ''}:</strong> 
+                        ${orderTypes.map(type => {
+                            const typeInfo = getItemTypeBadge(type);
+                            return `<span class="order-type-badge ${typeInfo.badge}" style="margin-right: 5px;">
+                                ${typeInfo.icon} ${typeInfo.text}
+                            </span>`;
+                        }).join('')}
+                    </p>
+                    <p><strong>Order Time:</strong> ${getNepaliTime(order.timestamp)}</p>
+                    <p><strong>Payment Method:</strong> ${order.paymentMethod || 'Not selected'}</p>
+                </div>
+
+                <div style="margin-bottom: 15px;">
+                    <h3 style="color: var(--text-primary); margin-bottom: 12px;">Order Items by Delivery Type</h3>
+                    <div class="mixed-order-content">
+                        ${deliverySections}
+                    </div>
+                    <div style="display: flex; justify-content: space-between; padding: 12px 0; border-top: 2px solid var(--primary); font-weight: bold;">
+                        <span>Total Amount</span>
+                        <span>Rs. ${order.total}</span>
+                    </div>
+                </div>
+
+                ${!isDeleted ? `
+                    <div class="payment-confirmation">
+                        <h4 style="color: var(--text-primary); margin-bottom: 10px;">Payment Confirmation</h4>
+                        <div class="payment-options">
+                            <div class="payment-option ${order.paymentMethod === 'fonepay' ? 'active' : ''}" 
+                                 onclick="selectPaymentMethod(${order.id}, 'fonepay')">
+                                💳 Fonepay
+                            </div>
+                            <div class="payment-option ${order.paymentMethod === 'cash' ? 'active' : ''}" 
+                                 onclick="selectPaymentMethod(${order.id}, 'cash')">
+                                💵 Cash
+                            </div>
+                            <div class="payment-option ${order.paymentMethod === 'bank' ? 'active' : ''}" 
+                                 onclick="selectPaymentMethod(${order.id}, 'bank')">
+                                🏦 Bank
+                            </div>
+                            <div class="payment-option ${order.paymentMethod === 'cod' ? 'active' : ''}" 
+                                 onclick="selectPaymentMethod(${order.id}, 'cod')">
+                                📦 COD
+                            </div>
+                        </div>
+                        <button class="complete-order-btn" 
+                                onclick="completeOrder(${order.id})" 
+                                ${!canComplete ? 'disabled' : ''}>
+                            <i class="fas fa-check"></i> 
+                            ${allItemsServed ? 'Complete Order' : 'Complete All Items First'}
+                        </button>
+                        ${!allItemsServed ? `
+                            <div style="text-align: center; margin-top: 10px; font-size: 12px; color: #666;">
+                                <i class="fas fa-info-circle"></i> All items must be served before completing order
+                            </div>
+                        ` : ''}
+                    </div>
+                ` : `
+                    <div style="background: #FEF2F2; padding: 10px; border-radius: 6px; width: 100%; border-left: 3px solid var(--danger);">
+                        <strong style="color: var(--danger);">Deleted Reason:</strong> 
+                        <span style="color: var(--text-secondary);">${order.deletedReason || 'No reason provided'}</span>
+                    </div>
+                `}
+
+                <div style="display: flex; gap: 8px; flex-wrap: wrap; margin-top: 15px;">
+                    ${!isDeleted ? `
+                        <button onclick="callCustomer('${order.customer.phone}')" style="background: var(--success); color: white; border: none; padding: 8px 12px; border-radius: 6px; cursor: pointer; font-weight: 600; font-size: 12px;">
+                            <i class="fas fa-phone"></i> Call
+                        </button>
+                        <button onclick="openDeleteReasonModal(${order.id})" style="background: var(--danger); color: white; border: none; padding: 8px 12px; border-radius: 6px; cursor: pointer; font-weight: 600; font-size: 12px;">
+                            <i class="fas fa-trash"></i> Delete
+                        </button>
+                    ` : ''}
+                </div>
+            `;
+            
+            document.getElementById('orderDetailsModal').style.display = 'flex';
+        }
+
+        function updateItemStatus(orderId, itemName, status) {
+            const orderIndex = orders.findIndex(order => order.id === orderId);
+            if (orderIndex !== -1) {
+                const itemIndex = orders[orderIndex].items.findIndex(item => item.name === itemName);
+                if (itemIndex !== -1) {
+                    orders[orderIndex].items[itemIndex].status = status;
+                    localStorage.setItem('ktmBakeryOrders', JSON.stringify(orders));
+                    openOrderDetails(orderId); // Refresh the modal
+                }
+            }
+        }
+
+        function selectPaymentMethod(orderId, method) {
+            const orderIndex = orders.findIndex(order => order.id === orderId);
+            if (orderIndex !== -1) {
+                orders[orderIndex].paymentMethod = method;
+                localStorage.setItem('ktmBakeryOrders', JSON.stringify(orders));
+                openOrderDetails(orderId); // Refresh the modal
+            }
+        }
+
+// Mobile resize handler for security gate
+function handleMobileResize() {
+    const securityGate = document.getElementById('securityGate');
+    if (window.innerWidth <= 480) {
+        securityGate.style.alignItems = 'flex-start';
+        securityGate.style.paddingTop = '40px';
+    } else {
+        securityGate.style.alignItems = 'center';
+        securityGate.style.paddingTop = '20px';
+    }
+}
+
+// Initialize on load
+window.addEventListener('load', handleMobileResize);
+window.addEventListener('resize', handleMobileResize);
+      
+        // ==================== DELETE REASON SYSTEM ====================
+        function openDeleteReasonModal(orderId) {
+            selectedOrderId = orderId;
+            selectedDeleteReason = '';
+            document.getElementById('confirmDeleteBtn').disabled = true;
+            document.querySelectorAll('.reason-option').forEach(btn => {
+                btn.classList.remove('selected');
+            });
+            document.getElementById('deleteReasonModal').style.display = 'flex';
+        }
+
+        function closeDeleteReasonModal() {
+            document.getElementById('deleteReasonModal').style.display = 'none';
+        }
+
+        function selectDeleteReason(reason) {
+            selectedDeleteReason = reason;
+            document.querySelectorAll('.reason-option').forEach(btn => {
+                btn.classList.remove('selected');
+            });
+            event.target.classList.add('selected');
+            document.getElementById('confirmDeleteBtn').disabled = false;
+        }
+
+        function confirmDeleteOrder() {
+            if (!selectedDeleteReason) return;
+            
+            const orderIndex = orders.findIndex(order => order.id === selectedOrderId);
+            if (orderIndex !== -1) {
+                const order = orders[orderIndex];
+                deletedOrders.push({
+                    ...order,
+                    deletedAt: new Date().toISOString(),
+                    deletedReason: selectedDeleteReason
+                });
+                orders.splice(orderIndex, 1);
+                localStorage.setItem('ktmBakeryOrders', JSON.stringify(orders));
+                localStorage.setItem('ktmDeletedOrders', JSON.stringify(deletedOrders));
+                closeDeleteReasonModal();
+                closeOrderModal();
+                loadOrders();
+            }
+        }
+
+        // ==================== UTILITY FUNCTIONS ====================
+        function updateDashboardStats() {
+            const today = new Date().toDateString();
+            const todayOrders = orders.filter(order => new Date(order.timestamp).toDateString() === today);
+            const activeOrders = orders.filter(order => order.status !== 'completed');
+            const mixedOrders = orders.filter(order => order.isMixed);
+            const completedToday = orders.filter(order => new Date(order.timestamp).toDateString() === today && order.status === 'completed');
+
+            document.getElementById('todayOrders').textContent = todayOrders.length;
+            document.getElementById('todayRevenue').textContent = `Rs. ${todayOrders.reduce((sum, order) => sum + order.total, 0)} Revenue`;
+            document.getElementById('activeOrders').textContent = activeOrders.length;
+            document.getElementById('pendingCalls').textContent = `${orders.filter(order => order.status === 'received').length} Need Confirmation`;
+            document.getElementById('mixedOrders').textContent = mixedOrders.length;
+            document.getElementById('mixedOrdersTrend').textContent = `${mixedOrders.length} multi-type orders`;
+
+            const completionRate = todayOrders.length > 0 ? Math.round((completedToday.length / todayOrders.length) * 100) : 0;
+            document.getElementById('completionRate').textContent = `${completionRate}%`;
+
+            // Payment stats
+            const paymentStats = { fonepay: { total: 0, count: 0 }, cash: { total: 0, count: 0 }, bank: { total: 0, count: 0 }, cod: { total: 0, count: 0 } };
+            todayOrders.forEach(order => {
+                if (order.paymentMethod && paymentStats[order.paymentMethod]) {
+                    paymentStats[order.paymentMethod].total += order.total;
+                    paymentStats[order.paymentMethod].count += 1;
+                }
+            });
+
+            document.getElementById('fonepayTotal').textContent = `Rs. ${paymentStats.fonepay.total}`;
+            document.getElementById('fonepayCount').textContent = `${paymentStats.fonepay.count} orders`;
+            document.getElementById('cashTotal').textContent = `Rs. ${paymentStats.cash.total}`;
+            document.getElementById('cashCount').textContent = `${paymentStats.cash.count} orders`;
+            document.getElementById('bankTotal').textContent = `Rs. ${paymentStats.bank.total}`;
+            document.getElementById('bankCount').textContent = `${paymentStats.bank.count} orders`;
+            document.getElementById('codTotal').textContent = `Rs. ${paymentStats.cod.total}`;
+            document.getElementById('codCount').textContent = `${paymentStats.cod.count} orders`;
+        }
+
+        function callCustomer(phoneNumber) {
+            window.open(`tel:${phoneNumber}`, '_self');
+        }
+
+        function completeOrder(orderId) {
+            const orderIndex = orders.findIndex(order => order.id === orderId);
+            if (orderIndex !== -1) {
+                orders[orderIndex].status = 'completed';
+                localStorage.setItem('ktmBakeryOrders', JSON.stringify(orders));
+                closeOrderModal();
+                loadOrders();
+            }
+        }
+
+        function closeOrderModal() {
+            document.getElementById('orderDetailsModal').style.display = 'none';
+        }
+
+        function logoutAdmin() {
+            document.getElementById('adminDashboard').style.display = 'none';
+            document.getElementById('securityGate').style.display = 'flex';
+            document.getElementById('step1').style.display = 'block';
+            document.getElementById('step2').style.display = 'none';
+            document.getElementById('step1Password').value = '';
+            document.getElementById('username').value = '';
+            document.getElementById('password').value = '';
+        }
+
+      
+  // Add Enter key support
+        document.addEventListener('DOMContentLoaded', function() {
+            document.getElementById('step1Password').addEventListener('keypress', function(e) {
+                if (e.key === 'Enter') {
+                    verifyStep1();
+                }
+            });
+
+            document.getElementById('password').addEventListener('keypress', function(e) {
+                if (e.key === 'Enter') {
+                    verifyStep2();
+                }
+            });
+            
+            // Close sidebar when clicking outside on mobile
+            document.addEventListener('click', function(event) {
+                const sidebar = document.getElementById('sidebar');
+                const sidebarToggle = document.getElementById('sidebarToggle');
+                
+                if (window.innerWidth <= 768 && 
+                    sidebar.classList.contains('mobile-open') &&
+                    !sidebar.contains(event.target) &&
+                    !sidebarToggle.contains(event.target)) {
+                    sidebar.classList.remove('mobile-open');
+                }
+            });
+        });
+    </script>
+</body>
+</html>
