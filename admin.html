@@ -3055,9 +3055,26 @@ document.addEventListener('DOMContentLoaded', function() {
             event.currentTarget.classList.add('active');
         }
 
+        // ==================== DATA COMPATIBILITY FIX ====================
+function fixOrderDataCompatibility(rawOrders) {
+    return rawOrders.map(order => {
+        // Ensure order has proper structure
+        if (!order.customer) {
+            order.customer = { name: 'Unknown', phone: 'Unknown' };
+        }
+        if (!order.cart) {
+            order.cart = [];
+        }
+        if (!order.total) {
+            order.total = order.cart.reduce((sum, item) => sum + (item.unitPrice * item.quantity), 0);
+        }
+        return order;
+    });
+}
+        
         // ==================== ORDER MANAGEMENT ====================
         function loadOrders() {
-            const rawOrders = JSON.parse(localStorage.getItem('ktmBakeryOrders')) || [];
+            const rawOrders = fixOrderDataCompatibility(JSON.parse(localStorage.getItem('ktmBakeryOrders')) || []);
             deletedOrders = JSON.parse(localStorage.getItem('ktmDeletedOrders')) || [];
             
             orders = rawOrders.map(order => {
