@@ -2982,31 +2982,34 @@
 
         // FIXED: Proper order saving function
         function saveOrderToDashboard(orderData) {
-            const orders = getStoredOrders();
-            
-            const orderWithMetadata = {
-                ...orderData,
-                id: Date.now(), // Unique order ID
-                timestamp: new Date().toLocaleString('en-IN'),
-                status: 'New',
-                read: false
-            };
-            
-            // Validate required fields
-            if (!orderWithMetadata.customer) {
-                orderWithMetadata.customer = { name: 'Unknown', phone: 'Unknown' };
-            }
-            if (!orderWithMetadata.cart || orderWithMetadata.cart.length === 0) {
-                console.error('Cannot save empty cart to dashboard');
-                return;
-            }
-            
-            orders.unshift(orderWithMetadata);
-            localStorage.setItem(ORDERS_KEY, JSON.stringify(orders));
-            updateOrderDashboard();
-            
-            console.log('✅ Order saved to dashboard:', orderWithMetadata);
-        }
+    const orders = getStoredOrders();
+    
+    const orderWithMetadata = {
+        ...orderData,
+        id: Date.now(), // Unique order ID
+        timestamp: new Date().toLocaleString('en-IN'),
+        status: 'New',
+        read: false
+    };
+    
+    // Validate required fields
+    if (!orderWithMetadata.customer) {
+        orderWithMetadata.customer = { name: 'Unknown', phone: 'Unknown' };
+    }
+    if (!orderWithMetadata.cart || orderWithMetadata.cart.length === 0) {
+        console.error('Cannot save empty cart to dashboard');
+        return;
+    }
+    
+    orders.unshift(orderWithMetadata);
+    localStorage.setItem(ORDERS_KEY, JSON.stringify(orders));
+    updateOrderDashboard();
+    
+    console.log('✅ Order saved to dashboard:', orderWithMetadata);
+    
+    // 🎯 ADD THIS LINE TO TRANSFER ORDER TO ADMIN
+    sessionStorage.setItem('transferOrder', JSON.stringify(orderWithMetadata));
+}
 
         // FIXED: Proper order retrieval with defaults
         function getStoredOrders() {
