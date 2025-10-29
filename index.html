@@ -1,0 +1,3810 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1" />
+    <title>KTM Bakery Pvt. Ltd - Premium Cakes & Coffee</title>
+    <meta name="description" content="KTM Bakery - Best cakes, coffee, sandwiches in Kathmandu. Order online for delivery, takeaway or dine-in. Fresh baked daily.">
+
+    <link
+    rel="stylesheet"
+    href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css"
+    crossorigin="anonymous"
+    referrerpolicy="no-referrer"
+    />
+
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap');
+
+        :root{
+            --bg:#fff8f0;
+            --accent:#4b2e05;
+            --muted:#333;
+            --card:#ffffff;
+            --success:#27ae60;
+            --warning:#e67e22;
+            --error:#e74c3c;
+        }
+
+        *{box-sizing:border-box; margin:0; padding:0;}
+        body{font-family:'Poppins',sans-serif; background:var(--bg);color:var(--muted);-webkit-font-smoothing:antialiased; line-height:1.6;}
+        a{color:var(--accent);text-decoration:none}
+
+        /* HEADER */
+        header.hero{
+            display:flex;
+            align-items:center;
+            gap:16px;
+            padding:18px 20px;
+            background:var(--card);
+            box-shadow:0 2px 12px rgba(0,0,0,0.1);
+            position:sticky;
+            top:0;
+            z-index:1000;
+        }
+        .logo{width:78px;height:auto;border-radius:8px}
+        .hero-title h1{margin:0;font-size:22px;font-weight:700;color:var(--accent)}
+        .hero-title p{margin:2px 0 0;font-size:13px;color:#666}
+
+        .hero-buttons{display:flex;gap:12px;justify-content:center;padding:20px; background:linear-gradient(135deg, #fff8f0 0%, #f5e6d3 100%);}
+        .btn{background:var(--accent);color:#fff;padding:12px 20px;border-radius:10px;border:none;cursor:pointer;font-weight:600;transition:all 0.3s ease; font-size:15px;}
+        .btn:hover{background:#3a2404;transform:translateY(-2px);box-shadow:0 4px 12px rgba(75,46,5,0.3);}
+        .btn-outline{background:transparent;border:2px solid var(--accent);color:var(--accent)}
+        .btn-success{background:var(--success);}
+        .btn-warning{background:var(--warning);}
+
+        /* LAYOUT */
+        .content{max-width:1200px;margin:0 auto;padding:20px}
+        h2{color:var(--accent);text-align:center;margin:20px 0 30px; font-size:28px; font-weight:700;}
+        .category{font-size:22px;font-weight:700;margin:30px 0 15px;padding-bottom:8px;border-bottom:3px solid rgba(75,46,5,0.15); color:var(--accent);}
+
+
+/* PERFECT 3-COLUMN ARRANGEMENT */
+.menu-items {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 15px;
+    width: 100%;
+    margin: 0;
+    padding: 0;
+    align-items: stretch;
+}
+
+.item {
+    background: var(--card);
+    border-radius: 10px;
+    padding: 12px;
+    box-shadow: 0 3px 10px rgba(0,0,0,0.08);
+    display: flex;
+    flex-direction: column;
+    text-align: center;
+    min-height: 320px;
+    height: auto;
+    transition: all 0.3s ease;
+    border: 1px solid #f0f0f0;
+    width: 100%;
+}
+
+/* FIXED ORDER AND SPACING */
+.item img {
+    width: 100%;
+    height: 110px;
+    object-fit: cover;
+    border-radius: 6px;
+    margin-bottom: 8px;
+}
+
+.item h4 {
+    margin: 0 0 6px 0;
+    font-size: 13px;
+    color: var(--accent);
+    font-weight: 600;
+    line-height: 1.3;
+    min-height: 32px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.price-container {
+    margin-bottom: 8px;
+}
+
+.price-display {
+    font-weight: 700;
+    margin: 0 0 4px 0;
+    color: #111;
+    font-size: 14px;
+}
+
+.weight-indicator {
+    font-size: 10px;
+    color: #666;
+    background: #f8f8f8;
+    padding: 2px 6px;
+    border-radius: 3px;
+    display: inline-block;
+    margin-bottom: 8px;
+}
+
+/* CONTROLS - PERFECTLY ARRANGED */
+.controls {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+    margin-top: auto;
+    padding-top: 8px;
+}
+
+.controls select,
+.controls input[type="number"] {
+    width: 100%;
+    padding: 6px;
+    border-radius: 4px;
+    border: 1px solid #ddd;
+    font-size: 11px;
+    background: #fafafa;
+}
+
+.add-to-cart {
+    width: 100%;
+    padding: 8px;
+    font-size: 12px;
+    font-weight: 600;
+    background: var(--accent);
+    color: white;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    margin-top: 4px;
+}
+
+.add-to-cart:hover {
+    background: #3a2404;
+}
+
+/* MOBILE */
+@media (max-width: 768px) {
+    .menu-items {
+        gap: 12px;
+    }
+    
+    .item {
+        padding: 10px;
+    }
+    
+    .item img {
+        height: 100px;
+    }
+    
+    .item h4 {
+        font-size: 12px;
+        min-height: 28px;
+    }
+}
+
+@media (max-width: 480px) {
+    .menu-items {
+        grid-template-columns: repeat(3, 1fr);
+        gap: 8px;
+    }
+    
+    .item {
+        padding: 8px;
+    }
+    
+    .item img {
+        height: 90px;
+    }
+    
+    .item h4 {
+        font-size: 11px;
+        min-height: 26px;
+    }
+    
+    .add-to-cart {
+        padding: 6px;
+        font-size: 11px;
+    }
+}
+
+      @keyframes glow {
+    0%, 100% { 
+        box-shadow: 0 10px 25px rgba(255,107,107,0.4);
+    }
+    50% { 
+        box-shadow: 0 15px 35px rgba(255,107,107,0.7);
+    }
+}
+
+      @keyframes float {
+    0%, 100% { transform: translateY(0px) rotate(0deg); }
+    50% { transform: translateY(-10px) rotate(5deg); }
+}
+
+@keyframes bounce {
+    0%, 100% { transform: translateY(0); }
+    50% { transform: translateY(-10px); }
+}
+
+@keyframes pulse {
+    0%, 100% { transform: scale(1); box-shadow: 0 5px 15px rgba(255,107,107,0.4); }
+    50% { transform: scale(1.05); box-shadow: 0 8px 25px rgba(255,107,107,0.6); }
+}
+
+      /* Better mobile touch targets */
+@media (max-width: 480px) {
+    .add-to-cart, .btn {
+        min-height: 44px;
+        padding: 12px 16px;
+    }
+    
+    .qty-inline button {
+        min-width: 44px;
+        min-height: 44px;
+    }
+}
+      
+        /* INFORMATION BOXES */
+        .info-box {
+            background: #e8f5e8;
+            border: 1px solid #4caf50;
+            border-radius: 12px;
+            padding: 20px;
+            margin: 25px auto;
+            max-width: 800px;
+            text-align: center;
+        }
+        .info-box.warning {
+            background: #fff3cd;
+            border-color: #ffeaa7;
+            color: #856404;
+        }
+        .info-box h4 {
+            margin: 0 0 10px 0;
+            color: #2e7d32;
+            font-size: 18px;
+        }
+        .info-box.warning h4 {
+            color: #856404;
+        }
+
+        /* PAYMENT QR SECTION */
+        .payment-section {
+            background: white;
+            border-radius: 15px;
+            padding: 25px;
+            margin: 30px auto;
+            max-width: 500px;
+            text-align: center;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+            border: 2px dashed #4b2e05;
+        }
+        .payment-section h3 {
+            color: var(--accent);
+            margin-bottom: 15px;
+            font-size: 20px;
+        }
+        .qr-code {
+            width: 200px;
+            height: 200px;
+            margin: 15px auto;
+            background: #f8f8f8;
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border: 2px solid #ddd;
+            font-weight: bold;
+            color: #666;
+        }
+
+        /* CUSTOMER FORM STYLING */
+        .customer-form {
+            background: white;
+            border-radius: 15px;
+            padding: 25px;
+            margin: 25px auto;
+            max-width: 700px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+        }
+        .form-group {
+            margin-bottom: 20px;
+            text-align: left;
+        }
+        .form-group label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: 600;
+            color: var(--accent);
+        }
+        .form-group input,
+        .form-group select,
+        .form-group textarea {
+            width: 100%;
+            padding: 12px;
+            border: 1px solid #ddd;
+            border-radius: 8px;
+            font-size: 15px;
+            background: #fafafa;
+            transition: border 0.3s ease;
+        }
+        .form-group input:focus,
+        .form-group select:focus,
+        .form-group textarea:focus {
+            border-color: var(--accent);
+            background: white;
+            outline: none;
+        }
+
+        /* FEEDBACK SYSTEM */
+        .feedback-system {
+            background: white;
+            border-radius: 15px;
+            padding: 30px;
+            margin: 40px auto;
+            max-width: 600px;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.1);
+            text-align: center;
+        }
+        .star-rating {
+            display: flex;
+            justify-content: center;
+            gap: 10px;
+            margin: 20px 0;
+        }
+        .star {
+            font-size: 30px;
+            color: #ddd;
+            cursor: pointer;
+            transition: color 0.2s ease;
+        }
+        .star:hover,
+        .star.active {
+            color: #ffc107;
+        }
+
+        /* CART STYLING */
+        #cart-icon{
+            position:fixed;bottom:25px;right:25px;
+            background:var(--accent);color:#fff;padding:15px 18px;border-radius:50px;
+            box-shadow:0 6px 20px rgba(0,0,0,0.25);cursor:pointer;z-index:1200;display:flex;align-items:center;gap:8px;font-weight:700;
+            transition: all 0.3s ease;
+        }
+        #cart-icon:hover{
+            transform: scale(1.05);
+            box-shadow: 0 8px 25px rgba(0,0,0,0.35);
+        }
+        #cart-count{background:#fff;color:var(--accent);padding:4px 10px;border-radius:999px;font-weight:700;font-size:14px;}
+
+        #cart-panel{
+            position:fixed;top:0;right:-450px;width:420px;height:100%;background:var(--card);box-shadow:-4px 0 25px rgba(0,0,0,0.25);
+            transition:right 0.3s ease;z-index:1199;display:flex;flex-direction:column;padding:20px;overflow:hidden;
+        }
+        #cart-panel.open{right:0}
+        #cart-header{display:flex;justify-content:space-between;align-items:center;margin-bottom:15px; padding-bottom:15px; border-bottom:2px solid #f0f0f0;}
+        #cart-header h3{margin:0;font-size:20px; color:var(--accent);}
+        #close-cart{cursor:pointer;font-size:20px;color:#c0392b; padding:5px;}
+
+        #cart-items{flex:1;overflow:auto;padding-right:10px; margin:10px 0;}
+        #cart-items ul{list-style:none;padding:0;margin:0}
+        #cart-items li{
+            display:flex;gap:10px;align-items:flex-start;justify-content:space-between;margin-bottom:15px;padding-bottom:15px;border-bottom:1px solid #eee;
+            word-break:break-word; padding:15px; background:#fafafa; border-radius:10px;
+        }
+        #cart-items li .left{flex:1;min-width:0}
+        #cart-items li .left .name{font-weight:600; color:var(--accent); margin-bottom:5px;}
+        #cart-items li .left .meta{font-size:13px;color:#666;margin-top:4px}
+        #cart-items li .right{display:flex;flex-direction:column;align-items:flex-end;gap:8px;flex-shrink:0}
+        .remove-btn{background:#e74c3c;color:#fff;border:none;padding:8px 12px;border-radius:6px;cursor:pointer;font-size:12px; transition:all 0.3s ease;}
+        .remove-btn:hover{background:#c0392b;}
+        .qty-inline{display:flex;gap:8px;align-items:center;}
+        .qty-inline button{padding:6px 10px;border-radius:6px;border:1px solid #ddd;background:#fafafa;cursor:pointer; transition:all 0.3s ease; min-width:36px; min-height:36px;}
+        .qty-inline button:hover{background:#e9e9e9;}
+
+        #cart-summary{padding-top:20px;border-top:2px dashed #ddd; margin-top:20px;}
+        #cart-summary .total{display:flex;justify-content:space-between;font-weight:700;font-size:18px;margin-top:15px; padding-top:15px; border-top:1px solid #eee;}
+        #cart-message{width:100%;min-height:80px;padding:12px;border-radius:8px;border:1px solid #ddd;margin-top:15px;resize:vertical; background:#fafafa;}
+
+        .checkout-btn{background:var(--accent);color:#fff;border:none;padding:15px;border-radius:10px;width:100%;font-weight:700;margin-top:20px;cursor:pointer; font-size:16px; transition:all 0.3s ease;}
+        .checkout-btn:hover{background:#3a2404; transform:translateY(-2px);}
+
+        /* BUSINESS INFO - UPDATED */
+        .business-info {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 20px;
+            margin: 30px 0;
+        }
+        .info-card {
+            background: white;
+            padding: 20px;
+            border-radius: 12px;
+            text-align: center;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+        }
+        .info-card h4 {
+            color: var(--accent);
+            margin-bottom: 10px;
+        }
+
+        /* TESTIMONIALS & FEEDBACK */
+        .testimonials {
+            background: linear-gradient(135deg, #fff8f0 0%, #f5e6d3 100%);
+            padding: 40px 20px;
+            border-radius: 15px;
+            margin: 40px 0;
+        }
+        .testimonial-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 20px;
+            margin-top: 25px;
+        }
+        .testimonial-card {
+            background: white;
+            padding: 20px;
+            border-radius: 12px;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+        }
+
+        /* RESPONSIVE */
+        @media (max-width: 768px) {
+            .btn, .add-to-cart, .checkout-btn {
+                min-height: 48px;
+            }
+            .qty-inline button {
+                min-width: 44px;
+                min-height: 44px;
+            }
+            #cart-panel {
+                width: 100%;
+                right: -100%;
+            }
+            .hero-buttons {
+                flex-direction: column;
+                align-items: center;
+            }
+            .hero-buttons .btn {
+                width: 200px;
+            }
+        }
+
+        /* LOADING ANIMATION */
+        .loading {
+            display: inline-block;
+            width: 20px;
+            height: 20px;
+            border: 3px solid #f3f3f3;
+            border-top: 3px solid var(--accent);
+            border-radius: 50%;
+            animation: spin 1s linear infinite;
+        }
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- HEADER -->
+    <header class="hero">
+        <img src="Logo.jpeg" alt="KTM Bakery Logo" class="logo">
+        <div class="hero-title">
+            <h1>KTM Bakery Pvt. Ltd</h1>
+            <p class="tagline">Great taste in every bite 🍰</p>
+        </div>
+    </header>
+
+    <!-- HERO BUTTONS -->
+    <div class="hero-buttons">
+        <button class="btn" onclick="document.getElementById('menu').scrollIntoView({behavior:'smooth'})">View Menu</button>
+        <button class="btn btn-outline" onclick="document.getElementById('order').scrollIntoView({behavior:'smooth'})">Order Now</button>
+    </div>
+
+ <!-- COMPACT EYE-CATCHING LOYALTY PROGRAM -->
+<div style="max-width: 450px; margin: 20px auto; padding: 0 15px;">
+    <div style="background: linear-gradient(135deg, #FF6B6B 0%, #FF8E53 100%); color: white; border-radius: 20px; padding: 25px 20px; text-align: center; box-shadow: 0 15px 30px rgba(255,107,107,0.4); position: relative; overflow: hidden; animation: glow 3s ease-in-out infinite;">
+        
+        <!-- Floating Background Elements -->
+        <div style="position: absolute; top: -20px; right: -20px; width: 80px; height: 80px; background: rgba(255,255,255,0.2); border-radius: 50%; animation: float 6s ease-in-out infinite;"></div>
+        <div style="position: absolute; bottom: -25px; left: -25px; width: 90px; height: 90px; background: rgba(255,255,255,0.15); border-radius: 50%; animation: float 8s ease-in-out infinite 1s;"></div>
+        
+        <div style="position: relative; z-index: 2;">
+            <!-- Bouncing Cake Icon -->
+            <div style="font-size: 45px; margin-bottom: 10px; animation: bounce 2s ease-in-out infinite;">🎂</div>
+            
+            <!-- Main Heading - More Compact -->
+            <h3 style="margin: 0 0 8px 0; font-size: 22px; font-weight: 700; text-shadow: 0 2px 8px rgba(0,0,0,0.2); line-height: 1.2;">BUY 5 CAKES<br>GET 1 FREE!</h3>
+            <p style="margin: 0 0 20px 0; opacity: 0.9; font-size: 14px; font-weight: 500;">Sweet rewards await! 🎁</p>
+            
+            <!-- Free Cake Options - More Compact -->
+            <div style="display: flex; justify-content: center; gap: 15px; margin-bottom: 20px;">
+                <div style="text-align: center;">
+                    <div style="font-size: 24px; margin-bottom: 5px;">🎂</div>
+                    <div style="font-weight: 700; font-size: 14px;">Black Forest</div>
+                    <div style="font-size: 11px; opacity: 0.9;">1 pound</div>
+                </div>
+                <div style="text-align: center; font-size: 18px; margin-top: 8px; opacity: 0.7;">OR</div>
+                <div style="text-align: center;">
+                    <div style="font-size: 24px; margin-bottom: 5px;">🎂</div>
+                    <div style="font-weight: 700; font-size: 14px;">White Forest</div>
+                    <div style="font-size: 11px; opacity: 0.9;">1 pound</div>
+                </div>
+            </div>
+            
+            <!-- Important Note - More Compact -->
+            <div style="background: rgba(255,255,255,0.25); padding: 12px; border-radius: 12px; backdrop-filter: blur(8px); border: 1px solid rgba(255,255,255,0.3); margin-bottom: 10px;">
+                <div style="font-weight: 700; font-size: 13px; margin-bottom: 3px;">🎯 Buy 5 → Get 1 Pound FREE</div>
+                <div style="font-size: 11px; opacity: 0.9;">1 pound cakes only • 1 cake = 1 stamp</div>
+            </div>
+            
+            <!-- Lost Card Warning - Compact -->
+            <div style="padding: 8px; background: rgba(231, 76, 60, 0.3); border-radius: 8px; font-size: 10px; border-left: 2px solid #e74c3c;">
+                <strong>⚠️ Keep card safe:</strong> Lost cards replaced, but stamps can't transfer
+            </div>
+        </div>
+    </div>
+</div>
+
+    <!-- ORDER INFORMATION -->
+    <div class="info-box">
+        <h4>ℹ️ Order Type Information</h4>
+        <p><strong>Note:</strong> You can choose order type for each item when adding to cart!<br>
+        • <strong>🎂 Cakes & Custom Items:</strong> Delivery or Takeaway<br>
+        • <strong>☕ Other Items (Food, Drinks):</strong> Dine-In or Takeaway</p>
+    </div>
+
+    <!-- DELIVERY INFO -->
+    <div class="info-box warning">
+        <h4>🚚 Delivery Information</h4>
+        <p><strong>Cake Delivery:</strong> Available within Kathmandu • 2-3 hours delivery<br>
+        <strong>Open Daily:</strong> 7:00 AM - 9:00 PM<br>
+        <strong>Takeaway:</strong> Quick pickup • Freshly packaged</p>
+    </div>
+
+<!-- CORRECTED VISUAL PROGRESS JOURNEY -->
+<div style="max-width: 700px; margin: 40px auto; padding: 0 20px;">
+    <div style="text-align: center; margin-bottom: 30px;">
+        <h3 style="color: var(--accent); margin: 0; font-size: 24px;">Your Cake Journey 🗺️</h3>
+        <p style="color: #666; margin: 8px 0 0 0;">5 cake purchases to FREE 1 pound cake!</p>
+    </div>
+    
+    <div style="background: white; padding: 40px 30px; border-radius: 25px; box-shadow: 0 15px 35px rgba(0,0,0,0.1); position: relative;">
+        
+        <!-- Progress Line -->
+        <div style="position: absolute; top: 75px; left: 40px; right: 40px; height: 4px; background: linear-gradient(90deg, #4b2e05, #4b2e05); z-index: 1; border-radius: 2px;"></div>
+        
+        <div style="display: flex; justify-content: space-between; position: relative; z-index: 2;">
+            <!-- Step 1 -->
+            <div style="text-align: center; position: relative;">
+                <div style="width: 50px; height: 50px; border-radius: 50%; background: linear-gradient(135deg, #4b2e05, #6b451c); color: white; display: flex; align-items: center; justify-content: center; font-weight: 800; font-size: 16px; margin: 0 auto 12px; border: 4px solid white; box-shadow: 0 5px 15px rgba(75,46,5,0.4); transition: all 0.3s ease;" onmouseover="this.style.transform='scale(1.1)'" onmouseout="this.style.transform='scale(1)'">1</div>
+                <div style="font-weight: 700; color: #4b2e05; font-size: 13px;">First</div>
+                <div style="font-size: 11px; color: #888; margin-top: 2px;">1 pound</div>
+            </div>
+            
+            <!-- Step 2 -->
+            <div style="text-align: center;">
+                <div style="width: 50px; height: 50px; border-radius: 50%; background: linear-gradient(135deg, #4b2e05, #6b451c); color: white; display: flex; align-items: center; justify-content: center; font-weight: 800; font-size: 16px; margin: 0 auto 12px; border: 4px solid white; box-shadow: 0 5px 15px rgba(75,46,5,0.4); transition: all 0.3s ease;" onmouseover="this.style.transform='scale(1.1)'" onmouseout="this.style.transform='scale(1)'">2</div>
+                <div style="font-weight: 700; color: #4b2e05; font-size: 13px;">Second</div>
+                <div style="font-size: 11px; color: #888; margin-top: 2px;">1 pound</div>
+            </div>
+            
+            <!-- Step 3 -->
+            <div style="text-align: center;">
+                <div style="width: 50px; height: 50px; border-radius: 50%; background: linear-gradient(135deg, #4b2e05, #6b451c); color: white; display: flex; align-items: center; justify-content: center; font-weight: 800; font-size: 16px; margin: 0 auto 12px; border: 4px solid white; box-shadow: 0 5px 15px rgba(75,46,5,0.4); transition: all 0.3s ease;" onmouseover="this.style.transform='scale(1.1)'" onmouseout="this.style.transform='scale(1)'">3</div>
+                <div style="font-weight: 700; color: #4b2e05; font-size: 13px;">Third</div>
+                <div style="font-size: 11px; color: #888; margin-top: 2px;">1 pound</div>
+            </div>
+            
+            <!-- Step 4 -->
+            <div style="text-align: center;">
+                <div style="width: 50px; height: 50px; border-radius: 50%; background: linear-gradient(135deg, #4b2e05, #6b451c); color: white; display: flex; align-items: center; justify-content: center; font-weight: 800; font-size: 16px; margin: 0 auto 12px; border: 4px solid white; box-shadow: 0 5px 15px rgba(75,46,5,0.4); transition: all 0.3s ease;" onmouseover="this.style.transform='scale(1.1)'" onmouseout="this.style.transform='scale(1)'">4</div>
+                <div style="font-weight: 700; color: #4b2e05; font-size: 13px;">Fourth</div>
+                <div style="font-size: 11px; color: #888; margin-top: 2px;">1 pound</div>
+            </div>
+            
+            <!-- Step 5 -->
+            <div style="text-align: center;">
+                <div style="width: 50px; height: 50px; border-radius: 50%; background: linear-gradient(135deg, #4b2e05, #6b451c); color: white; display: flex; align-items: center; justify-content: center; font-weight: 800; font-size: 16px; margin: 0 auto 12px; border: 4px solid white; box-shadow: 0 5px 15px rgba(75,46,5,0.4); transition: all 0.3s ease;" onmouseover="this.style.transform='scale(1.1)'" onmouseout="this.style.transform='scale(1)'">5</div>
+                <div style="font-weight: 700; color: #4b2e05; font-size: 13px;">Fifth</div>
+                <div style="font-size: 11px; color: #888; margin-top: 2px;">1 pound</div>
+            </div>
+            
+            <!-- Step 6 - FREE! -->
+            <div style="text-align: center;">
+                <div style="width: 50px; height: 50px; border-radius: 50%; background: linear-gradient(135deg, #FF6B6B, #FF8E53); color: white; display: flex; align-items: center; justify-content: center; font-weight: 800; font-size: 18px; margin: 0 auto 12px; border: 4px solid white; box-shadow: 0 5px 15px rgba(255,107,107,0.4); animation: pulse 2s infinite; transition: all 0.3s ease;" onmouseover="this.style.transform='scale(1.1)'" onmouseout="this.style.transform='scale(1)'">🎁</div>
+                <div style="font-weight: 700; color: #FF6B6B; font-size: 13px;">FREE!</div>
+                <div style="font-size: 11px; color: #888; margin-top: 2px;">1 pound</div>
+            </div>
+        </div>
+        
+        <!-- Clear explanation -->
+        <div style="text-align: center; margin-top: 25px; padding: 15px; background: #f8f9fa; border-radius: 10px;">
+            <div style="font-weight: 700; color: #4b2e05; margin-bottom: 5px;">🎯 Buy 5 Cakes → Get 6th Cake FREE!</div>
+            <div style="font-size: 13px; color: #666;">Each number represents one 1 pound cake purchase</div>
+        </div>
+    </div>
+</div>
+
+<!-- MAIN CONTENT -->
+    <main class="content">
+        <h2 id="menu">Our Menu</h2>
+
+
+    <!-- CAKES -->
+    <div class="category">Cakes</div>
+    <div class="menu-items">
+        <!-- BLACK FOREST -->
+        <div class="item" data-category="Cakes">
+            <img src="blackforest.jpeg" alt="Black Forest Cake">
+            <h4>BLACK FOREST</h4>
+            <div class="price-container">
+                <div class="price-display">Price: <span class="price-text">Rs. 750</span></div>
+                <div class="weight-indicator">1 & 2 pound available</div>
+            </div>
+            <div class="controls">
+                <select class="variation">
+                    <option data-price="750">1 pound — Rs. 750</option>
+                    <option data-price="1500">2 pound — Rs. 1500</option>
+                </select>
+                <input type="number" class="quantity" min="1" value="1" aria-label="Quantity">
+                <button class="btn add-btn add-to-cart" data-name="BLACK FOREST">Add to Cart</button>
+            </div>
+        </div>
+
+        <!-- WHITE FOREST -->
+        <div class="item" data-category="Cakes">
+            <img src="whiteforest.jpeg" alt="White Forest Cake">
+            <h4>WHITE FOREST</h4>
+            <div class="price-container">
+                <div class="price-display">Price: <span class="price-text">Rs. 800</span></div>
+                <div class="weight-indicator">1 & 2 pound available</div>
+            </div>
+            <div class="controls">
+                <select class="variation">
+                    <option data-price="800">1 pound — Rs. 800</option>
+                    <option data-price="1600">2 pound — Rs. 1600</option>
+                </select>
+                <input type="number" class="quantity" min="1" value="1" aria-label="Quantity">
+                <button class="btn add-btn add-to-cart" data-name="WHITE FOREST">Add to Cart</button>
+            </div>
+        </div>
+
+        <!-- CHOCOLATE -->
+        <div class="item" data-category="Cakes">
+            <img src="chocolate.jpeg" alt="Chocolate">
+            <h4>CHOCOLATE</h4>
+            <div class="price-container">
+                <div class="price-display">Price: <span class="price-text">Rs. 900</span></div>
+                <div class="weight-indicator">1 & 2 pound available</div>
+            </div>
+            <div class="controls">
+                <select class="variation">
+                    <option data-price="900">1 pound — Rs. 900</option>
+                    <option data-price="1800">2 pound — Rs. 1800</option>
+                </select>
+                <input type="number" class="quantity" min="1" value="1" aria-label="Quantity">
+                <button class="btn add-btn add-to-cart" data-name="CHOCOLATE">Add to Cart</button>
+            </div>
+        </div>
+
+        <!-- BLUEBERRY -->
+        <div class="item" data-category="Cakes">
+            <img src="blueberry.jpeg" alt="Blueberry">
+            <h4>BLUEBERRY</h4>
+            <div class="price-container">
+                <div class="price-display">Price: <span class="price-text">Rs. 950</span></div>
+                <div class="weight-indicator">1 & 2 pound available</div>
+            </div>
+            <div class="controls">
+                <select class="variation">
+                    <option data-price="950">1 pound — Rs. 950</option>
+                    <option data-price="1900">2 pound — Rs. 1900</option>
+                </select>
+                <input type="number" class="quantity" min="1" value="1" aria-label="Quantity">
+                <button class="btn add-btn add-to-cart" data-name="BLUEBERRY">Add to Cart</button>
+            </div>
+        </div>
+
+        <!-- SWEET VANILLA -->
+        <div class="item" data-category="Cakes">
+            <img src="vanilla.jpeg" alt="Sweet Vanilla">
+            <h4>SWEET VANILLA</h4>
+            <div class="price-container">
+                <div class="price-display">Price: <span class="price-text">Rs. 800</span></div>
+                <div class="weight-indicator">1 & 2 pound available</div>
+            </div>
+            <div class="controls">
+                <select class="variation">
+                    <option data-price="800">1 pound — Rs. 800</option>
+                    <option data-price="1600">2 pound — Rs. 1600</option>
+                </select>
+                <input type="number" class="quantity" min="1" value="1" aria-label="Quantity">
+                <button class="btn add-btn add-to-cart" data-name="SWEET VANILLA">Add to Cart</button>
+            </div>
+        </div>
+
+        <!-- STRAWBERRY -->
+        <div class="item" data-category="Cakes">
+            <img src="strawberry.jpeg" alt="Strawberry">
+            <h4>STRAWBERRY</h4>
+            <div class="price-container">
+                <div class="price-display">Price: <span class="price-text">Rs. 900</span></div>
+                <div class="weight-indicator">1 & 2 pound available</div>
+            </div>
+            <div class="controls">
+                <select class="variation">
+                    <option data-price="900">1 pound — Rs. 900</option>
+                    <option data-price="1800">2 pound — Rs. 1800</option>
+                </select>
+                <input type="number" class="quantity" min="1" value="1" aria-label="Quantity">
+                <button class="btn add-btn add-to-cart" data-name="STRAWBERRY">Add to Cart</button>
+            </div>
+        </div>
+
+        <!-- FLORIDA -->
+        <div class="item" data-category="Cakes">
+            <img src="florida.jpeg" alt="Florida">
+            <h4>FLORIDA</h4>
+            <div class="price-container">
+                <div class="price-display">Price: <span class="price-text">Rs. 950</span></div>
+                <div class="weight-indicator">1 & 2 pound available</div>
+            </div>
+            <div class="controls">
+                <select class="variation">
+                    <option data-price="950">1 pound — Rs. 950</option>
+                    <option data-price="1900">2 pound — Rs. 1900</option>
+                </select>
+                <input type="number" class="quantity" min="1" value="1" aria-label="Quantity">
+                <button class="btn add-btn add-to-cart" data-name="FLORIDA">Add to Cart</button>
+            </div>
+        </div>
+
+        <!-- OREO CAKE -->
+        <div class="item" data-category="Cakes">
+            <img src="oreo.jpeg" alt="Oreo Cake">
+            <h4>OREO CAKE</h4>
+            <div class="price-container">
+                <div class="price-display">Price: <span class="price-text">Rs. 900</span></div>
+                <div class="weight-indicator">1 & 2 pound available</div>
+            </div>
+            <div class="controls">
+                <select class="variation">
+                    <option data-price="900">1 pound — Rs. 900</option>
+                    <option data-price="1800">2 pound — Rs. 1800</option>
+                </select>
+                <input type="number" class="quantity" min="1" value="1" aria-label="Quantity">
+                <button class="btn add-btn add-to-cart" data-name="OREO CAKE">Add to Cart</button>
+            </div>
+        </div>
+
+        <!-- OPERA -->
+        <div class="item" data-category="Cakes">
+            <img src="opera.jpeg" alt="Opera">
+            <h4>OPERA</h4>
+            <div class="price-container">
+                <div class="price-display">Price: <span class="price-text">Rs. 950</span></div>
+                <div class="weight-indicator">1 & 2 pound available</div>
+            </div>
+            <div class="controls">
+                <select class="variation">
+                    <option data-price="950">1 pound — Rs. 950</option>
+                    <option data-price="1900">2 pound — Rs. 1900</option>
+                </select>
+                <input type="number" class="quantity" min="1" value="1" aria-label="Quantity">
+                <button class="btn add-btn add-to-cart" data-name="OPERA">Add to Cart</button>
+            </div>
+        </div>
+
+        <!-- CHERRY TOP -->
+        <div class="item" data-category="Cakes">
+            <img src="cherrytop.jpeg" alt="Cherry Top">
+            <h4>CHERRY TOP</h4>
+            <div class="price-container">
+                <div class="price-display">Price: <span class="price-text">Rs. 800</span></div>
+                <div class="weight-indicator">1 & 2 pound available</div>
+            </div>
+            <div class="controls">
+                <select class="variation">
+                    <option data-price="800">1 pound — Rs. 800</option>
+                    <option data-price="1600">2 pound — Rs. 1600</option>
+                </select>
+                <input type="number" class="quantity" min="1" value="1" aria-label="Quantity">
+                <button class="btn add-btn add-to-cart" data-name="CHERRY TOP">Add to Cart</button>
+            </div>
+        </div>
+
+        <!-- PINEAPPLE -->
+        <div class="item" data-category="Cakes">
+            <img src="pineapple.jpeg" alt="Pineapple">
+            <h4>PINEAPPLE</h4>
+            <div class="price-container">
+                <div class="price-display">Price: <span class="price-text">Rs. 900</span></div>
+                <div class="weight-indicator">1 & 2 pound available</div>
+            </div>
+            <div class="controls">
+                <select class="variation">
+                    <option data-price="900">1 pound — Rs. 900</option>
+                    <option data-price="1800">2 pound — Rs. 1800</option>
+                </select>
+                <input type="number" class="quantity" min="1" value="1" aria-label="Quantity">
+                <button class="btn add-btn add-to-cart" data-name="PINEAPPLE">Add to Cart</button>
+            </div>
+        </div>
+
+        <!-- RED VELVET -->
+        <div class="item" data-category="Cakes">
+            <img src="redvelvet.jpeg" alt="Red Velvet">
+            <h4>RED VELVET</h4>
+            <div class="price-container">
+                <div class="price-display">Price: <span class="price-text">Rs. 950</span></div>
+                <div class="weight-indicator">1 & 2 pound available</div>
+            </div>
+            <div class="controls">
+                <select class="variation">
+                    <option data-price="950">1 pound — Rs. 950</option>
+                    <option data-price="1900">2 pound — Rs. 1900</option>
+                </select>
+                <input type="number" class="quantity" min="1" value="1" aria-label="Quantity">
+                <button class="btn add-btn add-to-cart" data-name="RED VELVET">Add to Cart</button>
+            </div>
+        </div>
+
+        <!-- MANGO CAKE -->
+        <div class="item" data-category="Cakes">
+            <img src="mango.jpeg" alt="Mango Cake">
+            <h4>MANGO CAKE</h4>
+            <div class="price-container">
+                <div class="price-display">Price: <span class="price-text">Rs. 900</span></div>
+                <div class="weight-indicator">1 & 2 pound available</div>
+            </div>
+            <div class="controls">
+                <select class="variation">
+                    <option data-price="900">1 pound — Rs. 900</option>
+                    <option data-price="1800">2 pound — Rs. 1800</option>
+                </select>
+                <input type="number" class="quantity" min="1" value="1" aria-label="Quantity">
+                <button class="btn add-btn add-to-cart" data-name="MANGO CAKE">Add to Cart</button>
+            </div>
+        </div>
+
+        <!-- MOCHA CAKE -->
+        <div class="item" data-category="Cakes">
+            <img src="mocha.jpeg" alt="Mocha Cake">
+            <h4>MOCHA CAKE</h4>
+            <div class="price-container">
+                <div class="price-display">Price: <span class="price-text">Rs. 950</span></div>
+                <div class="weight-indicator">1 & 2 pound available</div>
+            </div>
+            <div class="controls">
+                <select class="variation">
+                    <option data-price="950">1 pound — Rs. 950</option>
+                    <option data-price="1900">2 pound — Rs. 1900</option>
+                </select>
+                <input type="number" class="quantity" min="1" value="1" aria-label="Quantity">
+                <button class="btn add-btn add-to-cart" data-name="MOCHA CAKE">Add to Cart</button>
+            </div>
+        </div>
+
+<!-- MOCHA & NEOGADINE -->
+<div class="item" data-category="Cakes">
+    <img src="mochaneo.jpeg" alt="Mocha & Neogadine">
+    <h4>MOCHA & NEOGADINE</h4>
+    <div class="price-container">
+        <div class="price-display">Price: <span class="price-text">Rs. 1250</span></div>
+        <div class="weight-indicator">1 & 2 pound available</div>
+    </div>
+    <div class="controls">
+        <select class="variation">
+            <option data-price="1250">1 pound — Rs. 1250</option>
+            <option data-price="2500">2 pound — Rs. 2500</option>
+        </select>
+        <input type="number" class="quantity" min="1" value="1" aria-label="Quantity">
+        <button class="btn add-btn add-to-cart" data-name="MOCHA & NEOGADINE">Add to Cart</button>
+    </div>
+</div>
+      
+        <!-- BUTTERSCOTCH -->
+        <div class="item" data-category="Cakes">
+            <img src="butterscotch.jpeg" alt="Butterscotch">
+            <h4>BUTTERSCOTCH</h4>
+            <div class="price-container">
+                <div class="price-display">Price: <span class="price-text">Rs. 950</span></div>
+                <div class="weight-indicator">1 & 2 pound available</div>
+            </div>
+            <div class="controls">
+                <select class="variation">
+                    <option data-price="950">1 pound — Rs. 950</option>
+                    <option data-price="1900">2 pound — Rs. 1900</option>
+                </select>
+                <input type="number" class="quantity" min="1" value="1" aria-label="Quantity">
+                <button class="btn add-btn add-to-cart" data-name="BUTTERSCOTCH">Add to Cart</button>
+            </div>
+        </div>
+
+        <!-- CHOCO TRUFFLE -->
+        <div class="item" data-category="Cakes">
+            <img src="chocotruffle.jpeg" alt="Choco Truffle">
+            <h4>CHOCO TRUFFLE</h4>
+            <div class="price-container">
+                <div class="price-display">Price: <span class="price-text">Rs. 1250</span></div>
+                <div class="weight-indicator">1 & 2 pound available</div>
+            </div>
+            <div class="controls">
+                <select class="variation">
+                    <option data-price="1250">1 pound — Rs. 1250</option>
+                    <option data-price="2500">2 pound — Rs. 2500</option>
+                </select>
+                <input type="number" class="quantity" min="1" value="1" aria-label="Quantity">
+                <button class="btn add-btn add-to-cart" data-name="CHOCO TRUFFLE">Add to Cart</button>
+            </div>
+        </div>
+
+        <!-- WHITE TRUFFLE -->
+        <div class="item" data-category="Cakes">
+            <img src="whitetruffle.jpeg" alt="White Truffle">
+            <h4>WHITE TRUFFLE</h4>
+            <div class="price-container">
+                <div class="price-display">Price: <span class="price-text">Rs. 1250</span></div>
+                <div class="weight-indicator">1 & 2 pound available</div>
+            </div>
+            <div class="controls">
+                <select class="variation">
+                    <option data-price="1250">1 pound — Rs. 1250</option>
+                    <option data-price="2500">2 pound — Rs. 2500</option>
+                </select>
+                <input type="number" class="quantity" min="1" value="1" aria-label="Quantity">
+                <button class="btn add-btn add-to-cart" data-name="WHITE TRUFFLE">Add to Cart</button>
+            </div>
+        </div>
+
+        <!-- DEVIL CAKE (2 pound only) -->
+        <div class="item" data-category="Cakes">
+            <img src="devilcake.jpeg" alt="Devil Cake">
+            <h4>DEVIL CAKE</h4>
+            <div class="price-container">
+                <div class="price-display">Price: <span class="price-text">Rs. 2500</span></div>
+                <div class="weight-indicator">2 pound only</div>
+            </div>
+            <div class="controls">
+                <input type="number" class="quantity" min="1" value="1" aria-label="Quantity">
+                <button class="btn add-btn add-to-cart" data-name="DEVIL CAKE">Add to Cart</button>
+            </div>
+        </div>
+
+        <!-- CHEESE CAKE (2 pound only) -->
+        <div class="item" data-category="Cakes">
+            <img src="cheesecake.jpeg" alt="Cheese Cake">
+            <h4>CHEESE CAKE</h4>
+            <div class="price-container">
+                <div class="price-display">Price: <span class="price-text">Rs. 2500</span></div>
+                <div class="weight-indicator">2 pound only</div>
+            </div>
+            <div class="controls">
+                <input type="number" class="quantity" min="1" value="1" aria-label="Quantity">
+                <button class="btn add-btn add-to-cart" data-name="CHEESE CAKE">Add to Cart</button>
+            </div>
+        </div>
+        
+        <!-- PHOTO PRINT -->
+        <div class="item" data-category="Cakes">
+            <img src="photo.jpeg" alt="Photo Print">
+            <h4>PHOTO PRINT</h4>
+            <div class="price-container">
+                <div class="price-display">Price: <span class="price-text">Rs. 500</span></div>
+                <div class="weight-indicator">Additional charges apply</div>
+            </div>
+            <div class="controls">
+                <input type="number" class="quantity" min="1" value="1" aria-label="Quantity">
+                <button class="btn add-btn add-to-cart" data-name="PHOTO PRINT">Add to Cart</button>
+            </div>
+        </div>
+
+        <!-- CUSTOMIZE YOUR OWN CAKE -->
+        <div class="item" data-category="Cakes">
+            <img src="custom.jpeg" alt="Custom Cake">
+            <h4>CUSTOMIZE YOUR OWN CAKE</h4>
+            <div class="price-container">
+                <div class="price-display">Custom Design</div>
+                <div class="weight-indicator">Contact for pricing</div>
+            </div>
+            <div class="controls">
+                <div class="contact-options" style="display: flex; flex-direction: column; gap: 10px; justify-content: center; width: 100%;">
+                    <a href="https://wa.me/9779820104085" class="btn contact-btn" target="_blank" style="background: #25D366; color: white; display: flex; align-items: center; gap: 8px; padding: 10px 15px; border-radius: 8px; text-decoration: none; font-weight: 600; font-size: 11px;">
+                        <i class="fab fa-whatsapp"></i> WhatsApp
+                    </a>
+                    <a href="https://instagram.com/ktmbakery78" class="btn contact-btn" target="_blank" style="background: linear-gradient(45deg, #f09433, #e6683c, #dc2743, #cc2366, #bc1888); color: white; display: flex; align-items: center; gap: 8px; padding: 10px 15px; border-radius: 8px; text-decoration: none; font-weight: 600; font-size: 11px;">
+                        <i class="fab fa-instagram"></i> Instagram
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- REGULAR COFFEE -->
+    <div class="category">REGULAR COFFEE</div>
+    <div class="menu-items">
+        <!-- ESPRESSO -->
+        <div class="item">
+            <img src="espresso.jpeg" alt="Espresso">
+            <h4>ESPRESSO</h4>
+            <div class="price-container">
+                <div class="price-display">Price: <span class="price-text">Rs. 100/130</span></div>
+                <div class="shot-indicator">Single/Double Shot</div>
+            </div>
+            <div class="controls">
+                <select class="variation">
+                    <option data-price="100">Single Shot — Rs. 100</option>
+                    <option data-price="130">Double Shot — Rs. 130</option>
+                </select>
+                <input type="number" class="quantity" min="1" value="1" aria-label="Quantity">
+                <button class="btn add-btn add-to-cart" data-name="ESPRESSO">Add to Cart</button>
+            </div>
+        </div>
+
+        <!-- AMERICANO -->
+        <div class="item">
+            <img src="americano.jpeg" alt="Americano">
+            <h4>AMERICANO</h4>
+            <div class="price-container">
+                <div class="price-display">Price: <span class="price-text">Rs. 120/130</span></div>
+                <div class="shot-indicator">Single/Double Shot</div>
+            </div>
+            <div class="controls">
+                <select class="variation">
+                    <option data-price="120">Single Shot — Rs. 120</option>
+                    <option data-price="130">Double Shot — Rs. 130</option>
+                </select>
+                <input type="number" class="quantity" min="1" value="1" aria-label="Quantity">
+                <button class="btn add-btn add-to-cart" data-name="AMERICANO">Add to Cart</button>
+            </div>
+        </div>
+
+        <!-- ESPRESSO AFFOCATO -->
+        <div class="item">
+            <img src="affocato.jpeg" alt="Espresso Affocato">
+            <h4>ESPRESSO AFFOCATO</h4>
+            <div class="price-container">
+                <div class="price-display">Price: <span class="price-text">Rs. 190</span></div>
+            </div>
+            <div class="controls">
+                <input type="number" class="quantity" min="1" value="1" aria-label="Quantity">
+                <button class="btn add-btn add-to-cart" data-name="ESPRESSO AFFOCATO">Add to Cart</button>
+            </div>
+        </div>
+
+        <!-- CAFE LATTE -->
+        <div class="item">
+            <img src="cafe-latte.jpeg" alt="Cafe Latte">
+            <h4>CAFE LATTE</h4>
+            <div class="price-container">
+                <div class="price-display">Price: <span class="price-text">Rs. 150</span></div>
+            </div>
+            <div class="controls">
+                <input type="number" class="quantity" min="1" value="1" aria-label="Quantity">
+                <button class="btn add-btn add-to-cart" data-name="CAFE LATTE">Add to Cart</button>
+            </div>
+        </div>
+
+        <!-- CAPPUCCINO -->
+        <div class="item">
+            <img src="cappuccino.jpeg" alt="Cappuccino">
+            <h4>CAPPUCCINO</h4>
+            <div class="price-container">
+                <div class="price-display">Price: <span class="price-text">Rs. 150</span></div>
+            </div>
+            <div class="controls">
+                <input type="number" class="quantity" min="1" value="1" aria-label="Quantity">
+                <button class="btn add-btn add-to-cart" data-name="CAPPUCCINO">Add to Cart</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- EXCLUSIVE FLAVOURED COFFEE -->
+    <div class="category">EXCLUSIVE FLAVOURED COFFEE</div>
+    <div class="menu-items">
+        <!-- CAFE MOCHA -->
+        <div class="item">
+            <img src="mochacoffee.jpeg" alt="Cafe Mocha">
+            <h4>CAFE MOCHA</h4>
+            <div class="price-container">
+                <div class="price-display">Price: <span class="price-text">Rs. 220</span></div>
+            </div>
+            <div class="controls">
+                <input type="number" class="quantity" min="1" value="1" aria-label="Quantity">
+                <button class="btn add-btn add-to-cart" data-name="CAFE MOCHA">Add to Cart</button>
+            </div>
+        </div>
+
+        <!-- CARAMEL MACCHIATO -->
+        <div class="item">
+            <img src="caramel-macchiato.jpeg" alt="Caramel Macchiato">
+            <h4>CARAMEL MACCHIATO</h4>
+            <div class="price-container">
+                <div class="price-display">Price: <span class="price-text">Rs. 220</span></div>
+            </div>
+            <div class="controls">
+                <input type="number" class="quantity" min="1" value="1" aria-label="Quantity">
+                <button class="btn add-btn add-to-cart" data-name="CARAMEL MACCHIATO">Add to Cart</button>
+            </div>
+        </div>
+
+        <!-- MOCHA MADNESS -->
+        <div class="item">
+            <img src="mocha-madness.jpeg" alt="Mocha Madness">
+            <h4>MOCHA MADNESS</h4>
+            <div class="price-container">
+                <div class="price-display">Price: <span class="price-text">Rs. 230</span></div>
+            </div>
+            <div class="controls">
+                <input type="number" class="quantity" min="1" value="1" aria-label="Quantity">
+                <button class="btn add-btn add-to-cart" data-name="MOCHA MADNESS">Add to Cart</button>
+            </div>
+        </div>
+
+        <!-- REDVELVET LATTE -->
+        <div class="item">
+            <img src="redvelvet-latte.jpeg" alt="Redvelvet Latte">
+            <h4>REDVELVET LATTE</h4>
+            <div class="price-container">
+                <div class="price-display">Price: <span class="price-text">Rs. 190</span></div>
+            </div>
+            <div class="controls">
+                <input type="number" class="quantity" min="1" value="1" aria-label="Quantity">
+                <button class="btn add-btn add-to-cart" data-name="REDVELVET LATTE">Add to Cart</button>
+            </div>
+        </div>
+
+        <!-- HOT GINGER LEMON PEACH -->
+        <div class="item">
+            <img src="ginger-lemon-peach.jpeg" alt="Hot Ginger Lemon Peach">
+            <h4>HOT GINGER LEMON PEACH</h4>
+            <div class="price-container">
+                <div class="price-display">Price: <span class="price-text">Rs. 190</span></div>
+            </div>
+            <div class="controls">
+                <input type="number" class="quantity" min="1" value="1" aria-label="Quantity">
+                <button class="btn add-btn add-to-cart" data-name="HOT GINGER LEMON PEACH">Add to Cart</button>
+            </div>
+        </div>
+
+        <!-- HOT BUTTER CHEESECAKE -->
+        <div class="item">
+            <img src="butter-cheesecake.jpeg" alt="Hot Butter Cheesecake">
+            <h4>HOT BUTTER CHEESECAKE</h4>
+            <div class="price-container">
+                <div class="price-display">Price: <span class="price-text">Rs. 190</span></div>
+            </div>
+            <div class="controls">
+                <input type="number" class="quantity" min="1" value="1" aria-label="Quantity">
+                <button class="btn add-btn add-to-cart" data-name="HOT BUTTER CHEESECAKE">Add to Cart</button>
+            </div>
+        </div>
+
+        <!-- HOT STRAWBERRY GINGER LEMONADE -->
+        <div class="item">
+            <img src="strawberry-ginger-lemonade.jpeg" alt="Hot Strawberry Ginger Lemonade">
+            <h4>HOT STRAWBERRY GINGER LEMONADE</h4>
+            <div class="price-container">
+                <div class="price-display">Price: <span class="price-text">Rs. 190</span></div>
+            </div>
+            <div class="controls">
+                <input type="number" class="quantity" min="1" value="1" aria-label="Quantity">
+                <button class="btn add-btn add-to-cart" data-name="HOT STRAWBERRY GINGER LEMONADE">Add to Cart</button>
+            </div>
+        </div>
+
+        <!-- CHEESECAKE LATTE -->
+        <div class="item">
+            <img src="cheesecake-latte.jpeg" alt="Cheesecake Latte">
+            <h4>CHEESECAKE LATTE</h4>
+            <div class="price-container">
+                <div class="price-display">Price: <span class="price-text">Rs. 190</span></div>
+            </div>
+            <div class="controls">
+                <input type="number" class="quantity" min="1" value="1" aria-label="Quantity">
+                <button class="btn add-btn add-to-cart" data-name="CHEESECAKE LATTE">Add to Cart</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- SANDWICHES -->
+    <div class="category">SANDWICHES</div>
+    <div class="menu-items">
+        <!-- CHICKEN HOT DOG SANDWICH -->
+        <div class="item">
+            <img src="chicken-hotdog-sandwich.jpeg" alt="Chicken Hot Dog Sandwich">
+            <h4>CHICKEN HOT DOG SANDWICH</h4>
+            <div class="price-container">
+                <div class="price-display">Price: <span class="price-text">Rs. 170</span></div>
+            </div>
+            <div class="controls">
+                <input type="number" class="quantity" min="1" value="1" aria-label="Quantity">
+                <button class="btn add-btn add-to-cart" data-name="CHICKEN HOT DOG SANDWICH">Add to Cart</button>
+            </div>
+        </div>
+
+        <!-- CHICKEN BREAD SANDWICH -->
+        <div class="item">
+            <img src="chicken-bread-sandwich.jpeg" alt="Chicken Bread Sandwich">
+            <h4>CHICKEN BREAD SANDWICH</h4>
+            <div class="price-container">
+                <div class="price-display">Price: <span class="price-text">Rs. 160</span></div>
+            </div>
+            <div class="controls">
+                <input type="number" class="quantity" min="1" value="1" aria-label="Quantity">
+                <button class="btn add-btn add-to-cart" data-name="CHICKEN BREAD SANDWICH">Add to Cart</button>
+            </div>
+        </div>
+
+        <!-- CHICKEN BUN SANDWICH -->
+        <div class="item">
+            <img src="chicken-bun-sandwich.jpeg" alt="Chicken Bun Sandwich">
+            <h4>CHICKEN BUN SANDWICH</h4>
+            <div class="price-container">
+                <div class="price-display">Price: <span class="price-text">Rs. 160</span></div>
+            </div>
+            <div class="controls">
+                <input type="number" class="quantity" min="1" value="1" aria-label="Quantity">
+                <button class="btn add-btn add-to-cart" data-name="CHICKEN BUN SANDWICH">Add to Cart</button>
+            </div>
+        </div>
+
+        <!-- VEG CHEESE SANDWICH -->
+        <div class="item">
+            <img src="veg-cheese-sandwich.jpeg" alt="Veg Cheese Sandwich">
+            <h4>VEG CHEESE SANDWICH</h4>
+            <div class="price-container">
+                <div class="price-display">Price: <span class="price-text">Rs. 120</span></div>
+            </div>
+            <div class="controls">
+                <input type="number" class="quantity" min="1" value="1" aria-label="Quantity">
+                <button class="btn add-btn add-to-cart" data-name="VEG CHEESE SANDWICH">Add to Cart</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- TRULY REFRESHING -->
+    <div class="category">TRULY REFRESHING</div>
+    <div class="menu-items">
+        <!-- MINT LEMONADE -->
+        <div class="item">
+            <img src="mint-lemonade.jpeg" alt="Mint Lemonade">
+            <h4>MINT LEMONADE</h4>
+            <div class="price-container">
+                <div class="price-display">Price: <span class="price-text">Rs. 180</span></div>
+            </div>
+            <div class="controls">
+                <input type="number" class="quantity" min="1" value="1" aria-label="Quantity">
+                <button class="btn add-btn add-to-cart" data-name="MINT LEMONADE">Add to Cart</button>
+            </div>
+        </div>
+
+        <!-- VIRGIN MOJITO -->
+        <div class="item">
+            <img src="virgin-mojito.jpeg" alt="Virgin Mojito">
+            <h4>VIRGIN MOJITO</h4>
+            <div class="price-container">
+                <div class="price-display">Price: <span class="price-text">Rs. 220</span></div>
+            </div>
+            <div class="controls">
+                <input type="number" class="quantity" min="1" value="1" aria-label="Quantity">
+                <button class="btn add-btn add-to-cart" data-name="VIRGIN MOJITO">Add to Cart</button>
+            </div>
+        </div>
+
+        <!-- MINT LEMONADE (200) -->
+        <div class="item">
+            <img src="mint-lemonade-200.jpeg" alt="Mint Lemonade">
+            <h4>MINT LEMONADE</h4>
+            <div class="price-container">
+                <div class="price-display">Price: <span class="price-text">Rs. 200</span></div>
+            </div>
+            <div class="controls">
+                <input type="number" class="quantity" min="1" value="1" aria-label="Quantity">
+                <button class="btn add-btn add-to-cart" data-name="MINT LEMONADE">Add to Cart</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- SHAKE ME UP -->
+    <div class="category">SHAKE ME UP</div>
+    <div class="menu-items">
+        <!-- VANILLA -->
+        <div class="item">
+            <img src="vanilla-shake.jpeg" alt="Vanilla Shake">
+            <h4>VANILLA</h4>
+            <div class="price-container">
+                <div class="price-display">Price: <span class="price-text">Rs. 180</span></div>
+            </div>
+            <div class="controls">
+                <input type="number" class="quantity" min="1" value="1" aria-label="Quantity">
+                <button class="btn add-btn add-to-cart" data-name="VANILLA SHAKE">Add to Cart</button>
+            </div>
+        </div>
+
+        <!-- STRAWBERRY -->
+        <div class="item">
+            <img src="strawberry-shake.jpeg" alt="Strawberry Shake">
+            <h4>STRAWBERRY</h4>
+            <div class="price-container">
+                <div class="price-display">Price: <span class="price-text">Rs. 220</span></div>
+            </div>
+            <div class="controls">
+                <input type="number" class="quantity" min="1" value="1" aria-label="Quantity">
+                <button class="btn add-btn add-to-cart" data-name="STRAWBERRY SHAKE">Add to Cart</button>
+            </div>
+        </div>
+
+        <!-- CARAMEL -->
+        <div class="item">
+            <img src="caramel-shake.jpeg" alt="Caramel Shake">
+            <h4>CARAMEL</h4>
+            <div class="price-container">
+                <div class="price-display">Price: <span class="price-text">Rs. 180</span></div>
+            </div>
+            <div class="controls">
+                <input type="number" class="quantity" min="1" value="1" aria-label="Quantity">
+                <button class="btn add-btn add-to-cart" data-name="CARAMEL SHAKE">Add to Cart</button>
+            </div>
+        </div>
+
+        <!-- CHOCOLATE -->
+        <div class="item">
+            <img src="chocolate-shake.jpeg" alt="Chocolate Shake">
+            <h4>CHOCOLATE</h4>
+            <div class="price-container">
+                <div class="price-display">Price: <span class="price-text">Rs. 200</span></div>
+            </div>
+            <div class="controls">
+                <input type="number" class="quantity" min="1" value="1" aria-label="Quantity">
+                <button class="btn add-btn add-to-cart" data-name="CHOCOLATE SHAKE">Add to Cart</button>
+            </div>
+        </div>
+
+        <!-- OREO -->
+        <div class="item">
+            <img src="oreo-shake.jpeg" alt="Oreo Shake">
+            <h4>OREO</h4>
+            <div class="price-container">
+                <div class="price-display">Price: <span class="price-text">Rs. 200</span></div>
+            </div>
+            <div class="controls">
+                <input type="number" class="quantity" min="1" value="1" aria-label="Quantity">
+                <button class="btn add-btn add-to-cart" data-name="OREO SHAKE">Add to Cart</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- HOT ALTERNATIVE -->
+    <div class="category">HOT ALTERNATIVE</div>
+    <div class="menu-items">
+        <!-- HOT CHOCOLATE -->
+        <div class="item">
+            <img src="hot-chocolate.jpeg" alt="Hot Chocolate">
+            <h4>HOT CHOCOLATE</h4>
+            <div class="price-container">
+                <div class="price-display">Price: <span class="price-text">Rs. 190</span></div>
+            </div>
+            <div class="controls">
+                <input type="number" class="quantity" min="1" value="1" aria-label="Quantity">
+                <button class="btn add-btn add-to-cart" data-name="HOT CHOCOLATE">Add to Cart</button>
+            </div>
+        </div>
+
+        <!-- HOT LEMON WITH HONEY -->
+        <div class="item">
+            <img src="hot-lemon-honey.jpeg" alt="Hot Lemon with Honey">
+            <h4>HOT LEMON WITH HONEY</h4>
+            <div class="price-container">
+                <div class="price-display">Price: <span class="price-text">Rs. 150</span></div>
+            </div>
+            <div class="controls">
+                <input type="number" class="quantity" min="1" value="1" aria-label="Quantity">
+                <button class="btn add-btn add-to-cart" data-name="HOT LEMON WITH HONEY">Add to Cart</button>
+            </div>
+        </div>
+
+        <!-- HOT LEMON HONEY & GINGER -->
+        <div class="item">
+            <img src="hot-lemon-ginger.jpeg" alt="Hot Lemon Honey & Ginger">
+            <h4>HOT LEMON HONEY & GINGER</h4>
+            <div class="price-container">
+                <div class="price-display">Price: <span class="price-text">Rs. 160</span></div>
+            </div>
+            <div class="controls">
+                <input type="number" class="quantity" min="1" value="1" aria-label="Quantity">
+                <button class="btn add-btn add-to-cart" data-name="HOT LEMON HONEY & GINGER">Add to Cart</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- LASSI -->
+    <div class="category">LASSI</div>
+    <div class="menu-items">
+        <!-- SWEET/PLAIN -->
+        <div class="item">
+            <img src="sweet-plain-lassi.jpeg" alt="Sweet/Plain Lassi">
+            <h4>SWEET/PLAIN</h4>
+            <div class="price-container">
+                <div class="price-display">Price: <span class="price-text">Rs. 100</span></div>
+            </div>
+            <div class="controls">
+                <select class="variation">
+                    <option data-price="100">Sweet — Rs. 100</option>
+                    <option data-price="100">Plain — Rs. 100</option>
+                </select>
+                <input type="number" class="quantity" min="1" value="1" aria-label="Quantity">
+                <button class="btn add-btn add-to-cart" data-name="SWEET/PLAIN LASSI">Add to Cart</button>
+            </div>
+        </div>
+
+        <!-- BANANA LASSI -->
+        <div class="item">
+            <img src="banana-lassi.jpeg" alt="Banana Lassi">
+            <h4>BANANA LASSI</h4>
+            <div class="price-container">
+                <div class="price-display">Price: <span class="price-text">Rs. 150</span></div>
+            </div>
+            <div class="controls">
+                <input type="number" class="quantity" min="1" value="1" aria-label="Quantity">
+                <button class="btn add-btn add-to-cart" data-name="BANANA LASSI">Add to Cart</button>
+            </div>
+        </div>
+
+        <!-- FLAVOR LASSI -->
+        <div class="item">
+            <img src="flavor-lassi.jpeg" alt="Flavor Lassi">
+            <h4>FLAVOR LASSI</h4>
+            <div class="price-container">
+                <div class="price-display">Price: <span class="price-text">Rs. 150</span></div>
+            </div>
+            <div class="controls">
+                <input type="number" class="quantity" min="1" value="1" aria-label="Quantity">
+                <button class="btn add-btn add-to-cart" data-name="FLAVOR LASSI">Add to Cart</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- SNACKS -->
+    <div class="category">SNACKS</div>
+    <div class="menu-items">
+        <!-- FRENCH FRY -->
+        <div class="item">
+            <img src="french-fry.jpeg" alt="French Fry">
+            <h4>FRENCH FRY</h4>
+            <div class="price-container">
+                <div class="price-display">Price: <span class="price-text">Rs. 200</span></div>
+            </div>
+            <div class="controls">
+                <input type="number" class="quantity" min="1" value="1" aria-label="Quantity">
+                <button class="btn add-btn add-to-cart" data-name="FRENCH FRY">Add to Cart</button>
+            </div>
+        </div>
+
+        <!-- CHICKEN BURGER -->
+        <div class="item">
+            <img src="chicken-burger.jpeg" alt="Chicken Burger">
+            <h4>CHICKEN BURGER</h4>
+            <div class="price-container">
+                <div class="price-display">Price: <span class="price-text">Rs. 250</span></div>
+            </div>
+            <div class="controls">
+                <input type="number" class="quantity" min="1" value="1" aria-label="Quantity">
+                <button class="btn add-btn add-to-cart" data-name="CHICKEN BURGER">Add to Cart</button>
+            </div>
+        </div>
+
+        <!-- CRUNCHY CHICKEN BURGER -->
+        <div class="item">
+            <img src="crunchy-chicken-burger.jpeg" alt="Crunchy Chicken Burger">
+            <h4>CRUNCHY CHICKEN BURGER</h4>
+            <div class="price-container">
+                <div class="price-display">Price: <span class="price-text">Rs. 280</span></div>
+            </div>
+            <div class="controls">
+                <input type="number" class="quantity" min="1" value="1" aria-label="Quantity">
+                <button class="btn add-btn add-to-cart" data-name="CRUNCHY CHICKEN BURGER">Add to Cart</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- COLD COFFEE -->
+    <div class="category">COLD COFFEE</div>
+    <div class="menu-items">
+        <!-- ICED AMERICANO -->
+        <div class="item">
+            <img src="iced-americano.jpeg" alt="Iced Americano">
+            <h4>ICED AMERICANO</h4>
+            <div class="price-container">
+                <div class="price-display">Price: <span class="price-text">Rs. 150</span></div>
+            </div>
+            <div class="controls">
+                <input type="number" class="quantity" min="1" value="1" aria-label="Quantity">
+                <button class="btn add-btn add-to-cart" data-name="ICED AMERICANO">Add to Cart</button>
+            </div>
+        </div>
+
+        <!-- ICED LATTE/CAPPUCCINO -->
+        <div class="item">
+            <img src="iced-latte-cappuccino.jpeg" alt="Iced Latte/Cappuccino">
+            <h4>ICED LATTE/CAPPUCCINO</h4>
+            <div class="price-container">
+                <div class="price-display">Price: <span class="price-text">Rs. 180</span></div>
+            </div>
+            <div class="controls">
+                <select class="variation">
+                    <option data-price="180">Iced Latte — Rs. 180</option>
+                    <option data-price="180">Iced Cappuccino — Rs. 180</option>
+                </select>
+                <input type="number" class="quantity" min="1" value="1" aria-label="Quantity">
+                <button class="btn add-btn add-to-cart" data-name="ICED LATTE/CAPPUCCINO">Add to Cart</button>
+            </div>
+        </div>
+
+        <!-- ICED MOCHA -->
+        <div class="item">
+            <img src="iced-mocha.jpeg" alt="Iced Mocha">
+            <h4>ICED MOCHA</h4>
+            <div class="price-container">
+                <div class="price-display">Price: <span class="price-text">Rs. 220</span></div>
+            </div>
+            <div class="controls">
+                <input type="number" class="quantity" min="1" value="1" aria-label="Quantity">
+                <button class="btn add-btn add-to-cart" data-name="ICED MOCHA">Add to Cart</button>
+            </div>
+        </div>
+
+        <!-- ICED MOCHA MADNESS -->
+        <div class="item">
+            <img src="iced-mocha-madness.jpeg" alt="Iced Mocha Madness">
+            <h4>ICED MOCHA MADNESS</h4>
+            <div class="price-container">
+                <div class="price-display">Price: <span class="price-text">Rs. 230</span></div>
+            </div>
+            <div class="controls">
+                <input type="number" class="quantity" min="1" value="1" aria-label="Quantity">
+                <button class="btn add-btn add-to-cart" data-name="ICED MOCHA MADNESS">Add to Cart</button>
+            </div>
+        </div>
+
+        <!-- COLD COFFEE WITH ICE-CREAM -->
+        <div class="item">
+            <img src="cold-coffee-icecream.jpeg" alt="Cold Coffee with Ice-Cream">
+            <h4>COLD COFFEE WITH ICE-CREAM</h4>
+            <div class="price-container">
+                <div class="price-display">Price: <span class="price-text">Rs. 230</span></div>
+            </div>
+            <div class="controls">
+                <input type="number" class="quantity" min="1" value="1" aria-label="Quantity">
+                <button class="btn add-btn add-to-cart" data-name="COLD COFFEE WITH ICE-CREAM">Add to Cart</button>
+            </div>
+        </div>
+
+        <!-- PEACH ICED TEA -->
+        <div class="item">
+            <img src="peach-iced-tea.jpeg" alt="Peach Iced Tea">
+            <h4>PEACH ICED TEA</h4>
+            <div class="price-container">
+                <div class="price-display">Price: <span class="price-text">Rs. 160</span></div>
+            </div>
+            <div class="controls">
+                <input type="number" class="quantity" min="1" value="1" aria-label="Quantity">
+                <button class="btn add-btn add-to-cart" data-name="PEACH ICED TEA">Add to Cart</button>
+            </div>
+        </div>
+
+        <!-- LEMON ICED TEA -->
+        <div class="item">
+            <img src="lemon-iced-tea.jpeg" alt="Lemon Iced Tea">
+            <h4>LEMON ICED TEA</h4>
+            <div class="price-container">
+                <div class="price-display">Price: <span class="price-text">Rs. 160</span></div>
+            </div>
+            <div class="controls">
+                <input type="number" class="quantity" min="1" value="1" aria-label="Quantity">
+                <button class="btn add-btn add-to-cart" data-name="LEMON ICED TEA">Add to Cart</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- BLENDED COLD COFFEE -->
+    <div class="category">BLENDED COLD COFFEE</div>
+    <div class="menu-items">
+        <!-- OREO FRAPPE -->
+        <div class="item">
+            <img src="oreo-frappe.jpeg" alt="Oreo Frappe">
+            <h4>OREO FRAPPE</h4>
+            <div class="price-container">
+                <div class="price-display">Price: <span class="price-text">Rs. 280</span></div>
+            </div>
+            <div class="controls">
+                <input type="number" class="quantity" min="1" value="1" aria-label="Quantity">
+                <button class="btn add-btn add-to-cart" data-name="OREO FRAPPE">Add to Cart</button>
+            </div>
+        </div>
+
+        <!-- MOCHA FRAPPE -->
+        <div class="item">
+            <img src="mocha-frappe.jpeg" alt="Mocha Frappe">
+            <h4>MOCHA FRAPPE</h4>
+            <div class="price-container">
+                <div class="price-display">Price: <span class="price-text">Rs. 280</span></div>
+            </div>
+            <div class="controls">
+                <input type="number" class="quantity" min="1" value="1" aria-label="Quantity">
+                <button class="btn add-btn add-to-cart" data-name="MOCHA FRAPPE">Add to Cart</button>
+            </div>
+        </div>
+
+        <!-- STRAWBERRY FRAPPE -->
+        <div class="item">
+            <img src="strawberry-frappe.jpeg" alt="Strawberry Frappe">
+            <h4>STRAWBERRY FRAPPE</h4>
+            <div class="price-container">
+                <div class="price-display">Price: <span class="price-text">Rs. 280</span></div>
+            </div>
+            <div class="controls">
+                <input type="number" class="quantity" min="1" value="1" aria-label="Quantity">
+                <button class="btn add-btn add-to-cart" data-name="STRAWBERRY FRAPPE">Add to Cart</button>
+            </div>
+        </div>
+
+        <!-- VANILLA FRAPPE -->
+        <div class="item">
+            <img src="vanilla-frappe.jpeg" alt="Vanilla Frappe">
+            <h4>VANILLA FRAPPE</h4>
+            <div class="price-container">
+                <div class="price-display">Price: <span class="price-text">Rs. 280</span></div>
+            </div>
+            <div class="controls">
+                <input type="number" class="quantity" min="1" value="1" aria-label="Quantity">
+                <button class="btn add-btn add-to-cart" data-name="VANILLA FRAPPE">Add to Cart</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- SPECIAL DRINKS -->
+    <div class="category">SPECIAL DRINKS</div>
+    <div class="menu-items">
+        <!-- ICED RED VELVET LATTE -->
+        <div class="item">
+            <img src="iced-red-velvet-latte.jpeg" alt="Iced Red Velvet Latte">
+            <h4>ICED RED VELVET LATTE</h4>
+            <div class="price-container">
+                <div class="price-display">Price: <span class="price-text">Rs. 250</span></div>
+            </div>
+            <div class="controls">
+                <input type="number" class="quantity" min="1" value="1" aria-label="Quantity">
+                <button class="btn add-btn add-to-cart" data-name="ICED RED VELVET LATTE">Add to Cart</button>
+            </div>
+        </div>
+
+        <!-- ICED CHEESECAKE LATTE -->
+        <div class="item">
+            <img src="iced-cheesecake-latte.jpeg" alt="Iced Cheesecake Latte">
+            <h4>ICED CHEESECAKE LATTE</h4>
+            <div class="price-container">
+                <div class="price-display">Price: <span class="price-text">Rs. 250</span></div>
+            </div>
+            <div class="controls">
+                <input type="number" class="quantity" min="1" value="1" aria-label="Quantity">
+                <button class="btn add-btn add-to-cart" data-name="ICED CHEESECAKE LATTE">Add to Cart</button>
+            </div>
+        </div>
+
+        <!-- ICED BUTTER CHEESECAKE -->
+        <div class="item">
+            <img src="iced-butter-cheesecake.jpeg" alt="Iced Butter Cheesecake">
+            <h4>ICED BUTTER CHEESECAKE</h4>
+            <div class="price-container">
+                <div class="price-display">Price: <span class="price-text">Rs. 250</span></div>
+            </div>
+            <div class="controls">
+                <input type="number" class="quantity" min="1" value="1" aria-label="Quantity">
+                <button class="btn add-btn add-to-cart" data-name="ICED BUTTER CHEESECAKE">Add to Cart</button>
+            </div>
+        </div>
+
+        <!-- ICED STRAWBERRY GINGER LEMONADE -->
+        <div class="item">
+            <img src="iced-strawberry-ginger-lemonade.jpeg" alt="Iced Strawberry Ginger Lemonade">
+            <h4>ICED STRAWBERRY GINGER LEMONADE</h4>
+            <div class="price-container">
+                <div class="price-display">Price: <span class="price-text">Rs. 250</span></div>
+            </div>
+            <div class="controls">
+                <input type="number" class="quantity" min="1" value="1" aria-label="Quantity">
+                <button class="btn add-btn add-to-cart" data-name="ICED STRAWBERRY GINGER LEMONADE">Add to Cart</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- BUBBLE TEA -->
+    <div class="category">BUBBLE TEA</div>
+    <div class="menu-items">
+        <!-- VANILLA -->
+        <div class="item">
+            <img src="vanilla-bubble-tea.jpeg" alt="Vanilla Bubble Tea">
+            <h4>VANILLA</h4>
+            <div class="price-container">
+                <div class="price-display">Price: <span class="price-text">Rs. 250</span></div>
+            </div>
+            <div class="controls">
+                <input type="number" class="quantity" min="1" value="1" aria-label="Quantity">
+                <button class="btn add-btn add-to-cart" data-name="VANILLA BUBBLE TEA">Add to Cart</button>
+            </div>
+        </div>
+
+        <!-- STRAWBERRY -->
+        <div class="item">
+            <img src="strawberry-bubble-tea.jpeg" alt="Strawberry Bubble Tea">
+            <h4>STRAWBERRY</h4>
+            <div class="price-container">
+                <div class="price-display">Price: <span class="price-text">Rs. 250</span></div>
+            </div>
+            <div class="controls">
+                <input type="number" class="quantity" min="1" value="1" aria-label="Quantity">
+                <button class="btn add-btn add-to-cart" data-name="STRAWBERRY BUBBLE TEA">Add to Cart</button>
+            </div>
+        </div>
+
+        <!-- RED VELVET -->
+        <div class="item">
+            <img src="red-velvet-bubble-tea.jpeg" alt="Red Velvet Bubble Tea">
+            <h4>RED VELVET</h4>
+            <div class="price-container">
+                <div class="price-display">Price: <span class="price-text">Rs. 250</span></div>
+            </div>
+            <div class="controls">
+                <input type="number" class="quantity" min="1" value="1" aria-label="Quantity">
+                <button class="btn add-btn add-to-cart" data-name="RED VELVET BUBBLE TEA">Add to Cart</button>
+            </div>
+        </div>
+
+        <!-- CHOCOLATE -->
+        <div class="item">
+            <img src="chocolate-bubble-tea.jpeg" alt="Chocolate Bubble Tea">
+            <h4>CHOCOLATE</h4>
+            <div class="price-container">
+                <div class="price-display">Price: <span class="price-text">Rs. 250</span></div>
+            </div>
+            <div class="controls">
+                <input type="number" class="quantity" min="1" value="1" aria-label="Quantity">
+                <button class="btn add-btn add-to-cart" data-name="CHOCOLATE BUBBLE TEA">Add to Cart</button>
+            </div>
+        </div>
+
+        <!-- BLUEBERRY -->
+        <div class="item">
+            <img src="blueberry-bubble-tea.jpeg" alt="Blueberry Bubble Tea">
+            <h4>BLUEBERRY</h4>
+            <div class="price-container">
+                <div class="price-display">Price: <span class="price-text">Rs. 250</span></div>
+            </div>
+            <div class="controls">
+                <input type="number" class="quantity" min="1" value="1" aria-label="Quantity">
+                <button class="btn add-btn add-to-cart" data-name="BLUEBERRY BUBBLE TEA">Add to Cart</button>
+            </div>
+        </div>
+
+        <!-- CHEESE CAKE -->
+        <div class="item">
+            <img src="cheesecake-bubble-tea.jpeg" alt="Cheese Cake Bubble Tea">
+            <h4>CHEESE CAKE</h4>
+            <div class="price-container">
+                <div class="price-display">Price: <span class="price-text">Rs. 250</span></div>
+            </div>
+            <div class="controls">
+                <input type="number" class="quantity" min="1" value="1" aria-label="Quantity">
+                <button class="btn add-btn add-to-cart" data-name="CHEESE CAKE BUBBLE TEA">Add to Cart</button>
+            </div>
+        </div>
+
+        <!-- MANGO -->
+        <div class="item">
+            <img src="mango-bubble-tea.jpeg" alt="Mango Bubble Tea">
+            <h4>MANGO</h4>
+            <div class="price-container">
+                <div class="price-display">Price: <span class="price-text">Rs. 250</span></div>
+            </div>
+            <div class="controls">
+                <input type="number" class="quantity" min="1" value="1" aria-label="Quantity">
+                <button class="btn add-btn add-to-cart" data-name="MANGO BUBBLE TEA">Add to Cart</button>
+            </div>
+        </div>
+
+        <!-- CARAMEL -->
+        <div class="item">
+            <img src="caramel-bubble-tea.jpeg" alt="Caramel Bubble Tea">
+            <h4>CARAMEL</h4>
+            <div class="price-container">
+                <div class="price-display">Price: <span class="price-text">Rs. 250</span></div>
+            </div>
+            <div class="controls">
+                <input type="number" class="quantity" min="1" value="1" aria-label="Quantity">
+                <button class="btn add-btn add-to-cart" data-name="CARAMEL BUBBLE TEA">Add to Cart</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- CROISSANT -->
+    <div class="category">CROISSANT</div>
+    <div class="menu-items">
+        <!-- PLAIN CROISSANT -->
+        <div class="item">
+            <img src="plain-croissant.jpeg" alt="Plain Croissant">
+            <h4>PLAIN CROISSANT</h4>
+            <div class="price-container">
+                <div class="price-display">Price: <span class="price-text">Rs. 60</span></div>
+            </div>
+            <div class="controls">
+                <input type="number" class="quantity" min="1" value="1" aria-label="Quantity">
+                <button class="btn add-btn add-to-cart" data-name="PLAIN CROISSANT">Add to Cart</button>
+            </div>
+        </div>
+
+        <!-- CHEESE CROISSANT -->
+        <div class="item">
+            <img src="cheese-croissant.jpeg" alt="Cheese Croissant">
+            <h4>CHEESE CROISSANT</h4>
+            <div class="price-container">
+                <div class="price-display">Price: <span class="price-text">Rs. 70</span></div>
+            </div>
+            <div class="controls">
+                <input type="number" class="quantity" min="1" value="1" aria-label="Quantity">
+                <button class="btn add-btn add-to-cart" data-name="CHEESE CROISSANT">Add to Cart</button>
+            </div>
+        </div>
+
+        <!-- CHOCOLATE CROISSANT -->
+        <div class="item">
+            <img src="chocolate-croissant.jpeg" alt="Chocolate Croissant">
+            <h4>CHOCOLATE CROISSANT</h4>
+            <div class="price-container">
+                <div class="price-display">Price: <span class="price-text">Rs. 70</span></div>
+            </div>
+            <div class="controls">
+                <input type="number" class="quantity" min="1" value="1" aria-label="Quantity">
+                <button class="btn add-btn add-to-cart" data-name="CHOCOLATE CROISSANT">Add to Cart</button>
+            </div>
+        </div>
+
+        <!-- ALMOND CROISSANT -->
+        <div class="item">
+            <img src="almond-croissant.jpeg" alt="Almond Croissant">
+            <h4>ALMOND CROISSANT</h4>
+            <div class="price-container">
+                <div class="price-display">Price: <span class="price-text">Rs. 70</span></div>
+            </div>
+            <div class="controls">
+                <input type="number" class="quantity" min="1" value="1" aria-label="Quantity">
+                <button class="btn add-btn add-to-cart" data-name="ALMOND CROISSANT">Add to Cart</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- DANISH -->
+    <div class="category">DANISH</div>
+    <div class="menu-items">
+        <!-- CHOCOLATE DANISH -->
+        <div class="item">
+            <img src="chocolate-danish.jpeg" alt="Chocolate Danish">
+            <h4>CHOCOLATE DANISH</h4>
+            <div class="price-container">
+                <div class="price-display">Price: <span class="price-text">Rs. 70</span></div>
+            </div>
+            <div class="controls">
+                <input type="number" class="quantity" min="1" value="1" aria-label="Quantity">
+                <button class="btn add-btn add-to-cart" data-name="CHOCOLATE DANISH">Add to Cart</button>
+            </div>
+        </div>
+
+        <!-- CINAMON DANISH -->
+        <div class="item">
+            <img src="cinamon-danish.jpeg" alt="Cinamon Danish">
+            <h4>CINAMON DANISH</h4>
+            <div class="price-container">
+                <div class="price-display">Price: <span class="price-text">Rs. 70</span></div>
+            </div>
+            <div class="controls">
+                <input type="number" class="quantity" min="1" value="1" aria-label="Quantity">
+                <button class="btn add-btn add-to-cart" data-name="CINAMON DANISH">Add to Cart</button>
+            </div>
+        </div>
+
+        <!-- COCONUT DANISH -->
+        <div class="item">
+            <img src="coconut-danish.jpeg" alt="Coconut Danish">
+            <h4>COCONUT DANISH</h4>
+            <div class="price-container">
+                <div class="price-display">Price: <span class="price-text">Rs. 70</span></div>
+            </div>
+            <div class="controls">
+                <input type="number" class="quantity" min="1" value="1" aria-label="Quantity">
+                <button class="btn add-btn add-to-cart" data-name="COCONUT DANISH">Add to Cart</button>
+            </div>
+        </div>
+
+        <!-- ANMOL DANISH -->
+        <div class="item">
+            <img src="anmol-danish.jpeg" alt="Anmol Danish">
+            <h4>ANMOL DANISH</h4>
+            <div class="price-container">
+                <div class="price-display">Price: <span class="price-text">Rs. 80</span></div>
+            </div>
+            <div class="controls">
+                <input type="number" class="quantity" min="1" value="1" aria-label="Quantity">
+                <button class="btn add-btn add-to-cart" data-name="ANMOL DANISH">Add to Cart</button>
+            </div>
+        </div>
+
+        <!-- RAISIN DANISH -->
+        <div class="item">
+            <img src="raisin-danish.jpeg" alt="Raisin Danish">
+            <h4>RAISIN DANISH</h4>
+            <div class="price-container">
+                <div class="price-display">Price: <span class="price-text">Rs. 70</span></div>
+            </div>
+            <div class="controls">
+                <input type="number" class="quantity" min="1" value="1" aria-label="Quantity">
+                <button class="btn add-btn add-to-cart" data-name="RAISIN DANISH">Add to Cart</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- SWEETS -->
+    <div class="category">SWEETS</div>
+    <div class="menu-items">
+        <!-- CUSTARD ROLL -->
+        <div class="item">
+            <img src="custard-roll.jpeg" alt="Custard Roll">
+            <h4>CUSTARD ROLL</h4>
+            <div class="price-container">
+                <div class="price-display">Price: <span class="price-text">Rs. 25</span></div>
+            </div>
+            <div class="controls">
+                <input type="number" class="quantity" min="1" value="1" aria-label="Quantity">
+                <button class="btn add-btn add-to-cart" data-name="CUSTARD ROLL">Add to Cart</button>
+            </div>
+        </div>
+
+        <!-- TRIANGLE DOUGHNUT -->
+        <div class="item">
+            <img src="triangle-doughnut.jpeg" alt="Triangle Doughnut">
+            <h4>TRIANGLE DOUGHNUT</h4>
+            <div class="price-container">
+                <div class="price-display">Price: <span class="price-text">Rs. 25</span></div>
+            </div>
+            <div class="controls">
+                <input type="number" class="quantity" min="1" value="1" aria-label="Quantity">
+                <button class="btn add-btn add-to-cart" data-name="TRIANGLE DOUGHNUT">Add to Cart</button>
+            </div>
+        </div>
+
+        <!-- MINI DOUGHNUT -->
+        <div class="item">
+            <img src="mini-doughnut.jpeg" alt="Mini Doughnut">
+            <h4>MINI DOUGHNUT</h4>
+            <div class="price-container">
+                <div class="price-display">Price: <span class="price-text">Rs. 25</span></div>
+            </div>
+            <div class="controls">
+                <input type="number" class="quantity" min="1" value="1" aria-label="Quantity">
+                <button class="btn add-btn add-to-cart" data-name="MINI DOUGHNUT">Add to Cart</button>
+            </div>
+        </div>
+
+        <!-- SWISS ROLL -->
+        <div class="item">
+            <img src="swiss-roll.jpeg" alt="Swiss Roll">
+            <h4>SWISS ROLL</h4>
+            <div class="price-container">
+                <div class="price-display">Price: <span class="price-text">Rs. 100</span></div>
+            </div>
+            <div class="controls">
+                <input type="number" class="quantity" min="1" value="1" aria-label="Quantity">
+                <button class="btn add-btn add-to-cart" data-name="SWISS ROLL">Add to Cart</button>
+            </div>
+        </div>
+
+        <!-- CREAM ROLL -->
+        <div class="item">
+            <img src="cream-roll.jpeg" alt="Cream Roll">
+            <h4>CREAM ROLL</h4>
+            <div class="price-container">
+                <div class="price-display">Price: <span class="price-text">Rs. 60</span></div>
+            </div>
+            <div class="controls">
+                <input type="number" class="quantity" min="1" value="1" aria-label="Quantity">
+                <button class="btn add-btn add-to-cart" data-name="CREAM ROLL">Add to Cart</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- FRUIT CAKE -->
+    <div class="category">FRUIT CAKE</div>
+    <div class="menu-items">
+        <!-- BANANA FRUIT CAKE -->
+        <div class="item">
+            <img src="banana-fruit-cake.jpeg" alt="Banana Fruit Cake">
+            <h4>BANANA FRUIT CAKE</h4>
+            <div class="price-container">
+                <div class="price-display">Price: <span class="price-text">Rs. 150</span></div>
+            </div>
+            <div class="controls">
+                <input type="number" class="quantity" min="1" value="1" aria-label="Quantity">
+                <button class="btn add-btn add-to-cart" data-name="BANANA FRUIT CAKE">Add to Cart</button>
+            </div>
+        </div>
+
+        <!-- VANILLA FRUIT CAKE -->
+        <div class="item">
+            <img src="vanilla-fruit-cake.jpeg" alt="Vanilla Fruit Cake">
+            <h4>VANILLA FRUIT CAKE</h4>
+            <div class="price-container">
+                <div class="price-display">Price: <span class="price-text">Rs. 150</span></div>
+            </div>
+            <div class="controls">
+                <input type="number" class="quantity" min="1" value="1" aria-label="Quantity">
+                <button class="btn add-btn add-to-cart" data-name="VANILLA FRUIT CAKE">Add to Cart</button>
+            </div>
+        </div>
+
+        <!-- PINEAPPLE FRUIT CAKE -->
+        <div class="item">
+            <img src="pineapple-fruit-cake.jpeg" alt="Pineapple Fruit Cake">
+            <h4>PINEAPPLE FRUIT CAKE</h4>
+            <div class="price-container">
+                <div class="price-display">Price: <span class="price-text">Rs. 120</span></div>
+            </div>
+            <div class="controls">
+                <input type="number" class="quantity" min="1" value="1" aria-label="Quantity">
+                <button class="btn add-btn add-to-cart" data-name="PINEAPPLE FRUIT CAKE">Add to Cart</button>
+            </div>
+        </div>
+
+        <!-- CUP CAKE -->
+        <div class="item">
+            <img src="cup-cake.jpeg" alt="Cup Cake">
+            <h4>CUP CAKE</h4>
+            <div class="price-container">
+                <div class="price-display">Price: <span class="price-text">Rs. 80</span></div>
+            </div>
+            <div class="controls">
+                <input type="number" class="quantity" min="1" value="1" aria-label="Quantity">
+                <button class="btn add-btn add-to-cart" data-name="CUP CAKE">Add to Cart</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- MUFFIN -->
+    <div class="category">MUFFIN</div>
+    <div class="menu-items">
+        <!-- VANILLA MUFFIN -->
+        <div class="item">
+            <img src="vanilla-muffin.jpeg" alt="Vanilla Muffin">
+            <h4>VANILLA MUFFIN</h4>
+            <div class="price-container">
+                <div class="price-display">Price: <span class="price-text">Rs. 60</span></div>
+            </div>
+            <div class="controls">
+                <input type="number" class="quantity" min="1" value="1" aria-label="Quantity">
+                <button class="btn add-btn add-to-cart" data-name="VANILLA MUFFIN">Add to Cart</button>
+            </div>
+        </div>
+
+        <!-- CHOCOLATE MUFFIN -->
+        <div class="item">
+            <img src="chocolate-muffin.jpeg" alt="Chocolate Muffin">
+            <h4>CHOCOLATE MUFFIN</h4>
+            <div class="price-container">
+                <div class="price-display">Price: <span class="price-text">Rs. 70</span></div>
+            </div>
+            <div class="controls">
+                <input type="number" class="quantity" min="1" value="1" aria-label="Quantity">
+                <button class="btn add-btn add-to-cart" data-name="CHOCOLATE MUFFIN">Add to Cart</button>
+            </div>
+        </div>
+
+        <!-- BANANA MUFFIN -->
+        <div class="item">
+            <img src="banana-muffin.jpeg" alt="Banana Muffin">
+            <h4>BANANA MUFFIN</h4>
+            <div class="price-container">
+                <div class="price-display">Price: <span class="price-text">Rs. 70</span></div>
+            </div>
+            <div class="controls">
+                <input type="number" class="quantity" min="1" value="1" aria-label="Quantity">
+                <button class="btn add-btn add-to-cart" data-name="BANANA MUFFIN">Add to Cart</button>
+            </div>
+        </div>
+
+        <!-- CHOCO LAVA -->
+        <div class="item">
+            <img src="choco-lava.jpeg" alt="Choco Lava">
+            <h4>CHOCO LAVA</h4>
+            <div class="price-container">
+                <div class="price-display">Price: <span class="price-text">Rs. 60</span></div>
+            </div>
+            <div class="controls">
+                <input type="number" class="quantity" min="1" value="1" aria-label="Quantity">
+                <button class="btn add-btn add-to-cart" data-name="CHOCO LAVA">Add to Cart</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- DOUGHNUT -->
+    <div class="category">DOUGHNUT</div>
+    <div class="menu-items">
+        <!-- PLAIN DOUGHNUT -->
+        <div class="item">
+            <img src="plain-doughnut.jpeg" alt="Plain Doughnut">
+            <h4>PLAIN DOUGHNUT</h4>
+            <div class="price-container">
+                <div class="price-display">Price: <span class="price-text">Rs. 20</span></div>
+            </div>
+            <div class="controls">
+                <input type="number" class="quantity" min="1" value="1" aria-label="Quantity">
+                <button class="btn add-btn add-to-cart" data-name="PLAIN DOUGHNUT">Add to Cart</button>
+            </div>
+        </div>
+
+        <!-- CREAM DOUGHNUT -->
+        <div class="item">
+            <img src="cream-doughnut.jpeg" alt="Cream Doughnut">
+            <h4>CREAM DOUGHNUT</h4>
+            <div class="price-container">
+                <div class="price-display">Price: <span class="price-text">Rs. 40</span></div>
+            </div>
+            <div class="controls">
+                <input type="number" class="quantity" min="1" value="1" aria-label="Quantity">
+                <button class="btn add-btn add-to-cart" data-name="CREAM DOUGHNUT">Add to Cart</button>
+            </div>
+        </div>
+
+        <!-- CHOCOLATE DOUGHNUT -->
+        <div class="item">
+            <img src="chocolate-doughnut.jpeg" alt="Chocolate Doughnut">
+            <h4>CHOCOLATE DOUGHNUT</h4>
+            <div class="price-container">
+                <div class="price-display">Price: <span class="price-text">Rs. 50</span></div>
+            </div>
+            <div class="controls">
+                <input type="number" class="quantity" min="1" value="1" aria-label="Quantity">
+                <button class="btn add-btn add-to-cart" data-name="CHOCOLATE DOUGHNUT">Add to Cart</button>
+            </div>
+        </div>
+
+        <!-- FILLING DOUGHNUT -->
+        <div class="item">
+            <img src="filling-doughnut.jpeg" alt="Filling Doughnut">
+            <h4>FILLING DOUGHNUT</h4>
+            <div class="price-container">
+                <div class="price-display">Price: <span class="price-text">Rs. 100</span></div>
+            </div>
+            <div class="controls">
+                <input type="number" class="quantity" min="1" value="1" aria-label="Quantity">
+                <button class="btn add-btn add-to-cart" data-name="FILLING DOUGHNUT">Add to Cart</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- PATTIES -->
+    <div class="category">PATTIES</div>
+    <div class="menu-items">
+        <!-- CHICKEN PATTIES -->
+        <div class="item">
+            <img src="chicken-patties.jpeg" alt="Chicken Patties">
+            <h4>CHICKEN PATTIES</h4>
+            <div class="price-container">
+                <div class="price-display">Price: <span class="price-text">Rs. 100</span></div>
+            </div>
+            <div class="controls">
+                <input type="number" class="quantity" min="1" value="1" aria-label="Quantity">
+                <button class="btn add-btn add-to-cart" data-name="CHICKEN PATTIES">Add to Cart</button>
+            </div>
+        </div>
+
+        <!-- VEG PATTIES -->
+        <div class="item">
+            <img src="veg-patties.jpeg" alt="Veg Patties">
+            <h4>VEG PATTIES</h4>
+            <div class="price-container">
+                <div class="price-display">Price: <span class="price-text">Rs. 80</span></div>
+            </div>
+            <div class="controls">
+                <input type="number" class="quantity" min="1" value="1" aria-label="Quantity">
+                <button class="btn add-btn add-to-cart" data-name="VEG PATTIES">Add to Cart</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- PUFF -->
+    <div class="category">PUFF</div>
+    <div class="menu-items">
+        <!-- CHEESE PUFF -->
+        <div class="item">
+            <img src="cheese-puff.jpeg" alt="Cheese Puff">
+            <h4>CHEESE PUFF</h4>
+            <div class="price-container">
+                <div class="price-display">Price: <span class="price-text">Rs. 160</span></div>
+            </div>
+            <div class="controls">
+                <input type="number" class="quantity" min="1" value="1" aria-label="Quantity">
+                <button class="btn add-btn add-to-cart" data-name="CHEESE PUFF">Add to Cart</button>
+            </div>
+        </div>
+
+        <!-- MINI PUFF -->
+        <div class="item">
+            <img src="mini-puff.jpeg" alt="Mini Puff">
+            <h4>MINI PUFF</h4>
+            <div class="price-container">
+                <div class="price-display">Price: <span class="price-text">Rs. 160</span></div>
+            </div>
+            <div class="controls">
+                <input type="number" class="quantity" min="1" value="1" aria-label="Quantity">
+                <button class="btn add-btn add-to-cart" data-name="MINI PUFF">Add to Cart</button>
+            </div>
+        </div>
+
+        <!-- SWEET PUFF -->
+        <div class="item">
+            <img src="sweet-puff.jpeg" alt="Sweet Puff">
+            <h4>SWEET PUFF</h4>
+            <div class="price-container">
+                <div class="price-display">Price: <span class="price-text">Rs. 160</span></div>
+            </div>
+            <div class="controls">
+                <input type="number" class="quantity" min="1" value="1" aria-label="Quantity">
+                <button class="btn add-btn add-to-cart" data-name="SWEET PUFF">Add to Cart</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- PASTRY -->
+    <div class="category">PASTRY</div>
+    <div class="menu-items">
+        <!-- BLACK FOREST -->
+        <div class="item">
+            <img src="black-forest.jpeg" alt="Black Forest">
+            <h4>BLACK FOREST</h4>
+            <div class="price-container">
+                <div class="price-display">Price: <span class="price-text">Rs. 90</span></div>
+            </div>
+            <div class="controls">
+                <input type="number" class="quantity" min="1" value="1" aria-label="Quantity">
+                <button class="btn add-btn add-to-cart" data-name="BLACK FOREST">Add to Cart</button>
+            </div>
+        </div>
+
+        <!-- WHITE FOREST -->
+        <div class="item">
+            <img src="white-forest.jpeg" alt="White Forest">
+            <h4>WHITE FOREST</h4>
+            <div class="price-container">
+                <div class="price-display">Price: <span class="price-text">Rs. 100</span></div>
+            </div>
+            <div class="controls">
+                <input type="number" class="quantity" min="1" value="1" aria-label="Quantity">
+                <button class="btn add-btn add-to-cart" data-name="WHITE FOREST">Add to Cart</button>
+            </div>
+        </div>
+
+        <!-- CHOCOLATE -->
+        <div class="item">
+            <img src="chocolate-pastry.jpeg" alt="Chocolate Pastry">
+            <h4>CHOCOLATE</h4>
+            <div class="price-container">
+                <div class="price-display">Price: <span class="price-text">Rs. 120</span></div>
+            </div>
+            <div class="controls">
+                <input type="number" class="quantity" min="1" value="1" aria-label="Quantity">
+                <button class="btn add-btn add-to-cart" data-name="CHOCOLATE PASTRY">Add to Cart</button>
+            </div>
+        </div>
+
+        <!-- BUTTERSCOTCH -->
+        <div class="item">
+            <img src="butterscotch.jpeg" alt="Butterscotch">
+            <h4>BUTTERSCOTCH</h4>
+            <div class="price-container">
+                <div class="price-display">Price: <span class="price-text">Rs. 150</span></div>
+            </div>
+            <div class="controls">
+                <input type="number" class="quantity" min="1" value="1" aria-label="Quantity">
+                <button class="btn add-btn add-to-cart" data-name="BUTTERSCOTCH">Add to Cart</button>
+            </div>
+        </div>
+
+        <!-- PINEAPPLE -->
+        <div class="item">
+            <img src="pineapple-pastry.jpeg" alt="Pineapple Pastry">
+            <h4>PINEAPPLE</h4>
+            <div class="price-container">
+                <div class="price-display">Price: <span class="price-text">Rs. 150</span></div>
+            </div>
+            <div class="controls">
+                <input type="number" class="quantity" min="1" value="1" aria-label="Quantity">
+                <button class="btn add-btn add-to-cart" data-name="PINEAPPLE PASTRY">Add to Cart</button>
+            </div>
+        </div>
+
+        <!-- STRAWBERRY -->
+        <div class="item">
+            <img src="strawberry-pastry.jpeg" alt="Strawberry Pastry">
+            <h4>STRAWBERRY</h4>
+            <div class="price-container">
+                <div class="price-display">Price: <span class="price-text">Rs. 150</span></div>
+            </div>
+            <div class="controls">
+                <input type="number" class="quantity" min="1" value="1" aria-label="Quantity">
+                <button class="btn add-btn add-to-cart" data-name="STRAWBERRY PASTRY">Add to Cart</button>
+            </div>
+        </div>
+
+        <!-- REDVELVET -->
+        <div class="item">
+            <img src="redvelvet-pastry.jpeg" alt="Redvelvet Pastry">
+            <h4>REDVELVET</h4>
+            <div class="price-container">
+                <div class="price-display">Price: <span class="price-text">Rs. 150</span></div>
+            </div>
+            <div class="controls">
+                <input type="number" class="quantity" min="1" value="1" aria-label="Quantity">
+                <button class="btn add-btn add-to-cart" data-name="REDVELVET PASTRY">Add to Cart</button>
+            </div>
+        </div>
+
+        <!-- CHEESECAKE -->
+        <div class="item">
+            <img src="cheesecake-pastry.jpeg" alt="Cheesecake Pastry">
+            <h4>CHEESECAKE</h4>
+            <div class="price-container">
+                <div class="price-display">Price: <span class="price-text">Rs. 190</span></div>
+            </div>
+            <div class="controls">
+                <input type="number" class="quantity" min="1" value="1" aria-label="Quantity">
+                <button class="btn add-btn add-to-cart" data-name="CHEESECAKE PASTRY">Add to Cart</button>
+            </div>
+        </div>
+
+        <!-- DEVIL -->
+        <div class="item">
+            <img src="devil-pastry.jpeg" alt="Devil Pastry">
+            <h4>DEVIL</h4>
+            <div class="price-container">
+                <div class="price-display">Price: <span class="price-text">Rs. 170</span></div>
+            </div>
+            <div class="controls">
+                <input type="number" class="quantity" min="1" value="1" aria-label="Quantity">
+                <button class="btn add-btn add-to-cart" data-name="DEVIL PASTRY">Add to Cart</button>
+            </div>
+        </div>
+
+        <!-- CARROT CAKE -->
+        <div class="item">
+            <img src="carrot-cake.jpeg" alt="Carrot Cake">
+            <h4>CARROT CAKE</h4>
+            <div class="price-container">
+                <div class="price-display">Price: <span class="price-text">Rs. 170</span></div>
+            </div>
+            <div class="controls">
+                <input type="number" class="quantity" min="1" value="1" aria-label="Quantity">
+                <button class="btn add-btn add-to-cart" data-name="CARROT CAKE">Add to Cart</button>
+            </div>
+        </div>
+
+        <!-- BROWNIE -->
+        <div class="item">
+            <img src="brownie.jpeg" alt="Brownie">
+            <h4>BROWNIE</h4>
+            <div class="price-container">
+                <div class="price-display">Price: <span class="price-text">Rs. 140</span></div>
+            </div>
+            <div class="controls">
+                <input type="number" class="quantity" min="1" value="1" aria-label="Quantity">
+                <button class="btn add-btn add-to-cart" data-name="BROWNIE">Add to Cart</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- PIZZA -->
+    <div class="category">PIZZA</div>
+    <div class="menu-items">
+        <!-- MINI PIZZA -->
+        <div class="item">
+            <img src="mini-pizza.jpeg" alt="Mini Pizza">
+            <h4>MINI PIZZA</h4>
+            <div class="price-container">
+                <div class="price-display">Price: <span class="price-text">Rs. 200</span></div>
+            </div>
+            <div class="controls">
+                <input type="number" class="quantity" min="1" value="1" aria-label="Quantity">
+                <button class="btn add-btn add-to-cart" data-name="MINI PIZZA">Add to Cart</button>
+            </div>
+        </div>
+
+        <!-- PIZZA WRAP -->
+        <div class="item">
+            <img src="pizza-wrap.jpeg" alt="Pizza Wrap">
+            <h4>PIZZA WRAP</h4>
+            <div class="price-container">
+                <div class="price-display">Price: <span class="price-text">Rs. 180</span></div>
+            </div>
+            <div class="controls">
+                <input type="number" class="quantity" min="1" value="1" aria-label="Quantity">
+                <button class="btn add-btn add-to-cart" data-name="PIZZA WRAP">Add to Cart</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- CHOCOLATE -->
+    <div class="category">CHOCOLATE</div>
+    <div class="menu-items">
+        <!-- RUMBALL -->
+        <div class="item">
+            <img src="rumball.jpeg" alt="Rumball">
+            <h4>RUMBALL</h4>
+            <div class="price-container">
+                <div class="price-display">Price: <span class="price-text">Rs. 60</span></div>
+            </div>
+            <div class="controls">
+                <input type="number" class="quantity" min="1" value="1" aria-label="Quantity">
+                <button class="btn add-btn add-to-cart" data-name="RUMBALL">Add to Cart</button>
+            </div>
+        </div>
+
+        <!-- TRUFFLE -->
+        <div class="item">
+            <img src="truffle.jpeg" alt="Truffle">
+            <h4>TRUFFLE</h4>
+            <div class="price-container">
+                <div class="price-display">Price: <span class="price-text">Rs. 60</span></div>
+            </div>
+            <div class="controls">
+                <input type="number" class="quantity" min="1" value="1" aria-label="Quantity">
+                <button class="btn add-btn add-to-cart" data-name="TRUFFLE">Add to Cart</button>
+            </div>
+        </div>
+
+        <!-- BOUNTY BAR -->
+        <div class="item">
+            <img src="bounty-bar.jpeg" alt="Bounty Bar">
+            <h4>BOUNTY BAR</h4>
+            <div class="price-container">
+                <div class="price-display">Price: <span class="price-text">Rs. 40</span></div>
+            </div>
+            <div class="controls">
+                <input type="number" class="quantity" min="1" value="1" aria-label="Quantity">
+                <button class="btn add-btn add-to-cart" data-name="BOUNTY BAR">Add to Cart</button>
+            </div>
+        </div>
+
+        <!-- OREO BALL -->
+        <div class="item">
+            <img src="oreo-ball.jpeg" alt="Oreo Ball">
+            <h4>OREO BALL</h4>
+            <div class="price-container">
+                <div class="price-display">Price: <span class="price-text">Rs. 60</span></div>
+            </div>
+            <div class="controls">
+                <input type="number" class="quantity" min="1" value="1" aria-label="Quantity">
+                <button class="btn add-btn add-to-cart" data-name="OREO BALL">Add to Cart</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- COOKIES -->
+    <div class="category">COOKIES</div>
+    <div class="menu-items">
+        <!-- NAN KHATAI -->
+        <div class="item">
+            <img src="nan-khatai.jpeg" alt="Nan Khatai">
+            <h4>NAN KHATAI</h4>
+            <div class="price-container">
+                <div class="price-display">Price: <span class="price-text">Rs. 200</span></div>
+            </div>
+            <div class="controls">
+                <input type="number" class="quantity" min="1" value="1" aria-label="Quantity">
+                <button class="btn add-btn add-to-cart" data-name="NAN KHATAI">Add to Cart</button>
+            </div>
+        </div>
+
+        <!-- CHOCOLATE CHIPS -->
+        <div class="item">
+            <img src="chocolate-chips.jpeg" alt="Chocolate Chips">
+            <h4>CHOCOLATE CHIPS</h4>
+            <div class="price-container">
+                <div class="price-display">Price: <span class="price-text">Rs. 200</span></div>
+            </div>
+            <div class="controls">
+                <input type="number" class="quantity" min="1" value="1" aria-label="Quantity">
+                <button class="btn add-btn add-to-cart" data-name="CHOCOLATE CHIPS">Add to Cart</button>
+            </div>
+        </div>
+
+        <!-- PEANUT COOKIES -->
+        <div class="item">
+            <img src="peanut-cookies.jpeg" alt="Peanut Cookies">
+            <h4>PEANUT COOKIES</h4>
+            <div class="price-container">
+                <div class="price-display">Price: <span class="price-text">Rs. 200</span></div>
+            </div>
+            <div class="controls">
+                <input type="number" class="quantity" min="1" value="1" aria-label="Quantity">
+                <button class="btn add-btn add-to-cart" data-name="PEANUT COOKIES">Add to Cart</button>
+            </div>
+        </div>
+
+        <!-- COCONUT COOKIES -->
+        <div class="item">
+            <img src="coconut-cookies.jpeg" alt="Coconut Cookies">
+            <h4>COCONUT COOKIES</h4>
+            <div class="price-container">
+                <div class="price-display">Price: <span class="price-text">Rs. 200</span></div>
+            </div>
+            <div class="controls">
+                <input type="number" class="quantity" min="1" value="1" aria-label="Quantity">
+                <button class="btn add-btn add-to-cart" data-name="COCONUT COOKIES">Add to Cart</button>
+            </div>
+        </div>
+
+        <!-- COCONUT MACROON -->
+        <div class="item">
+            <img src="coconut-macroon.jpeg" alt="Coconut Macroon">
+            <h4>COCONUT MACROON</h4>
+            <div class="price-container">
+                <div class="price-display">Price: <span class="price-text">Rs. 200</span></div>
+            </div>
+            <div class="controls">
+                <input type="number" class="quantity" min="1" value="1" aria-label="Quantity">
+                <button class="btn add-btn add-to-cart" data-name="COCONUT MACROON">Add to Cart</button>
+            </div>
+        </div>
+
+        <!-- WALLNUT COOKIES -->
+        <div class="item">
+            <img src="wallnut-cookies.jpeg" alt="Wallnut Cookies">
+            <h4>WALLNUT COOKIES</h4>
+            <div class="price-container">
+                <div class="price-display">Price: <span class="price-text">Rs. 200</span></div>
+            </div>
+            <div class="controls">
+                <input type="number" class="quantity" min="1" value="1" aria-label="Quantity">
+                <button class="btn add-btn add-to-cart" data-name="WALLNUT COOKIES">Add to Cart</button>
+            </div>
+        </div>
+
+        <!-- FRENCH HEART -->
+        <div class="item">
+            <img src="french-heart.jpeg" alt="French Heart">
+            <h4>FRENCH HEART</h4>
+            <div class="price-container">
+                <div class="price-display">Price: <span class="price-text">Rs. 200</span></div>
+            </div>
+            <div class="controls">
+                <input type="number" class="quantity" min="1" value="1" aria-label="Quantity">
+                <button class="btn add-btn add-to-cart" data-name="FRENCH HEART">Add to Cart</button>
+            </div>
+        </div>
+
+        <!-- JEERA SALT COOKIES -->
+        <div class="item">
+            <img src="jeera-salt-cookies.jpeg" alt="Jeera Salt Cookies">
+            <h4>JEERA SALT COOKIES</h4>
+            <div class="price-container">
+                <div class="price-display">Price: <span class="price-text">Rs. 200</span></div>
+            </div>
+            <div class="controls">
+                <input type="number" class="quantity" min="1" value="1" aria-label="Quantity">
+                <button class="btn add-btn add-to-cart" data-name="JEERA SALT COOKIES">Add to Cart</button>
+            </div>
+        </div>
+
+        <!-- AJWAIN COOKIES -->
+        <div class="item">
+            <img src="ajwain-cookies.jpeg" alt="Ajwain Cookies">
+            <h4>AJWAIN COOKIES</h4>
+            <div class="price-container">
+                <div class="price-display">Price: <span class="price-text">Rs. 200</span></div>
+            </div>
+            <div class="controls">
+                <input type="number" class="quantity" min="1" value="1" aria-label="Quantity">
+                <button class="btn add-btn add-to-cart" data-name="AJWAIN COOKIES">Add to Cart</button>
+            </div>
+        </div>
+
+        <!-- SEASOME COOKIE -->
+        <div class="item">
+            <img src="seasome-cookie.jpeg" alt="Seasome Cookie">
+            <h4>SEASOME COOKIE</h4>
+            <div class="price-container">
+                <div class="price-display">Price: <span class="price-text">Rs. 200</span></div>
+            </div>
+            <div class="controls">
+                <input type="number" class="quantity" min="1" value="1" aria-label="Quantity">
+                <button class="btn add-btn add-to-cart" data-name="SEASOME COOKIE">Add to Cart</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- BREAD -->
+    <div class="category">BREAD</div>
+    <div class="menu-items">
+        <!-- WHITE BREAD -->
+        <div class="item">
+            <img src="white-bread.jpeg" alt="White Bread">
+            <h4>WHITE BREAD</h4>
+            <div class="price-container">
+                <div class="price-display">Price: <span class="price-text">Rs. 80</span></div>
+            </div>
+            <div class="controls">
+                <input type="number" class="quantity" min="1" value="1" aria-label="Quantity">
+                <button class="btn add-btn add-to-cart" data-name="WHITE BREAD">Add to Cart</button>
+            </div>
+        </div>
+
+        <!-- BROWN BREAD -->
+        <div class="item">
+            <img src="brown-bread.jpeg" alt="Brown Bread">
+            <h4>BROWN BREAD</h4>
+            <div class="price-container">
+                <div class="price-display">Price: <span class="price-text">Rs. 100</span></div>
+            </div>
+            <div class="controls">
+                <input type="number" class="quantity" min="1" value="1" aria-label="Quantity">
+                <button class="btn add-btn add-to-cart" data-name="BROWN BREAD">Add to Cart</button>
+            </div>
+        </div>
+
+        <!-- CINAMON BREAD -->
+        <div class="item">
+            <img src="cinamon-bread.jpeg" alt="Cinamon Bread">
+            <h4>CINAMON BREAD</h4>
+            <div class="price-container">
+                <div class="price-display">Price: <span class="price-text">Rs. 140</span></div>
+            </div>
+            <div class="controls">
+                <input type="number" class="quantity" min="1" value="1" aria-label="Quantity">
+                <button class="btn add-btn add-to-cart" data-name="CINAMON BREAD">Add to Cart</button>
+            </div>
+        </div>
+
+        <!-- CHERRY BREAD -->
+        <div class="item">
+            <img src="cherry-bread.jpeg" alt="Cherry Bread">
+            <h4>CHERRY BREAD</h4>
+            <div class="price-container">
+                <div class="price-display">Price: <span class="price-text">Rs. 80</span></div>
+            </div>
+            <div class="controls">
+                <input type="number" class="quantity" min="1" value="1" aria-label="Quantity">
+                <button class="btn add-btn add-to-cart" data-name="CHERRY BREAD">Add to Cart</button>
+            </div>
+        </div>
+    </div>
+
+<!-- BEAUTIFUL FAQ -->
+<div style="max-width: 500px; margin: 40px auto; padding: 0 20px;">
+    <div style="background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); color: white; padding: 25px; border-radius: 20px; text-align: center; margin-bottom: 20px; box-shadow: 0 10px 30px rgba(102,126,234,0.3);">
+        <h3 style="margin: 0 0 8px 0; font-size: 22px;">Quick Questions? 🎯</h3>
+        <p style="margin: 0; opacity: 0.9;">We've got sweet answers!</p>
+    </div>
+    
+    <div style="background: white; border-radius: 20px; overflow: hidden; box-shadow: 0 10px 30px rgba(0,0,0,0.1);">
+        
+        <!-- FAQ 1 -->
+        <div style="padding: 25px; border-bottom: 1px solid #f0f0f0; transition: all 0.3s ease;" onmouseover="this.style.background='#f8f9fa'" onmouseout="this.style.background='white'">
+            <div style="display: flex; align-items: start; gap: 15px;">
+                <div style="background: linear-gradient(135deg, #4b2e05, #6b451c); color: white; min-width: 35px; height: 35px; border-radius: 10px; display: flex; align-items: center; justify-content: center; font-weight: 800; font-size: 14px; margin-top: 2px;">Q1</div>
+                <div>
+                    <h4 style="margin: 0 0 8px 0; color: #333; font-size: 16px;">What counts for stamps?</h4>
+                    <p style="margin: 0; color: #666; font-size: 14px;"><strong style="color: #4b2e05;">Only 1 pound cakes</strong> - coffee, sandwiches don't count</p>
+                </div>
+            </div>
+        </div>
+        
+        <!-- FAQ 2 -->
+        <div style="padding: 25px; border-bottom: 1px solid #f0f0f0; transition: all 0.3s ease;" onmouseover="this.style.background='#f8f9fa'" onmouseout="this.style.background='white'">
+            <div style="display: flex; align-items: start; gap: 15px;">
+                <div style="background: linear-gradient(135deg, #4b2e05, #6b451c); color: white; min-width: 35px; height: 35px; border-radius: 10px; display: flex; align-items: center; justify-content: center; font-weight: 800; font-size: 14px; margin-top: 2px;">Q2</div>
+                <div>
+                    <h4 style="margin: 0 0 8px 0; color: #333; font-size: 16px;">Free cake options?</h4>
+                    <p style="margin: 0; color: #666; font-size: 14px;"><strong style="color: #4b2e05;">Black Forest OR White Forest</strong> - 1 pound only</p>
+                </div>
+            </div>
+        </div>
+        
+        <!-- FAQ 3 - UPDATED WITH LOST CARD POLICY -->
+        <div style="padding: 25px; border-bottom: 1px solid #f0f0f0; transition: all 0.3s ease;" onmouseover="this.style.background='#f8f9fa'" onmouseout="this.style.background='white'">
+            <div style="display: flex; align-items: start; gap: 15px;">
+                <div style="background: linear-gradient(135deg, #4b2e05, #6b451c); color: white; min-width: 35px; height: 35px; border-radius: 10px; display: flex; align-items: center; justify-content: center; font-weight: 800; font-size: 14px; margin-top: 2px;">Q3</div>
+                <div>
+                    <h4 style="margin: 0 0 8px 0; color: #333; font-size: 16px;">Lost your card?</h4>
+                    <p style="margin: 0; color: #666; font-size: 14px;"><strong style="color: #e74c3c;">We'll give you a new card, but stamps can't be transferred.</strong> Please keep your card safe!</p>
+                </div>
+            </div>
+        </div>
+        
+        <!-- FAQ 4 -->
+        <div style="padding: 25px; transition: all 0.3s ease;" onmouseover="this.style.background='#f8f9fa'" onmouseout="this.style.background='white'">
+            <div style="display: flex; align-items: start; gap: 15px;">
+                <div style="background: linear-gradient(135deg, #4b2e05, #6b451c); color: white; min-width: 35px; height: 35px; border-radius: 10px; display: flex; align-items: center; justify-content: center; font-weight: 800; font-size: 14px; margin-top: 2px;">Q4</div>
+                <div>
+                    <h4 style="margin: 0 0 8px 0; color: #333; font-size: 16px;">Buy 5 get 1 pound free?</h4>
+                    <p style="margin: 0; color: #666; font-size: 14px;"><strong style="color: #4b2e05;">Yes!</strong> Buy 5 cakes → Get 1 pound free cake of your choice</p>
+                </div>
+            </div>
+        </div>
+        
+    </div>
+</div>
+      
+  <!-- PAYMENT SECTION -->
+    <div class="payment-section">
+        <h3>💳 Payment Methods</h3>
+        <p>We accept bank transfer and QR code payments</p>
+        <div class="qr-code">
+            <img src="qrcode.jpeg" alt="Payment QR Code" style="width:100%;height:100%;object-fit:cover;border-radius:8px;">
+        </div>
+        <p><strong>Bank Details:</strong><br>
+        KTM Bakery Pvt. Ltd<br>
+        Account: XXX-XXXX-XXXX<br>
+        Bank: Sanima Bank</p>
+    </div>
+      
+        
+        <!-- SMART CUSTOMER ORDER FORM FOR MIXED ORDERS -->
+        <section id="order" class="order">
+            <h2>Complete Your Order</h2>
+            <div class="customer-form">
+                <form id="customer-order-form">
+                    
+                    <!-- Customer Basic Info -->
+                    <div class="form-group">
+                        <label for="customer-name">Full Name *</label>
+                        <input type="text" id="customer-name" name="name" required placeholder="Enter your full name">
+                    </div>
+
+                    <div class="form-group">
+                        <label for="customer-phone">Phone Number *</label>
+                        <input type="tel" id="customer-phone" name="phone" required placeholder="Enter your phone number">
+                    </div>
+
+                    <!-- SMART ORDER TYPE DETECTION -->
+                    <div class="form-group">
+                        <label>Order Summary</label>
+                        <div id="order-summary" style="background: #f8f9fa; padding: 15px; border-radius: 8px; border: 1px solid #ddd;">
+                            <div id="mixed-order-warning" style="display: none; background: #fff3cd; padding: 10px; border-radius: 6px; margin-bottom: 10px;">
+                                <strong>⚠️ Mixed Order Detected:</strong> Please provide details for each order type below.
+                            </div>
+                            <div id="order-breakdown">
+                                <!-- Will be filled by JavaScript -->
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- DELIVERY SECTION (Shows only if delivery items in cart) -->
+                    <div id="delivery-section" class="form-group" style="display: none;">
+                        <h4 style="color: var(--accent); margin-bottom: 15px;">🚚 Delivery Information</h4>
+                        <label for="delivery-address">Delivery Address *</label>
+                        <textarea id="delivery-address" name="address" placeholder="Enter complete delivery address with landmark..." required></textarea>
+                        
+                        <label for="delivery-time" style="margin-top: 15px;">Preferred Delivery Time</label>
+                        <select id="delivery-time" name="deliveryTime">
+                            <option value="asap">As soon as possible</option>
+                            <option value="specific">Specific time (we'll call you)</option>
+                        </select>
+                    </div>
+
+                    <!-- DINE-IN SECTION (Shows only if dine-in items in cart) -->
+                    <div id="dinein-section" class="form-group" style="display: none;">
+                        <h4 style="color: var(--accent); margin-bottom: 15px;">🍽️ Dine-In Information</h4>
+                        
+                        <label for="table-preferences" style="margin-top: 15px;">Table Preferences</label>
+                        <select id="table-preferences" name="tablePreferences">
+                            <option value="1">Table 1</option>
+                            <option value="2">Table 2</option>
+                            <option value="3">Table 3</option>
+                            <option value="4">Table 4</option>
+                            <option value="outside">Outside</option>
+                        </select>
+
+                        <label for="guest-count" style="margin-top: 15px;">Number of Guests</label>
+                        <input type="number" id="guest-count" name="guestCount" min="1" value="1" placeholder="How many people?">
+                    </div>
+
+                    <!-- TAKEWAY SECTION (Shows only if takeaway items in cart) -->
+                    <div id="takeaway-section" class="form-group" style="display: none;">
+                        <h4 style="color: var(--accent); margin-bottom: 15px;">🥡 Takeaway Information</h4>
+                        
+                        <label for="pickup-time">Preferred Pickup Time</label>
+                        <select id="pickup-time" name="pickupTime">
+                            <option value="asap">As soon as possible</option>
+                            <option value="specific">Specific time (we'll call you)</option>
+                        </select>
+                    </div>
+
+                    <!-- Special Instructions -->
+                    <div class="form-group">
+                        <label for="special-instructions">Special Instructions</label>
+                        <textarea id="special-instructions" name="instructions" placeholder="Any special requests, dietary requirements, or additional notes..."></textarea>
+                    </div>
+
+                    <button type="submit" class="btn checkout-btn">Submit Order</button>
+                </form>
+            </div>
+        </section>
+
+        <!-- CUSTOMER FEEDBACK SYSTEM -->
+        <div class="feedback-system">
+            <h3>💬 We Value Your Feedback</h3>
+            <p>How was your experience with KTM Bakery?</p>
+            
+            <div class="star-rating">
+                <span class="star" data-rating="1">☆</span>
+                <span class="star" data-rating="2">☆</span>
+                <span class="star" data-rating="3">☆</span>
+                <span class="star" data-rating="4">☆</span>
+                <span class="star" data-rating="5">☆</span>
+            </div>
+
+            <div class="form-group">
+                <label for="feedback-message">Your Feedback (Optional)</label>
+                <textarea id="feedback-message" placeholder="Tell us about your experience..."></textarea>
+            </div>
+
+            <div class="form-group">
+                <label for="customer-email">Email (Optional - for follow up)</label>
+                <input type="email" id="customer-email" placeholder="your@email.com">
+            </div>
+
+            <button class="btn btn-success" onclick="submitFeedback()">Submit Feedback</button>
+        </div>
+
+        <!-- BUSINESS INFORMATION - UPDATED HOURS -->
+        <div class="business-info">
+            <div class="info-card">
+                <h4>🕒 Opening Hours</h4>
+                <p><strong>Every Day</strong><br>7:00 AM - 9:00 PM</p>
+            </div>
+           
+        
+        </div>
+
+        <!-- TESTIMONIALS -->
+        <div class="testimonials">
+            <h2 style="text-align:center; color:var(--accent);">What Our Customers Say</h2>
+            <div class="testimonial-grid">
+                <div class="testimonial-card">
+                    <p>"Best cakes in Kathmandu! The Black Forest is amazing 🎂"</p>
+                    <small>- Anjali S.</small>
+                </div>
+                <div class="testimonial-card">
+                    <p>"Coffee and service is excellent! Love the ambiance ☕"</p>
+                    <small>- Raj K.</small>
+                </div>
+                <div class="testimonial-card">
+                    <p>"Quick delivery and fresh products. Highly recommended! ⭐"</p>
+                    <small>- Suresh M.</small>
+                </div>
+            </div>
+        </div>
+
+ </main>
+
+    <!-- CART ICON -->
+    <div id="cart-icon" title="Open cart">🛒 <span id="cart-count">0</span></div>
+
+    <!-- CART PANEL -->
+    <aside id="cart-panel" aria-hidden="true">
+        <div id="cart-header">
+            <h3>Your Cart</h3>
+            <span id="close-cart" title="Close">✖</span>
+        </div>
+        <div id="cart-items">
+            <div id="empty-cart" style="text-align: center; padding: 40px 20px; color: #666;">
+                <div style="font-size: 48px; margin-bottom: 10px;">🛒</div>
+                <h3>Your cart is empty</h3>
+                <p>Add some delicious items to get started!</p>
+            </div>
+        </div>
+
+        <div id="cart-summary" aria-live="polite">
+            <div style="margin-top:15px">
+                <label for="cart-message" style="font-size:14px;color:#333; font-weight:600;">Special instructions</label>
+                <textarea id="cart-message" placeholder="Any special requests or notes for your order..."></textarea>
+            </div>
+
+            <div class="total-line" style="margin-top:20px">
+                <div style="display:flex;justify-content:space-between;align-items:center">
+                    <div style="font-weight:600; font-size:18px;">Total</div>
+                    <div id="cart-total" style="font-weight:700; font-size:20px;">Rs. 0</div>
+                </div>
+            </div>
+
+            <button id="checkout" class="checkout-btn">Proceed to Checkout</button>
+        </div>
+    </aside>
+
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+        // Elements
+        const cartIcon = document.getElementById('cart-icon');
+        const cartPanel = document.getElementById('cart-panel');
+        const closeCart = document.getElementById('close-cart');
+        const cartItemsDiv = document.getElementById('cart-items');
+        const cartCount = document.getElementById('cart-count');
+        const cartTotalEl = document.getElementById('cart-total');
+        const checkoutBtn = document.getElementById('checkout');
+        const cartMessage = document.getElementById('cart-message');
+        const customerForm = document.getElementById('customer-order-form');
+
+        // Cart array with secure storage
+        const CART_KEY = 'ktmBakeryCart';
+        const CART_EXPIRY = 24 * 60 * 60 * 1000;
+
+        function saveCartSecurely(cart) {
+            const cartData = {
+                data: cart,
+                expiry: Date.now() + CART_EXPIRY,
+                version: '1.0'
+            };
+            localStorage.setItem(CART_KEY, JSON.stringify(cartData));
+        }
+
+        function loadCartSecurely() {
+            try {
+                const saved = localStorage.getItem(CART_KEY);
+                if (!saved) return [];
+                const cartData = JSON.parse(saved);
+                if (Date.now() > cartData.expiry) {
+                    localStorage.removeItem(CART_KEY);
+                    return [];
+                }
+                return cartData.data || [];
+            } catch (error) {
+                localStorage.removeItem(CART_KEY);
+                return [];
+            }
+        }
+
+        let cart = loadCartSecurely();
+
+        // ===== FIXED ORDER STORAGE SYSTEM =====
+        const ORDERS_KEY = 'ktmBakeryOrders';
+
+        // FIXED: Proper order saving function
+        function saveOrderToDashboard(orderData) {
+            const orders = getStoredOrders();
+            
+            const orderWithMetadata = {
+                ...orderData,
+                id: Date.now(), // Unique order ID
+                timestamp: new Date().toLocaleString('en-IN'),
+                status: 'New',
+                read: false
+            };
+            
+            // Validate required fields
+            if (!orderWithMetadata.customer) {
+                orderWithMetadata.customer = { name: 'Unknown', phone: 'Unknown' };
+            }
+            if (!orderWithMetadata.cart || orderWithMetadata.cart.length === 0) {
+                console.error('Cannot save empty cart to dashboard');
+                return;
+            }
+            
+            orders.unshift(orderWithMetadata);
+            localStorage.setItem(ORDERS_KEY, JSON.stringify(orders));
+            updateOrderDashboard();
+            
+            console.log('✅ Order saved to dashboard:', orderWithMetadata);
+        }
+
+        // FIXED: Proper order retrieval with defaults
+        function getStoredOrders() {
+            try {
+                const orders = JSON.parse(localStorage.getItem(ORDERS_KEY)) || [];
+                // Ensure each order has required properties
+                return orders.map(order => ({
+                    id: order.id || Date.now(),
+                    timestamp: order.timestamp || new Date().toLocaleString('en-IN'),
+                    status: order.status || 'New',
+                    read: order.read || false,
+                    customer: order.customer || { name: 'Unknown', phone: 'Unknown' },
+                    delivery: order.delivery || null,
+                    dineIn: order.dineIn || null,
+                    takeaway: order.takeaway || null,
+                    instructions: order.instructions || '',
+                    cartInstructions: order.cartInstructions || '',
+                    cart: order.cart || [],
+                    total: order.total || 0
+                }));
+            } catch {
+                return [];
+            }
+        }
+
+        // FIXED: Proper status update function
+        function updateOrderStatus(orderId, newStatus) {
+            const orders = getStoredOrders();
+            const orderIndex = orders.findIndex(o => o.id === orderId);
+            if (orderIndex !== -1) {
+                orders[orderIndex].status = newStatus;
+                orders[orderIndex].read = true;
+                localStorage.setItem(ORDERS_KEY, JSON.stringify(orders));
+                updateOrderDashboard();
+                
+                // Show confirmation
+                alert(`✅ Order #${orderId} marked as ${newStatus}`);
+            }
+        }
+
+        // FIXED: Dashboard update function
+        function updateOrderDashboard() {
+            const orders = getStoredOrders();
+            const container = document.getElementById('orders-container');
+            
+            if (!container) {
+                console.log('Dashboard container not found');
+                return;
+            }
+            
+            if (orders.length === 0) {
+                container.innerHTML = '<p style="text-align: center; color: #666; padding: 40px;">No orders yet</p>';
+                return;
+            }
+            
+            let html = '';
+            
+            orders.forEach(order => {
+                const orderType = order.delivery ? '🚚 Delivery' : 
+                                order.dineIn ? '🍽️ Dine-In' : 
+                                order.takeaway ? '🥡 Takeaway' : 'Unknown';
+                
+                html += `
+                    <div class="order-card" style="background: ${order.read ? '#f8f9fa' : '#e8f5e8'}; border: 1px solid #ddd; border-radius: 12px; padding: 20px; margin-bottom: 20px; border-left: 4px solid ${getStatusColor(order.status)};">
+                        <div style="display: flex; justify-content: space-between; align-items: start; margin-bottom: 15px;">
+                            <div>
+                                <h4 style="margin: 0 0 5px 0; color: #333;">Order #${order.id}</h4>
+                                <p style="margin: 0; color: #666; font-size: 14px;">${order.timestamp}</p>
+                                <p style="margin: 5px 0 0 0; color: #333; font-weight: bold;">${orderType}</p>
+                            </div>
+                            <div style="text-align: right;">
+                                <span style="background: ${getStatusColor(order.status)}; color: white; padding: 5px 10px; border-radius: 20px; font-size: 12px; font-weight: bold;">${order.status}</span>
+                                <p style="margin: 5px 0 0 0; font-size: 18px; font-weight: bold; color: var(--accent);">Rs. ${order.total}</p>
+                            </div>
+                        </div>
+                        
+                        <div style="margin-bottom: 15px;">
+                            <p style="margin: 0 0 5px 0; font-weight: bold;">👤 ${order.customer.name}</p>
+                            <p style="margin: 0; color: #666;">📞 ${order.customer.phone}</p>
+                        </div>
+                        
+                        ${order.delivery ? `
+                            <div style="margin-bottom: 10px;">
+                                <p style="margin: 0 0 5px 0; font-weight: bold;">📍 Delivery Address:</p>
+                                <p style="margin: 0; color: #666;">${order.delivery.address}</p>
+                                ${order.delivery.time ? `<p style="margin: 5px 0 0 0; color: #666;">⏰ ${order.delivery.time}</p>` : ''}
+                            </div>
+                        ` : ''}
+                        
+                        ${order.dineIn ? `
+                            <div style="margin-bottom: 10px;">
+                                <p style="margin: 0 0 5px 0; font-weight: bold;">🍽️ Dine-In Details:</p>
+                                ${order.dineIn.table ? `<p style="margin: 0; color: #666;">🪑 Table: ${order.dineIn.table}</p>` : ''}
+                                ${order.dineIn.guests ? `<p style="margin: 5px 0 0 0; color: #666;">👥 Guests: ${order.dineIn.guests}</p>` : ''}
+                            </div>
+                        ` : ''}
+                        
+                        ${order.takeaway ? `
+                            <div style="margin-bottom: 10px;">
+                                <p style="margin: 0 0 5px 0; font-weight: bold;">🥡 Takeaway:</p>
+                                ${order.takeaway.time ? `<p style="margin: 0; color: #666;">⏰ ${order.takeaway.time}</p>` : ''}
+                            </div>
+                        ` : ''}
+                        
+                        <div style="margin-bottom: 15px;">
+                            <p style="margin: 0 0 8px 0; font-weight: bold;">📦 Order Items:</p>
+                            ${order.cart.map(item => `
+                                <div style="display: flex; justify-content: space-between; margin-bottom: 5px;">
+                                    <span>${item.name} ${item.variationText ? '(' + item.variationText + ')' : ''} x${item.quantity}</span>
+                                    <span>Rs. ${item.unitPrice * item.quantity}</span>
+                                </div>
+                            `).join('')}
+                        </div>
+                        
+                        ${order.instructions ? `
+                            <div style="margin-bottom: 10px;">
+                                <p style="margin: 0 0 5px 0; font-weight: bold;">📝 Instructions:</p>
+                                <p style="margin: 0; color: #666;">${order.instructions}</p>
+                            </div>
+                        ` : ''}
+                        
+                        ${order.cartInstructions ? `
+                            <div style="margin-bottom: 15px;">
+                                <p style="margin: 0 0 5px 0; font-weight: bold;">📋 Order Notes:</p>
+                                <p style="margin: 0; color: #666;">${order.cartInstructions}</p>
+                            </div>
+                        ` : ''}
+                        
+                        <div style="display: flex; gap: 10px;">
+                            <button onclick="updateOrderStatus(${order.id}, 'Preparing')" style="background: #f39c12; color: white; border: none; padding: 8px 15px; border-radius: 6px; cursor: pointer; font-size: 12px; transition: all 0.3s ease;" onmouseover="this.style.transform='translateY(-2px)'" onmouseout="this.style.transform='translateY(0)'">Preparing</button>
+                            <button onclick="updateOrderStatus(${order.id}, 'Ready')" style="background: #27ae60; color: white; border: none; padding: 8px 15px; border-radius: 6px; cursor: pointer; font-size: 12px; transition: all 0.3s ease;" onmouseover="this.style.transform='translateY(-2px)'" onmouseout="this.style.transform='translateY(0)'">Ready</button>
+                            <button onclick="updateOrderStatus(${order.id}, 'Completed')" style="background: #7f8c8d; color: white; border: none; padding: 8px 15px; border-radius: 6px; cursor: pointer; font-size: 12px; transition: all 0.3s ease;" onmouseover="this.style.transform='translateY(-2px)'" onmouseout="this.style.transform='translateY(0)'">Completed</button>
+                        </div>
+                    </div>
+                `;
+            });
+            
+            container.innerHTML = html;
+        }
+        
+        function getStatusColor(status) {
+            switch(status) {
+                case 'New': return '#e74c3c';
+                case 'Preparing': return '#f39c12';
+                case 'Ready': return '#27ae60';
+                case 'Completed': return '#7f8c8d';
+                default: return '#95a5a6';
+            }
+        }
+        // ===== END ORDER STORAGE =====
+
+        // ===== SECURITY FUNCTIONS =====
+        function sanitizeInput(input) {
+            if (typeof input !== 'string') return '';
+            return input.replace(/[<>]/g, '').trim();
+        }
+
+        function validatePhone(phone) {
+            return /^[0-9+\-\s()]{7,15}$/.test(phone);
+        }
+
+        let lastOrderTime = 0;
+        const ORDER_COOLDOWN = 30000;
+
+        function canPlaceOrder() {
+            const now = Date.now();
+            if (now - lastOrderTime < ORDER_COOLDOWN) {
+                alert('Please wait a moment before placing another order');
+                return false;
+            }
+            lastOrderTime = now;
+            return true;
+        }
+        // ===== END SECURITY FUNCTIONS =====
+
+        // ===== WHATSAPP ORDER NOTIFICATIONS =====
+        function sendOrderNotification(orderData) {
+            // Your WhatsApp number (with country code, no +)
+            const yourWhatsAppNumber = '9779820104085';
+            
+            // Build order summary for WhatsApp
+            let whatsappMessage = `🆕 NEW ORDER ALERT!%0A%0A`;
+            whatsappMessage += `👤 Customer: ${orderData.customer.name}%0A`;
+            whatsappMessage += `📞 Phone: ${orderData.customer.phone}%0A`;
+            
+            // Order type information
+            if (orderData.delivery) {
+                whatsappMessage += `🚚 DELIVERY%0A`;
+                whatsappMessage += `📍 Address: ${orderData.delivery.address}%0A`;
+                if (orderData.delivery.time) whatsappMessage += `⏰ Time: ${orderData.delivery.time}%0A`;
+            }
+            if (orderData.dineIn) {
+                whatsappMessage += `🍽️ DINE-IN%0A`;
+                if (orderData.dineIn.table) whatsappMessage += `🪑 Table: ${orderData.dineIn.table}%0A`;
+                if (orderData.dineIn.guests) whatsappMessage += `👥 Guests: ${orderData.dineIn.guests}%0A`;
+            }
+            if (orderData.takeaway) {
+                whatsappMessage += `🥡 TAKEWAY%0A`;
+                if (orderData.takeaway.time) whatsappMessage += `⏰ Time: ${orderData.takeaway.time}%0A`;
+            }
+            
+            whatsappMessage += `%0A📦 ORDER ITEMS:%0A`;
+            
+            // Add cart items
+            orderData.cart.forEach(item => {
+                whatsappMessage += `• ${item.name} ${item.variationText ? '(' + item.variationText + ')' : ''} x${item.quantity} - Rs. ${item.unitPrice * item.quantity}%0A`;
+                whatsappMessage += `  ${getOrderTypeIcon(item.orderType)} ${item.orderType}%0A`;
+            });
+            
+            whatsappMessage += `%0A💰 TOTAL: Rs. ${orderData.total}%0A`;
+            
+            if (orderData.instructions) {
+                whatsappMessage += `%0A📝 Instructions: ${orderData.instructions}%0A`;
+            }
+            if (orderData.cartInstructions) {
+                whatsappMessage += `%0A📋 Order Notes: ${orderData.cartInstructions}%0A`;
+            }
+            
+            // Create WhatsApp link for YOUR number
+            const yourWhatsAppURL = `https://wa.me/${yourWhatsAppNumber}?text=${whatsappMessage}`;
+            
+            // Create a hidden link and click it (for you only)
+            const hiddenLink = document.createElement('a');
+            hiddenLink.href = yourWhatsAppURL;
+            hiddenLink.target = '_blank';
+            hiddenLink.style.display = 'none';
+            document.body.appendChild(hiddenLink);
+            
+            // Open WhatsApp for YOU (the business)
+            setTimeout(() => {
+                hiddenLink.click();
+                document.body.removeChild(hiddenLink);
+            }, 1000);
+            
+            console.log('📱 WhatsApp notification ready!');
+        }
+        // ===== END NOTIFICATIONS =====
+      
+        // Format currency
+        function format(amount) {
+            return 'Rs. ' + amount.toLocaleString('en-IN');
+        }
+
+        // SMART FORM: Update form based on cart contents
+        function updateOrderForm() {
+            const deliveryItems = cart.filter(item => item.orderType === 'Delivery');
+            const dineInItems = cart.filter(item => item.orderType === 'Dine-In');
+            const takeawayItems = cart.filter(item => item.orderType === 'Takeaway');
+            
+            const deliverySection = document.getElementById('delivery-section');
+            const dineinSection = document.getElementById('dinein-section');
+            const takeawaySection = document.getElementById('takeaway-section');
+            const orderBreakdown = document.getElementById('order-breakdown');
+            const mixedOrderWarning = document.getElementById('mixed-order-warning');
+
+            // Show/hide sections based on cart contents
+            deliverySection.style.display = deliveryItems.length > 0 ? 'block' : 'none';
+            dineinSection.style.display = dineInItems.length > 0 ? 'block' : 'none';
+            takeawaySection.style.display = takeawayItems.length > 0 ? 'block' : 'none';
+
+            // Build order breakdown
+            let breakdownHTML = '';
+            
+            if (deliveryItems.length > 0) {
+                breakdownHTML += `<div style="margin-bottom: 10px;"><strong>🚚 Delivery:</strong> ${deliveryItems.length} item(s)</div>`;
+            }
+            if (dineInItems.length > 0) {
+                breakdownHTML += `<div style="margin-bottom: 10px;"><strong>🍽️ Dine-In:</strong> ${dineInItems.length} item(s)</div>`;
+            }
+            if (takeawayItems.length > 0) {
+                breakdownHTML += `<div style="margin-bottom: 10px;"><strong>🥡 Takeaway:</strong> ${takeawayItems.length} item(s)</div>`;
+            }
+
+            orderBreakdown.innerHTML = breakdownHTML;
+
+            // Show mixed order warning if multiple types
+            const orderTypesCount = [deliveryItems, dineInItems, takeawayItems].filter(arr => arr.length > 0).length;
+            mixedOrderWarning.style.display = orderTypesCount > 1 ? 'block' : 'none';
+        }
+
+        // Get price from item - FIXED VERSION
+        function getItemPrice(card) {
+            const variation = card.querySelector('.variation');
+            if (variation) {
+                const selectedOption = variation.options[variation.selectedIndex];
+                return Number(selectedOption.dataset.price || 0);
+            }
+            
+            // If no variation, get price from price-text
+            const priceText = card.querySelector('.price-text');
+            if (priceText) {
+                const priceMatch = priceText.textContent.match(/Rs\.?\s*(\d+)/);
+                if (priceMatch) {
+                    return Number(priceMatch[1]);
+                }
+            }
+            
+            // Fallback: try to extract from price-display
+            const priceDisplay = card.querySelector('.price-display');
+            if (priceDisplay) {
+                const priceMatch = priceDisplay.textContent.match(/Rs\.?\s*(\d+)/);
+                if (priceMatch) {
+                    return Number(priceMatch[1]);
+                }
+            }
+            
+            return 0;
+        }
+
+        // Initialize price displays
+        document.querySelectorAll('.item').forEach((card) => {
+            const variation = card.querySelector('.variation');
+            const priceText = card.querySelector('.price-text');
+            
+            if (variation) {
+                // For items with variations
+                const first = variation.querySelector('option');
+                if (first && first.dataset.price) {
+                    priceText.textContent = format(Number(first.dataset.price));
+                }
+                variation.addEventListener('change', function() {
+                    const opt = this.options[this.selectedIndex];
+                    const price = Number(opt.dataset.price || 0);
+                    priceText.textContent = format(price);
+                });
+            } else if (priceText) {
+                // For items without variations, ensure price is displayed correctly
+                const currentText = priceText.textContent;
+                const priceMatch = currentText.match(/Rs\.?\s*(\d+)/);
+                if (!priceMatch) {
+                    // If price is not formatted, add Rs. prefix
+                    const priceNum = currentText.replace(/[^\d]/g, '');
+                    if (priceNum) {
+                        priceText.textContent = format(Number(priceNum));
+                    }
+                }
+            }
+        });
+
+        // Cart functions
+        cartIcon.addEventListener('click', function() {
+            cartPanel.classList.toggle('open');
+        });
+
+        closeCart.addEventListener('click', function() {
+            cartPanel.classList.remove('open');
+        });
+
+        // Add to cart with order type selection - FIXED PRICING
+        document.querySelectorAll('.add-to-cart').forEach(btn => {
+            btn.addEventListener('click', function(e) {
+                e.preventDefault();
+                
+                const card = this.closest('.item');
+                const name = this.getAttribute('data-name') || card.querySelector('h4').textContent;
+                const variationEl = card.querySelector('.variation');
+                const variationText = variationEl ? variationEl.options[variationEl.selectedIndex].text : '';
+                
+                // FIXED: Use the getItemPrice function to get correct price
+                const unitPrice = getItemPrice(card);
+                
+                const qtyEl = card.querySelector('.quantity');
+                const qty = qtyEl ? Math.max(1, parseInt(qtyEl.value) || 1) : 1;
+
+                // Order type selection
+                let orderType;
+                const isCake = name.includes('CAKE') || name.includes('FOREST') || name.includes('CHOCOLATE') || 
+                            name.includes('BLUEBERRY') || name.includes('VANILLA') || name.includes('STRAWBERRY') || 
+                            name.includes('FLORIDA') || name.includes('OREO') || name.includes('OPERA') || 
+                            name.includes('CHERRY') || name.includes('PINEAPPLE') || name.includes('RED VELVET') || 
+                            name.includes('MANGO') || name.includes('MOCHA') || name.includes('NEOGADINE') || 
+                            name.includes('BUTTERSCOTCH') || name.includes('TRUFFLE') || name.includes('DEVIL') || 
+                            name.includes('CHEESE') || name.includes('PHOTO PRINT') || name.includes('CUSTOMIZE');
+
+                // Special handling for Cherry Bread - allow Dine-In and Takeaway
+                if (name === 'CHERRY BREAD') {
+                    orderType = prompt(`🍞 ${name}\n\nChoose order type:\n1. 🍽️ Dine-In\n2. 🥡 Takeaway\n\nEnter 1 or 2:`, '1');
+                    if (orderType === '1') orderType = 'Dine-In';
+                    else if (orderType === '2') orderType = 'Takeaway';
+                    else {
+                        alert('Please choose 1 for Dine-In or 2 for Takeaway');
+                        return;
+                    }
+                } else if (isCake) {
+                    orderType = prompt(`🎂 ${name}\n\nChoose order type:\n1. 🚚 Delivery\n2. 🥡 Takeaway\n\nEnter 1 or 2:`, '1');
+                    if (orderType === '1') orderType = 'Delivery';
+                    else if (orderType === '2') orderType = 'Takeaway';
+                    else {
+                        alert('Please choose 1 for Delivery or 2 for Takeaway');
+                        return;
+                    }
+                } else {
+                    orderType = prompt(`☕ ${name}\n\nChoose order type:\n1. 🍽️ Dine-In\n2. 🥡 Takeaway\n\nEnter 1 or 2:`, '1');
+                    if (orderType === '1') orderType = 'Dine-In';
+                    else if (orderType === '2') orderType = 'Takeaway';
+                    else {
+                        alert('Please choose 1 for Dine-In or 2 for Takeaway');
+                        return;
+                    }
+                }
+
+                const key = name + '||' + variationText + '||' + orderType;
+                const existing = cart.find(item => item.key === key);
+                
+                if (existing) {
+                    existing.quantity += qty;
+                } else {
+                    cart.push({ key, name, variationText, unitPrice, quantity: qty, orderType });
+                }
+
+                updateCartUI();
+                updateOrderForm(); // Update the smart form
+                alert('✅ ' + name + ' added to cart!\nOrder Type: ' + orderType + '\nPrice: ' + format(unitPrice * qty));
+            });
+        });
+
+        // Update cart UI - FIXED VERSION
+        function updateCartUI() {
+            const count = cart.reduce((sum, item) => sum + item.quantity, 0);
+            cartCount.textContent = count;
+
+            if (cart.length === 0) {
+                cartItemsDiv.innerHTML = `
+                    <div id="empty-cart" style="text-align: center; padding: 40px 20px; color: #666;">
+                        <div style="font-size: 48px; margin-bottom: 10px;">🛒</div>
+                        <h3>Your cart is empty</h3>
+                        <p>Add some delicious items to get started!</p>
+                    </div>
+                `;
+                cartTotalEl.textContent = format(0);
+                // SAVE EMPTY CART TOO
+                saveCartSecurely(cart);
+                return;
+            }
+
+            const ul = document.createElement('ul');
+            cart.forEach((item, index) => {
+                const li = document.createElement('li');
+                li.innerHTML = `
+                    <div class="left">
+                        <div class="name">${item.name}</div>
+                        <div class="meta">${item.variationText ? item.variationText + ' • ' : ''}${format(item.unitPrice)} each • ${getOrderTypeIcon(item.orderType)} ${item.orderType}</div>
+                    </div>
+                    <div class="right">
+                        <div class="qty-inline">
+                            <button class="qty-minus" data-index="${index}">-</button>
+                            <span>${item.quantity}</span>
+                            <button class="qty-plus" data-index="${index}">+</button>
+                        </div>
+                        <div style="font-weight:700;">${format(item.unitPrice * item.quantity)}</div>
+                        <button class="remove-btn" data-index="${index}">Remove</button>
+                    </div>
+                `;
+                ul.appendChild(li);
+            });
+
+            cartItemsDiv.innerHTML = '';
+            cartItemsDiv.appendChild(ul);
+
+            // Add event listeners to dynamic buttons
+            document.querySelectorAll('.qty-minus').forEach(btn => {
+                btn.addEventListener('click', function() {
+                    const index = parseInt(this.getAttribute('data-index'));
+                    if (cart[index].quantity > 1) {
+                        cart[index].quantity--;
+                    } else {
+                        cart.splice(index, 1);
+                    }
+                    updateCartUI();
+                    updateOrderForm();
+                });
+            });
+
+            document.querySelectorAll('.qty-plus').forEach(btn => {
+                btn.addEventListener('click', function() {
+                    const index = parseInt(this.getAttribute('data-index'));
+                    cart[index].quantity++;
+                    updateCartUI();
+                    updateOrderForm();
+                });
+            });
+
+            document.querySelectorAll('.remove-btn').forEach(btn => {
+                btn.addEventListener('click', function() {
+                    const index = parseInt(this.getAttribute('data-index'));
+                    cart.splice(index, 1);
+                    updateCartUI();
+                    updateOrderForm();
+                });
+            });
+
+            const total = cart.reduce((sum, item) => sum + (item.unitPrice * item.quantity), 0);
+            cartTotalEl.textContent = format(total);
+            
+            // SAVE CART AFTER EVERY UPDATE
+            saveCartSecurely(cart);
+        }
+
+        function getOrderTypeIcon(orderType) {
+            switch(orderType) {
+                case 'Delivery': return '🚚';
+                case 'Takeaway': return '🥡';
+                case 'Dine-In': return '🍽️';
+                default: return '';
+            }
+        }
+
+        // Checkout process
+        checkoutBtn.addEventListener('click', function() {
+            if (cart.length === 0) {
+                alert('Your cart is empty!');
+                return;
+            }
+            
+            // Scroll to order form
+            document.getElementById('order').scrollIntoView({ behavior: 'smooth' });
+            cartPanel.classList.remove('open');
+            
+            alert('Please fill out your details in the order form below to complete your order.');
+        });
+
+        customerForm.addEventListener('submit', function(e) {
+            e.preventDefault();
+            
+            // SECURITY: Rate limiting
+            if (!canPlaceOrder()) return;
+            
+            if (cart.length === 0) {
+                alert('Your cart is empty! Please add some items first.');
+                return;
+            }
+
+            // SECURITY: Input validation
+            const name = sanitizeInput(document.getElementById('customer-name').value);
+            const phone = sanitizeInput(document.getElementById('customer-phone').value);
+            
+            if (!name) {
+                alert('Please enter your name');
+                return;
+            }
+            
+            if (!validatePhone(phone)) {
+                alert('Please enter a valid phone number');
+                return;
+            }
+
+            const formData = new FormData(this);
+            const customerName = formData.get('name');
+            const customerPhone = formData.get('phone');
+            const deliveryAddress = formData.get('address');
+            const deliveryTime = formData.get('deliveryTime');
+            const tablePreferences = formData.get('tablePreferences');
+            const guestCount = formData.get('guestCount');
+            const pickupTime = formData.get('pickupTime');
+            const instructions = formData.get('instructions');
+            const cartInstructions = cartMessage.value;
+
+            // Validate required fields based on order types
+            const deliveryItems = cart.filter(item => item.orderType === 'Delivery');
+            if (deliveryItems.length > 0 && (!deliveryAddress || deliveryAddress.trim() === '')) {
+                alert('Please provide delivery address for delivery items.');
+                return;
+            }
+
+            // Build order summary
+            let summary = `🧁 ORDER CONFIRMATION\n\n`;
+            summary += `👤 Customer: ${customerName}\n`;
+            summary += `📞 Phone: ${customerPhone}\n`;
+            
+            // Add order type specific information
+            if (deliveryItems.length > 0) {
+                summary += `🚚 Delivery Address: ${deliveryAddress}\n`;
+                if (deliveryTime) summary += `⏰ Delivery Time: ${deliveryTime}\n`;
+            }
+            
+            const dineInItems = cart.filter(item => item.orderType === 'Dine-In');
+            if (dineInItems.length > 0) {
+                if (tablePreferences) summary += `🪑 Table Preference: ${tablePreferences}\n`;
+                if (guestCount) summary += `👥 Guests: ${guestCount}\n`;
+            }
+            
+            const takeawayItems = cart.filter(item => item.orderType === 'Takeaway');
+            if (takeawayItems.length > 0) {
+                if (pickupTime) summary += `🥡 Pickup Time: ${pickupTime}\n`;
+            }
+            
+            summary += `\n📦 ORDER ITEMS:\n\n`;
+
+            // Group items by order type
+            if (deliveryItems.length > 0) {
+                summary += '🚚 DELIVERY ITEMS:\n';
+                deliveryItems.forEach(item => {
+                    summary += `• ${item.name} ${item.variationText ? '(' + item.variationText + ')' : ''} x${item.quantity} — ${format(item.unitPrice * item.quantity)}\n`;
+                });
+                summary += '\n';
+            }
+
+            if (takeawayItems.length > 0) {
+                summary += '🥡 TAKEAWAY ITEMS:\n';
+                takeawayItems.forEach(item => {
+                    summary += `• ${item.name} ${item.variationText ? '(' + item.variationText + ')' : ''} x${item.quantity} — ${format(item.unitPrice * item.quantity)}\n`;
+                });
+                summary += '\n';
+            }
+
+            if (dineInItems.length > 0) {
+                summary += '🍽️ DINE-IN ITEMS:\n';
+                dineInItems.forEach(item => {
+                    summary += `• ${item.name} ${item.variationText ? '(' + item.variationText + ')' : ''} x${item.quantity} — ${format(item.unitPrice * item.quantity)}\n`;
+                });
+                summary += '\n';
+            }
+
+            const total = cart.reduce((sum, item) => sum + (item.unitPrice * item.quantity), 0);
+            summary += `💰 TOTAL: ${format(total)}\n\n`;
+
+            if (instructions) summary += `📝 Special Instructions: ${instructions}\n`;
+            if (cartInstructions) summary += `📋 Order Notes: ${cartInstructions}\n\n`;
+
+            summary += `💳 Payment Method: Bank Transfer / QR Code\n`;
+            summary += `✅ Order will be prepared upon confirmation\n\n`;
+            summary += `We will contact you shortly to confirm your order!`;
+
+            // Show order confirmation
+            alert(summary);
+
+            // ===== INSTANT ORDER NOTIFICATION =====
+            sendOrderNotification({
+                customer: { name: customerName, phone: customerPhone },
+                delivery: deliveryItems.length > 0 ? { address: deliveryAddress, time: deliveryTime } : null,
+                dineIn: dineInItems.length > 0 ? { table: tablePreferences, guests: guestCount } : null,
+                takeaway: takeawayItems.length > 0 ? { time: pickupTime } : null,
+                instructions: instructions,
+                cart: cart,
+                total: total,
+                cartInstructions: cartInstructions
+            });
+
+            // ===== SAVE TO DASHBOARD =====
+            saveOrderToDashboard({
+                customer: { name: customerName, phone: customerPhone },
+                delivery: deliveryItems.length > 0 ? { address: deliveryAddress, time: deliveryTime } : null,
+                dineIn: dineInItems.length > 0 ? { table: tablePreferences, guests: guestCount } : null,
+                takeaway: takeawayItems.length > 0 ? { time: pickupTime } : null,
+                instructions: instructions,
+                cart: cart,
+                total: total,
+                cartInstructions: cartInstructions
+            });
+         
+            // Here you would typically send this to your server
+            console.log('Order Details:', {
+                customer: { name: customerName, phone: customerPhone },
+                delivery: deliveryItems.length > 0 ? { address: deliveryAddress, time: deliveryTime } : null,
+                dineIn: dineInItems.length > 0 ? { table: tablePreferences, guests: guestCount } : null,
+                takeaway: takeawayItems.length > 0 ? { time: pickupTime } : null,
+                instructions: instructions,
+                cart: cart,
+                total: total
+            });
+
+            // Clear cart and form
+            cart = [];
+            customerForm.reset();
+            cartMessage.value = '';
+            updateCartUI();
+            updateOrderForm();
+            
+            alert('Thank you for your order! We will call you within 10 minutes to confirm.');
+        });
+
+        // Feedback System
+        let currentRating = 0;
+        
+        // Star rating functionality
+        document.querySelectorAll('.star').forEach(star => {
+            star.addEventListener('click', function() {
+                const rating = parseInt(this.getAttribute('data-rating'));
+                currentRating = rating;
+                
+                // Update stars visual
+                document.querySelectorAll('.star').forEach(s => {
+                    const starRating = parseInt(s.getAttribute('data-rating'));
+                    if (starRating <= rating) {
+                        s.classList.add('active');
+                        s.textContent = '★';
+                    } else {
+                        s.classList.remove('active');
+                        s.textContent = '☆';
+                    }
+                });
+            });
+        });
+
+        // Initialize
+        updateCartUI();
+        updateOrderForm();
+    });
+
+    // Feedback submission function
+    function submitFeedback() {
+        const stars = document.querySelectorAll('.star.active').length;
+        const message = document.getElementById('feedback-message').value;
+        const email = document.getElementById('customer-email').value;
+
+        if (stars === 0) {
+            alert('Please select a rating by clicking on the stars.');
+            return;
+        }
+
+        // Here you would typically send this to your server
+        console.log('Feedback:', {
+            rating: stars,
+            message: message,
+            email: email
+        });
+
+        alert(`Thank you for your ${stars}-star feedback! We appreciate your input.`);
+        
+        // Reset form
+        document.querySelectorAll('.star').forEach(star => {
+            star.classList.remove('active');
+            star.textContent = '☆';
+        });
+        document.getElementById('feedback-message').value = '';
+        document.getElementById('customer-email').value = '';
+    }
+
+    // NUCLEAR FIX - Force 3 columns no matter what
+    function forceThreeColumnsNuclear() {
+        const menuSections = document.querySelectorAll('.menu-items');
+        console.log('Nuclear fix: Found', menuSections.length, 'menu sections');
+        
+        menuSections.forEach((section, index) => {
+            // Remove all conflicting classes
+            section.classList.remove('row', 'flex', 'single-column', 'columns');
+            
+            // Apply nuclear inline styles
+            section.style.cssText = `
+                display: grid !important;
+                grid-template-columns: repeat(3, 1fr) !important;
+                gap: 10px !important;
+                width: 100% !important;
+                margin: 0 auto !important;
+                padding: 0 !important;
+                grid-auto-flow: row !important;
+            `;
+            
+            console.log(`Section ${index + 1} forced to 3 columns`);
+        });
+    }
+
+    // Run multiple times to ensure it sticks
+    document.addEventListener('DOMContentLoaded', forceThreeColumnsNuclear);
+    setTimeout(forceThreeColumnsNuclear, 100);
+    setTimeout(forceThreeColumnsNuclear, 500);
+    setTimeout(forceThreeColumnsNuclear, 1000);
+    setTimeout(forceThreeColumnsNuclear, 2000);
+
+    // Also run on resize
+    window.addEventListener('resize', forceThreeColumnsNuclear);
+</script>
+  
+    <footer style="text-align:center; padding:30px 10px; font-size:14px; color:#444; background:#fff8f0; margin-top:40px; border-top:2px solid #4b2e05;">
+        <p>📍 Tokha-10, Samakhusi Road, Kathmandu, Nepal</p>
+        <p>☎️ +977-9820104085, 9820104086</p>
+        <p>🕒 Open Daily: 7:00 AM - 9:00 PM</p>
+
+        <div style="margin:15px 0;">
+            <a href="https://www.instagram.com/ktmbakery78" target="_blank" style="margin:0 12px; color:#E4405F; font-size:28px;">
+                <i class="fab fa-instagram"></i>
+            </a>
+            <a href="https://www.facebook.com/share/165CdNMU6X" target="_blank" style="margin:0 12px; color:#1877F2; font-size:28px;">
+                <i class="fab fa-facebook"></i>
+            </a>
+            <a href="https://wa.me/9779820104085" target="_blank" style="margin:0 12px; color:#25D366; font-size:28px;">
+                <i class="fab fa-whatsapp"></i>
+            </a>
+            <a href="https://www.tiktok.com/@ktmbakery" target="_blank" style="margin:0 12px; color:#000000; font-size:28px;">
+                <i class="fab fa-tiktok"></i>
+            </a>
+        </div>
+
+
+        <p>© 2025 KTM Bakery Pvt. Ltd. All rights reserved.</p>
+
+        <div style="width:100%; height:400px; margin-top:20px; border-radius:12px; overflow:hidden;">
+            <iframe
+                width="100%"
+                height="100%"
+                style="border:0;"
+                loading="lazy"
+                allowfullscreen
+                src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3532.5955926211837!2d85.31709431508272!3d27.737140082795407!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x39eb1953a692d5c9%3A0xfeb2ed5eedba1c78!2sK.T.M%20Bakery%2C%20Tokha%20Road%2C%20Kathmandu%2044600%2C%20Nepal!5e0!3m2!1sen!2snp!4v1707644392851!5m2!1sen!2snp">
+            </iframe>
+        </div>
+    
+    </footer>
+
+</body>
+</html>
