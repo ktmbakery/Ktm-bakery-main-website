@@ -3074,8 +3074,29 @@ function fixOrderDataCompatibility(rawOrders) {
         
         // ==================== ORDER MANAGEMENT ====================
         function loadOrders() {
-            const rawOrders = fixOrderDataCompatibility(JSON.parse(localStorage.getItem('ktmBakeryOrders')) || []);
-            deletedOrders = JSON.parse(localStorage.getItem('ktmDeletedOrders')) || [];
+    // 🎯 CHECK FOR TRANSFERRED ORDERS FROM WEBSITE
+    const transferOrder = sessionStorage.getItem('transferOrder');
+    if (transferOrder) {
+        try {
+            const newOrder = JSON.parse(transferOrder);
+            const existingOrders = JSON.parse(localStorage.getItem('ktmBakeryOrders')) || [];
+            
+            // Check if order already exists
+            const orderExists = existingOrders.some(order => order.id === newOrder.id);
+            if (!orderExists) {
+                existingOrders.unshift(newOrder);
+                localStorage.setItem('ktmBakeryOrders', JSON.stringify(existingOrders));
+                console.log('✅ Order transferred from website:', newOrder);
+            }
+            
+            sessionStorage.removeItem('transferOrder');
+        } catch (error) {
+            console.error('Error transferring order:', error);
+        }
+    }
+    
+    const rawOrders = JSON.parse(localStorage.getItem('ktmBakeryOrders')) || [];
+    deletedOrders = JSON.parse(localStorage.getItem('ktmDeletedOrders')) || [];
             
             orders = rawOrders.map(order => {
                 let type = 'takeaway';
