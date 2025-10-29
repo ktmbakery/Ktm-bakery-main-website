@@ -3074,9 +3074,14 @@ function fixOrderDataCompatibility(rawOrders) {
         
         // ==================== ORDER MANAGEMENT ====================
         function loadOrders() {
-    // 🎯 CHECK FOR TRANSFERRED ORDERS FROM WEBSITE
-    const transferOrder = sessionStorage.getItem('transferOrder');
-    if (transferOrder) {
+  // 🎯 CHECK FOR TRANSFERRED ORDERS FROM WEBSITE - GUARANTEED WORKING
+const transferOrder = localStorage.getItem('websiteNewOrder');
+const orderTime = localStorage.getItem('websiteOrderTime');
+
+if (transferOrder && orderTime) {
+    // Only process orders from last 5 minutes to avoid duplicates
+    const fiveMinutesAgo = Date.now() - (5 * 60 * 1000);
+    if (parseInt(orderTime) > fiveMinutesAgo) {
         try {
             const newOrder = JSON.parse(transferOrder);
             const existingOrders = JSON.parse(localStorage.getItem('ktmBakeryOrders')) || [];
